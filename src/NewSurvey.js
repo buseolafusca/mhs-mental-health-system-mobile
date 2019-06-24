@@ -19,6 +19,7 @@ import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
 
 import * as widgets from "surveyjs-widgets";
+import getQuestionnaire from './BackendService';
 
 import "icheck/skins/square/blue.css";
 window["$"] = window["jQuery"] = $;
@@ -259,6 +260,17 @@ class NewSurvey extends Component {
 
   onComplete(result) {
     console.log("Complete! " + result);
+  }
+
+  componentWillMount() {
+    console.log("componentWillMount logs");
+    const id = "5d0ce7a7fc101609e9765de6";
+
+    getQuestionnaire(id);
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount logs");
   }
 
   render() {
