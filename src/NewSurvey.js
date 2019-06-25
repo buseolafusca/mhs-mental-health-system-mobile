@@ -187,7 +187,6 @@ class NewSurvey extends Component {
       console.log(item);
     })
     console.log("Final Result:" + item);
-
   }
 
 
