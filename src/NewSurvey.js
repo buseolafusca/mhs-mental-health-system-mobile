@@ -70,78 +70,78 @@ class NewSurvey extends Component {
           }
         ]
       },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question3",
-            "title": "Trouble falling or staying asleep, or sleeping much.",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question4",
-            "title": "Feeling tired or having little energy",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question5",
-            "title": "Poor appetite or overeating",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question6",
-            "title": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question7",
-            "title": "Trouble concentrating on things, such as reading the newspaper or watching television.",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question8",
-            "title": "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving .around a lot more than usual",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question3",
+      //       "title": "Trouble falling or staying asleep, or sleeping much.",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question4",
+      //       "title": "Feeling tired or having little energy",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question5",
+      //       "title": "Poor appetite or overeating",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question6",
+      //       "title": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question7",
+      //       "title": "Trouble concentrating on things, such as reading the newspaper or watching television.",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question8",
+      //       "title": "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving .around a lot more than usual",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
       {
         questions: [
           {
@@ -161,9 +161,22 @@ class NewSurvey extends Component {
     console.log("value changed!");
   }
 
-  onComplete(result) {
-    console.log("Complete! " + result);
+  sendResultOnPageNext() {
+    console.log("sendResultOnPageNext");
   }
+
+
+  goNextPageAutomatic() {
+    console.log("goNextPageAutomatic");
+  }
+  
+  onComplete(result) {
+    console.log("Complete! ");
+    console.log(result);
+    console.log(result.valuesHash);
+    console.log(result.valuesHash.Question1);
+  }
+
 
   componentWillMount() {
     console.log("componentWillMount logs");
@@ -188,6 +201,7 @@ class NewSurvey extends Component {
             model={model}
             onComplete={this.onComplete}
             onValueChanged={this.onValueChanged}
+
           />
           {/*If you do not want to show Survey Creator, comment the line below*/}
           <h1>SurveyJS Creator in action:</h1>
