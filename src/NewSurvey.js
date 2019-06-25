@@ -43,6 +43,13 @@ widgets.bootstrapslider(Survey);
 
 class NewSurvey extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentScore: 0
+    };
+  }
+
   json = {
     title: "PHQ-9",
     showProgressBar: "top",
@@ -59,18 +66,18 @@ class NewSurvey extends Component {
           }
         ]
       },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question2",
-            "title": "Feeling down, depressed, or hopeless",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question2",
+      //       "title": "Feeling down, depressed, or hopeless",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
       // {
       //   questions: [
       //     {
@@ -156,15 +163,21 @@ class NewSurvey extends Component {
         ]
       }
     ],
-    completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>{item}</b></p>"
+    completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "this.state.currentScore"  + "</b></p>"
   };
 
   sendResult(){
     console.log("value changed!");
   }
 
-  onValueChanged(result) {
+  onValueChanged = (result) => {
+
+  // onValueChanged(result) {
     console.log("value changed!");
+    // this.setState({ aa: 1});
+    // this.state.currentScore = 1;
+    console.log(this.state.currentScore);
+
   }
 
   sendResultOnPageNext() {
@@ -190,6 +203,22 @@ class NewSurvey extends Component {
 
   }
 
+  onComplete2 = (result) => {
+    var finalScore = 0;
+    console.log("Complete! ");
+    console.log(result);
+    console.log(result.valuesHash);
+    console.log(result.valuesHash.Question1);
+    Object.keys(result.valuesHash).map(function (key) {
+      finalScore = finalScore + parseInt(result.valuesHash[key], 10) ;
+      console.log(finalScore);
+    })
+    console.log("2 Final Result:" + this.state.currentScore);
+    this.state.currentScore = finalScore;
+    console.log("2 Final Result:" + this.state.currentScore);
+
+  };
+
 
   componentWillMount() {
     console.log("componentWillMount logs");
@@ -212,7 +241,7 @@ class NewSurvey extends Component {
           {/*If you want to show survey, uncomment the line below*/}
           <Survey.Survey
             model={model}
-            onComplete={this.onComplete}
+            onComplete={this.onComplete2}
             onValueChanged={this.onValueChanged}
 
           />
