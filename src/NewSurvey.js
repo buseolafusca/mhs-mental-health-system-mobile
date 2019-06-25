@@ -66,6 +66,130 @@ class NewSurvey extends Component {
           }
         ]
       },
+
+      {
+        questions: [
+          {
+            "type": "radiogroup",
+            "name": "Question9",
+            "title": "Thoughts that you would be better off dead or of hurting yourself in some way",
+            "isRequired": true,
+            "colCount": 0,
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+          }
+        ]
+      }
+    ],
+    // completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<button type=\"button\" onClick={this.doSomething}>Click Me!</button>" + "</b></p>"
+    completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<a href=\"/result\">Check Your Result</a>" + "</b></p>"
+
+  };
+
+  sendResult(){
+    console.log("value changed!");
+  }
+
+  showValue(){
+    // return this.state.currentScore;
+    return 1;
+  }
+  
+  showValue2 = () => {
+    return this.state.currentScore;
+  }
+
+  sendResult(){
+    console.log("value changed!");
+  }
+
+  onValueChanged = (result) => {
+
+  // onValueChanged(result) {
+    console.log("value changed!");
+    // this.setState({ aa: 1});
+    // this.state.currentScore = 1;
+    console.log(this.state.currentScore);
+
+  }
+
+  sendResultOnPageNext() {
+    console.log("sendResultOnPageNext");
+  }
+
+
+  goNextPageAutomatic() {
+    console.log("goNextPageAutomatic");
+  }
+  
+  onComplete(result) {
+    var item = 0;
+    console.log("Complete! ");
+    console.log(result);
+    console.log(result.valuesHash);
+    //console.log(result.valuesHash.Question1);
+    Object.keys(result.valuesHash).map(function (key) {
+      item = item + parseInt(result.valuesHash[key], 10) ;
+      console.log(item);
+    })
+    console.log("Final Result:" + item);
+
+  }
+
+  onComplete2 = (result) => {
+    var finalScore = 0;
+    console.log("Complete! ");
+    console.log(result);
+    console.log(result.valuesHash);
+    console.log(result.valuesHash.Question1);
+    Object.keys(result.valuesHash).map(function (key) {
+      finalScore = finalScore + parseInt(result.valuesHash[key], 10) ;
+      console.log(finalScore);
+    })
+    console.log("2 Final Result:" + this.state.currentScore);
+    this.state.currentScore = finalScore;
+    console.log("2 Final Result:" + this.state.currentScore);
+
+  };
+
+
+  componentWillMount() {
+    console.log("componentWillMount logs");
+    const id = "5d0ce7a7fc101609e9765de6";
+
+    getQuestionnaire(id);
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount logs");
+  }
+
+  render() {
+    Survey.Survey.cssType = "bootstrap";
+    var model = new Survey.Model(this.json);
+
+    return (
+      <div className="SurveyResult">
+        <div className="surveyjs">
+          {/*If you want to show survey, uncomment the line below*/}
+          <Survey.Survey
+            model={model}
+            onComplete={this.onComplete2}
+            onValueChanged={this.onValueChanged}
+
+          />
+          {/*If you do not want to show Survey Creator, comment the line below*/}
+          {/*<h1>SurveyJS Creator in action:</h1>
+          <SurveyCreator /> */}
+        </div>
+       
+      </div>
+    );
+  }
+}
+
+export default NewSurvey;
+
+
       // {
       //   questions: [
       //     {
@@ -150,109 +274,3 @@ class NewSurvey extends Component {
       //     }
       //   ]
       // },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question9",
-            "title": "Thoughts that you would be better off dead or of hurting yourself in some way",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      }
-    ],
-    completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "this.state.currentScore"  + "</b></p>"
-  };
-
-  sendResult(){
-    console.log("value changed!");
-  }
-
-  onValueChanged = (result) => {
-
-  // onValueChanged(result) {
-    console.log("value changed!");
-    // this.setState({ aa: 1});
-    // this.state.currentScore = 1;
-    console.log(this.state.currentScore);
-
-  }
-
-  sendResultOnPageNext() {
-    console.log("sendResultOnPageNext");
-  }
-
-
-  goNextPageAutomatic() {
-    console.log("goNextPageAutomatic");
-  }
-  
-  onComplete(result) {
-    var item = 0;
-    console.log("Complete! ");
-    console.log(result);
-    console.log(result.valuesHash);
-    //console.log(result.valuesHash.Question1);
-    Object.keys(result.valuesHash).map(function (key) {
-      item = item + parseInt(result.valuesHash[key], 10) ;
-      console.log(item);
-    })
-    console.log("Final Result:" + item);
-
-  }
-
-  onComplete2 = (result) => {
-    var finalScore = 0;
-    console.log("Complete! ");
-    console.log(result);
-    console.log(result.valuesHash);
-    console.log(result.valuesHash.Question1);
-    Object.keys(result.valuesHash).map(function (key) {
-      finalScore = finalScore + parseInt(result.valuesHash[key], 10) ;
-      console.log(finalScore);
-    })
-    console.log("2 Final Result:" + this.state.currentScore);
-    this.state.currentScore = finalScore;
-    console.log("2 Final Result:" + this.state.currentScore);
-
-  };
-
-
-  componentWillMount() {
-    console.log("componentWillMount logs");
-    const id = "5d0ce7a7fc101609e9765de6";
-
-    getQuestionnaire(id);
-  }
-
-  componentDidMount() {
-    console.log("componentDidMount logs");
-  }
-
-  render() {
-    Survey.Survey.cssType = "bootstrap";
-    var model = new Survey.Model(this.json);
-
-    return (
-      <div className="App">
-        <div className="surveyjs">
-          {/*If you want to show survey, uncomment the line below*/}
-          <Survey.Survey
-            model={model}
-            onComplete={this.onComplete2}
-            onValueChanged={this.onValueChanged}
-
-          />
-          {/*If you do not want to show Survey Creator, comment the line below*/}
-          {/*<h1>SurveyJS Creator in action:</h1>
-          <SurveyCreator /> */}
-        </div>
-       
-      </div>
-    );
-  }
-}
-
-export default NewSurvey;
