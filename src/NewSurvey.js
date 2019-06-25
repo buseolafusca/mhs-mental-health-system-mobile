@@ -43,7 +43,7 @@ widgets.bootstrapslider(Survey);
 
 class NewSurvey extends Component {
   json = {
-    title: "Product Feedback Survey Example",
+    title: "PHQ-9",
     showProgressBar: "top",
     pages: [
       {
@@ -154,8 +154,13 @@ class NewSurvey extends Component {
           }
         ]
       }
-    ]
+    ],
+    completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>{Question1}</b></p><p>Question 2: <b>{Question2}</b></p><p>Question 3:<b>{Question3}</b></p>"
   };
+
+  sendResult(){
+    console.log("value changed!");
+  }
 
   onValueChanged(result) {
     console.log("value changed!");
@@ -183,19 +188,16 @@ class NewSurvey extends Component {
       <div className="App">
         <div className="surveyjs">
           {/*If you want to show survey, uncomment the line below*/}
-          <h1>SurveyJS library in action:</h1>
           <Survey.Survey
             model={model}
             onComplete={this.onComplete}
             onValueChanged={this.onValueChanged}
           />
           {/*If you do not want to show Survey Creator, comment the line below*/}
-          <h1>SurveyJS Creator in action:</h1>
-          <SurveyCreator />
+          {/*<h1>SurveyJS Creator in action:</h1>
+          <SurveyCreator /> */}
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+       
       </div>
     );
   }
