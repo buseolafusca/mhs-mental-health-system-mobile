@@ -16,7 +16,7 @@ import {
 const routing = (
   <Router>      
       <Switch>
-        <Route exact path="/landing" component={LandingPage} />
+        <Route exact path="/" component={LandingPage} />
         <Route exact path="/phq" component={NewSurvey} />
         <Route exact path="/resources" component={ResourcesPage} />
         <Route path="/result" component={SurveyResult} />
