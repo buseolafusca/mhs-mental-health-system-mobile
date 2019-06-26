@@ -6,6 +6,7 @@ import logo from "./logo.svg";
 import "./NewSurvey.css";
 import "bootstrap/dist/css/bootstrap.css";
 
+
 import "jquery-ui/themes/base/all.css";
 
 import "nouislider/distribute/nouislider.css";
