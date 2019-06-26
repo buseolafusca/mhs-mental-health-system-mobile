@@ -21,7 +21,7 @@ import "icheck/skins/square/blue.css";
 window["$"] = window["jQuery"] = $;
 require("icheck");
 
-Survey.StylesManager.applyTheme("default");
+Survey.StylesManager.applyTheme("darkblue");
 
 widgets.icheck(Survey, $);
 widgets.select2(Survey, $);
@@ -42,7 +42,6 @@ class NewSurvey extends Component {
     super(props);
     this.state = { json: undefined
     } ;
-    
   }
 
   sendResult(){
@@ -95,7 +94,7 @@ class NewSurvey extends Component {
     })
 
     $("#tbody1").html(tableData);
-    document.querySelector('#test').textContent = "Final score is " + finalScore;
+    document.querySelector('#finalScore').textContent = "Final score is " + finalScore;
   };
 
 
@@ -251,7 +250,7 @@ class NewSurvey extends Component {
               </tbody>
             </table>
           </center>
-          <div id="test"></div>
+          <div id="finalScore"></div>
         </div>
         
       </div>
