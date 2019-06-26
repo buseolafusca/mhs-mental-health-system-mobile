@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './landingpage.css';
+import { Link } from "react-router-dom";
 
 
 class Square extends React.Component{
@@ -11,7 +12,8 @@ class Square extends React.Component{
  
     render() {
         return (
-            <a href={this.props.url} className="box">{this.props.title}</a>
+//             <a href={this.props.url} className="box">{this.props.title}</a>
+            <Link to={this.props.url}>{this.props.title}</Link>
         );
     }
 }
