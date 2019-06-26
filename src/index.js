@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import SurveyResult from './SurveyResult';
 import NewSurvey from './NewSurvey';
+import LandingPage from './landingpage';
+import ResourcesPage from './resourcespage';
 import * as serviceWorker from './serviceWorker';
 import {
   Route,
@@ -12,14 +14,13 @@ import {
 
 
 const routing = (
-  <Router>
-    <div>
-      
+  <Router>      
       <Switch>
-        <Route exact path="/" component={NewSurvey} />
+        <Route exact path="/landing" component={LandingPage} />
+        <Route exact path="/phq" component={NewSurvey} />
+        <Route exact path="/resources" component={ResourcesPage} />
         <Route path="/result" component={SurveyResult} />
       </Switch>
-    </div>
   </Router>
 );
 
