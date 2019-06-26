@@ -5,18 +5,27 @@ import axios from "axios";
 const testUrl = "http://178.128.34.125/api/v1/questions";
 const id = "";
 
-const getQuestionnaire = async (id) => {
+const getQuestionnaire = async (testUrl) => {
 
-  axios.get(testUrl)
-    .then(function (response) {
-      console.log(response);
-      var questions = response.data.data;
-      console.log(questions);
+  try {
+    const response = await axios.get(testUrl);
+    return response.data.data;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
 
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  // axios.get(testUrl)
+  //   .then(function (response) {
+  //     console.log(response);
+  //     var questions = response.data.data;
+  //     console.log(questions);
+  //     return questions;
+
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //     return 0;
+  //   });
 
 };
 

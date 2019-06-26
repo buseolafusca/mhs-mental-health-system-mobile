@@ -17,6 +17,7 @@ import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
 import getQuestionnaire from './BackendService';
 import "icheck/skins/square/blue.css";
+import axios from "axios";
 
 window["$"] = window["jQuery"] = $;
 require("icheck");
@@ -40,7 +41,13 @@ class NewSurvey extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { json: undefined
+    this.state = { json: 
+      {
+        title: "PHQ-9",
+        showProgressBar: "top",
+        pages: [],
+        completedHtml: "<center><p><h4>Your Score</h4></p>"
+      }
     } ;
     
   }
@@ -103,125 +110,46 @@ class NewSurvey extends Component {
     console.log("componentWillMount logs");
     const id = "5d0ce7a7fc101609e9765de6";
 
-    getQuestionnaire(id);
-    var json = {
-      title: "PHQ-9",
-      showProgressBar: "top",
-      pages: [
-        {
-          elements: [
-            {
-              "type": "radiogroup",
-              "name": "Question1",
-              "title": "Little interest or pleasure in doing things",
-              "isRequired": true,
-              "colCount": 0,
-              "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-            }
-          ]
-        },
-         {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question2",
-            "title": "Feeling down, depressed, or hopeless",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question3",
-            "title": "Trouble falling or staying asleep, or sleeping much.",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question4",
-            "title": "Feeling tired or having little energy",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question5",
-            "title": "Poor appetite or overeating",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question6",
-            "title": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question7",
-            "title": "Trouble concentrating on things, such as reading the newspaper or watching television.",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question8",
-            "title": "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving .around a lot more than usual",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
-        {
-          questions: [
-            {
-              "type": "radiogroup",
-              "name": "Question9",
-              "title": "Thoughts that you would be better off dead or of hurting yourself in some way",
-              "isRequired": true,
-              "colCount": 0,
-              "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-            }
-          ]
+    const testUrl = "http://178.128.34.125/api/v1/questions";
+
+    getQuestionnaire(testUrl)
+      .then(fetched_data => {
+        console.log(fetched_data)
+        console.log(this.state.json)
+        var new_json = this.state.json;
+        console.log(new_json);
+        console.log(new_json.pages);
+
+        for (var i = 0; i < fetched_data.length; i++) { 
+          console.log(i);
+          // var questions = []
+          var new_question = {};
+          new_question["type"] = "radiogroup"
+          new_question["name"] = "Question" + (i + 1)
+          new_question["title"] = fetched_data[i].title
+          new_question["isRequired"] = true
+          new_question["colCount"] = 0
+          new_question["choices"] = ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
+          console.log(new_question);
+          new_json.pages.push({
+            questions: [new_question]
+          });
         }
-      ],
-      //completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<button type=\"button\" onClick={this.doSomething}>Click Me!</button>" + "</b></p>"
-      //completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<a href=\"/result\">Check Your Result</a>" + "</b></p>"
-        completedHtml: "<center><p><h4>Your Score</h4></p>"
-    }
-    this.setState({ json });
+
+        this.setState({ new_json });
+
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    
+
+    // console.log(typeof fetched_data);
+
+    // for (var i = 0; i < 3; i++) { 
+    //   console.log(fetched_data.result[i]);
+    // }
+    // this.setState({ json });
 
   }
 
@@ -261,5 +189,103 @@ class NewSurvey extends Component {
 
 export default NewSurvey;
 
+
+      //   ,
+      //    {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question2",
+      //       "title": "Feeling down, depressed, or hopeless",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question3",
+      //       "title": "Trouble falling or staying asleep, or sleeping much.",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question4",
+      //       "title": "Feeling tired or having little energy",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question5",
+      //       "title": "Poor appetite or overeating",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question6",
+      //       "title": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question7",
+      //       "title": "Trouble concentrating on things, such as reading the newspaper or watching television.",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      // {
+      //   questions: [
+      //     {
+      //       "type": "radiogroup",
+      //       "name": "Question8",
+      //       "title": "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving .around a lot more than usual",
+      //       "isRequired": true,
+      //       "colCount": 0,
+      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //     }
+      //   ]
+      // },
+      //   {
+      //     questions: [
+      //       {
+      //         "type": "radiogroup",
+      //         "name": "Question9",
+      //         "title": "Thoughts that you would be better off dead or of hurting yourself in some way",
+      //         "isRequired": true,
+      //         "colCount": 0,
+      //         "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+      //       }
+      //     ]
+      //   }
 
      
