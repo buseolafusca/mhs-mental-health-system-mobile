@@ -116,7 +116,7 @@ class NewSurvey extends Component {
               "title": "Little interest or pleasure in doing things",
               "isRequired": true,
               "colCount": 0,
-              "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+              "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
             }
           ]
         },
@@ -128,7 +128,7 @@ class NewSurvey extends Component {
             "title": "Feeling down, depressed, or hopeless",
             "isRequired": true,
             "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
           }
         ]
       },
@@ -140,7 +140,7 @@ class NewSurvey extends Component {
             "title": "Trouble falling or staying asleep, or sleeping much.",
             "isRequired": true,
             "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
           }
         ]
       },
@@ -152,7 +152,7 @@ class NewSurvey extends Component {
             "title": "Feeling tired or having little energy",
             "isRequired": true,
             "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
           }
         ]
       },
@@ -164,7 +164,7 @@ class NewSurvey extends Component {
             "title": "Poor appetite or overeating",
             "isRequired": true,
             "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
           }
         ]
       },
@@ -176,7 +176,7 @@ class NewSurvey extends Component {
             "title": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
             "isRequired": true,
             "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
           }
         ]
       },
@@ -188,7 +188,7 @@ class NewSurvey extends Component {
             "title": "Trouble concentrating on things, such as reading the newspaper or watching television.",
             "isRequired": true,
             "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
           }
         ]
       },
@@ -200,7 +200,7 @@ class NewSurvey extends Component {
             "title": "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving .around a lot more than usual",
             "isRequired": true,
             "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
           }
         ]
       },
@@ -212,7 +212,7 @@ class NewSurvey extends Component {
               "title": "Thoughts that you would be better off dead or of hurting yourself in some way",
               "isRequired": true,
               "colCount": 0,
-              "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+              "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
             }
           ]
         }
