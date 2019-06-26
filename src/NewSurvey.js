@@ -45,10 +45,7 @@ class NewSurvey extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      currentScore: 0
-    };
-
+    
     this.json = {
       title: "PHQ-9",
       showProgressBar: "top",
@@ -92,13 +89,7 @@ class NewSurvey extends Component {
   }
 
   onValueChanged = (result) => {
-
-  // onValueChanged(result) {
     console.log("value changed!");
-    // this.setState({ aa: 1});
-    // this.state.currentScore = 1;
-    console.log(this.state.currentScore);
-
   }
 
   sendResultOnPageNext() {
@@ -113,7 +104,6 @@ class NewSurvey extends Component {
   onComplete(result) {
     var item = 0;
     console.log("Complete! ");
-    console.log(result);
     console.log(result.valuesHash);
     //console.log(result.valuesHash.Question1);
     Object.keys(result.valuesHash).map(function (key) {
@@ -133,14 +123,8 @@ class NewSurvey extends Component {
       finalScore = finalScore + parseInt(result.valuesHash[key], 10) ;
       console.log(finalScore);
     })
-    //console.log("2 Final Result:" + this.state.currentScore);
-    //this.state.currentScore = finalScore;
-    //console.log("2 Final Result:" + this.state.currentScore);
-    console.log("2 Final Result:" + this.state.currentScore);
-    // this.state.currentScore = finalScore;
-    this.setState({currentScore: finalScore});
-    console.log("2 Final Result:" + this.state.currentScore);
-    document.querySelector('#test').textContent = "final score is " + finalScore;
+
+    document.querySelector('#test').textContent = "Final score is " + finalScore;
   };
 
 
@@ -158,7 +142,6 @@ class NewSurvey extends Component {
   render() {
     Survey.Survey.cssType = "bootstrap";
 
-
     return (
       <div className="SurveyResult">
         <div className="surveyjs">
@@ -172,8 +155,9 @@ class NewSurvey extends Component {
           {/*If you do not want to show Survey Creator, comment the line below*/}
           {/*<h1>SurveyJS Creator in action:</h1>
           <SurveyCreator /> */}
+          <div id="test"></div>
         </div>
-        <div id="test"></div>
+        
       </div>
     );
   }
