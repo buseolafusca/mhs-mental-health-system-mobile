@@ -45,7 +45,7 @@ class NewSurvey extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.json = {
       title: "PHQ-9",
       showProgressBar: "top",
@@ -62,7 +62,90 @@ class NewSurvey extends Component {
             }
           ]
         },
-
+         {
+        questions: [
+          {
+            "type": "radiogroup",
+            "name": "Question2",
+            "title": "Feeling down, depressed, or hopeless",
+            "isRequired": true,
+            "colCount": 0,
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+          }
+        ]
+      },
+      {
+        questions: [
+          {
+            "type": "radiogroup",
+            "name": "Question3",
+            "title": "Trouble falling or staying asleep, or sleeping much.",
+            "isRequired": true,
+            "colCount": 0,
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+          }
+        ]
+      },
+      {
+        questions: [
+          {
+            "type": "radiogroup",
+            "name": "Question4",
+            "title": "Feeling tired or having little energy",
+            "isRequired": true,
+            "colCount": 0,
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+          }
+        ]
+      },
+      {
+        questions: [
+          {
+            "type": "radiogroup",
+            "name": "Question5",
+            "title": "Poor appetite or overeating",
+            "isRequired": true,
+            "colCount": 0,
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+          }
+        ]
+      },
+      {
+        questions: [
+          {
+            "type": "radiogroup",
+            "name": "Question6",
+            "title": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+            "isRequired": true,
+            "colCount": 0,
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+          }
+        ]
+      },
+      {
+        questions: [
+          {
+            "type": "radiogroup",
+            "name": "Question7",
+            "title": "Trouble concentrating on things, such as reading the newspaper or watching television.",
+            "isRequired": true,
+            "colCount": 0,
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+          }
+        ]
+      },
+      {
+        questions: [
+          {
+            "type": "radiogroup",
+            "name": "Question8",
+            "title": "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving .around a lot more than usual",
+            "isRequired": true,
+            "colCount": 0,
+            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+          }
+        ]
+      },
         {
           questions: [
             {
@@ -78,10 +161,9 @@ class NewSurvey extends Component {
       ],
       //completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<button type=\"button\" onClick={this.doSomething}>Click Me!</button>" + "</b></p>"
       //completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<a href=\"/result\">Check Your Result</a>" + "</b></p>"
-        completedHtml: "<center><p><h4>Your Score</h4></p><p><table width = '400' border='1'><tr><td>Question 1</td><td>{Question1}</td></tr><tr><td>Question 9</td><td>{Question9}</td></tr></table></center></p><p><a href=\"/result\">Check Your Result</a></p>"
+        completedHtml: "<center><p><h4>Your Score</h4></p>"
     };
-    this.model = new Survey.Model(this.json);
-
+    
   }
 
   sendResult(){
@@ -115,15 +197,25 @@ class NewSurvey extends Component {
 
   onComplete2 = (result) => {
     var finalScore = 0;
+    var tableData;
+    var i = 1;
+    var temp;
     console.log("Complete! ");
     console.log(result);
     console.log(result.valuesHash);
     console.log(result.valuesHash.Question1);
     Object.keys(result.valuesHash).map(function (key) {
-      finalScore = finalScore + parseInt(result.valuesHash[key], 10) ;
+      tableData+="<tr>"
+      tableData += "<td align='center'>" + "Question " + i + "</td>"
+      finalScore = finalScore + parseInt(result.valuesHash[key], 10) -1;
+      temp = parseInt(result.valuesHash[key], 10) -1;
+      tableData+="<td align='center'>"+temp+"</td>";
       console.log(finalScore);
+      tableData+="</tr>"
+      i++;
     })
 
+    $("#tbody1").html(tableData);
     document.querySelector('#test').textContent = "Final score is " + finalScore;
   };
 
@@ -141,7 +233,7 @@ class NewSurvey extends Component {
 
   render() {
     Survey.Survey.cssType = "bootstrap";
-
+    this.model = new Survey.Model(this.json);
     return (
       <div className="SurveyResult">
         <div className="surveyjs">
@@ -155,6 +247,12 @@ class NewSurvey extends Component {
           {/*If you do not want to show Survey Creator, comment the line below*/}
           {/*<h1>SurveyJS Creator in action:</h1>
           <SurveyCreator /> */}
+          <center>
+            <table border = "1" width = "180" >
+              <tbody id="tbody1">
+              </tbody>
+            </table>
+          </center>
           <div id="test"></div>
         </div>
         
@@ -166,87 +264,4 @@ class NewSurvey extends Component {
 export default NewSurvey;
 
 
-      // {
-      //   questions: [
-      //     {
-      //       "type": "radiogroup",
-      //       "name": "Question2",
-      //       "title": "Feeling down, depressed, or hopeless",
-      //       "isRequired": true,
-      //       "colCount": 0,
-      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-      //     }
-      //   ]
-      // },
-      // {
-      //   questions: [
-      //     {
-      //       "type": "radiogroup",
-      //       "name": "Question3",
-      //       "title": "Trouble falling or staying asleep, or sleeping much.",
-      //       "isRequired": true,
-      //       "colCount": 0,
-      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-      //     }
-      //   ]
-      // },
-      // {
-      //   questions: [
-      //     {
-      //       "type": "radiogroup",
-      //       "name": "Question4",
-      //       "title": "Feeling tired or having little energy",
-      //       "isRequired": true,
-      //       "colCount": 0,
-      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-      //     }
-      //   ]
-      // },
-      // {
-      //   questions: [
-      //     {
-      //       "type": "radiogroup",
-      //       "name": "Question5",
-      //       "title": "Poor appetite or overeating",
-      //       "isRequired": true,
-      //       "colCount": 0,
-      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-      //     }
-      //   ]
-      // },
-      // {
-      //   questions: [
-      //     {
-      //       "type": "radiogroup",
-      //       "name": "Question6",
-      //       "title": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
-      //       "isRequired": true,
-      //       "colCount": 0,
-      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-      //     }
-      //   ]
-      // },
-      // {
-      //   questions: [
-      //     {
-      //       "type": "radiogroup",
-      //       "name": "Question7",
-      //       "title": "Trouble concentrating on things, such as reading the newspaper or watching television.",
-      //       "isRequired": true,
-      //       "colCount": 0,
-      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-      //     }
-      //   ]
-      // },
-      // {
-      //   questions: [
-      //     {
-      //       "type": "radiogroup",
-      //       "name": "Question8",
-      //       "title": "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving .around a lot more than usual",
-      //       "isRequired": true,
-      //       "colCount": 0,
-      //       "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-      //     }
-      //   ]
-      // },
+     
