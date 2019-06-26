@@ -5,25 +5,19 @@ import SurveyCreator from "./SurveyCreator";
 import logo from "./logo.svg";
 import "./NewSurvey.css";
 import "bootstrap/dist/css/bootstrap.css";
-
-
 import "jquery-ui/themes/base/all.css";
-
 import "nouislider/distribute/nouislider.css";
 import "select2/dist/css/select2.css";
 import "bootstrap-slider/dist/css/bootstrap-slider.css";
-
 import "jquery-bar-rating/dist/themes/css-stars.css";
-
 import $ from "jquery";
 import "jquery-ui/ui/widgets/datepicker.js";
 import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
-
 import * as widgets from "surveyjs-widgets";
 import getQuestionnaire from './BackendService';
-
 import "icheck/skins/square/blue.css";
+
 window["$"] = window["jQuery"] = $;
 require("icheck");
 
@@ -46,8 +40,71 @@ class NewSurvey extends Component {
 
   constructor(props) {
     super(props);
+    this.state = { json: undefined
+    } ;
+    
+  }
 
-    this.json = {
+  sendResult(){
+    console.log("value changed!");
+  }
+
+  onValueChanged = (result) => {
+    console.log("value changed!");
+  }
+
+  sendResultOnPageNext() {
+    console.log("sendResultOnPageNext");
+  }
+
+
+  goNextPageAutomatic() {
+    console.log("goNextPageAutomatic");
+  }
+  
+  onComplete(result) {
+    var item = 0;
+    console.log("Complete! ");
+    console.log(result.valuesHash);
+    //console.log(result.valuesHash.Question1);
+    Object.keys(result.valuesHash).map(function (key) {
+      item = item + parseInt(result.valuesHash[key], 10) ;
+      console.log(item);
+    })
+    console.log("Final Result:" + item);
+  }
+
+  onComplete2 = (result) => {
+    var finalScore = 0;
+    var tableData;
+    var i = 1;
+    var temp;
+    console.log("Complete! ");
+    console.log(result);
+    console.log(result.valuesHash);
+    console.log(result.valuesHash.Question1);
+    Object.keys(result.valuesHash).map(function (key) {
+      tableData+="<tr>"
+      tableData += "<td align='center'>" + "Question " + i + "</td>"
+      finalScore = finalScore + parseInt(result.valuesHash[key], 10) -1;
+      temp = parseInt(result.valuesHash[key], 10) -1;
+      tableData+="<td align='center'>"+temp+"</td>";
+      console.log(finalScore);
+      tableData+="</tr>"
+      i++;
+    })
+
+    $("#tbody1").html(tableData);
+    document.querySelector('#test').textContent = "Final score is " + finalScore;
+  };
+
+
+  componentWillMount() {
+    console.log("componentWillMount logs");
+    const id = "5d0ce7a7fc101609e9765de6";
+
+    getQuestionnaire(id);
+    var json = {
       title: "PHQ-9",
       showProgressBar: "top",
       pages: [
@@ -163,69 +220,9 @@ class NewSurvey extends Component {
       //completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<button type=\"button\" onClick={this.doSomething}>Click Me!</button>" + "</b></p>"
       //completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<a href=\"/result\">Check Your Result</a>" + "</b></p>"
         completedHtml: "<center><p><h4>Your Score</h4></p>"
-    };
-    
-  }
+    }
+    this.setState({ json });
 
-  sendResult(){
-    console.log("value changed!");
-  }
-
-  onValueChanged = (result) => {
-    console.log("value changed!");
-  }
-
-  sendResultOnPageNext() {
-    console.log("sendResultOnPageNext");
-  }
-
-
-  goNextPageAutomatic() {
-    console.log("goNextPageAutomatic");
-  }
-  
-  onComplete(result) {
-    var item = 0;
-    console.log("Complete! ");
-    console.log(result.valuesHash);
-    //console.log(result.valuesHash.Question1);
-    Object.keys(result.valuesHash).map(function (key) {
-      item = item + parseInt(result.valuesHash[key], 10) ;
-      console.log(item);
-    })
-    console.log("Final Result:" + item);
-  }
-
-  onComplete2 = (result) => {
-    var finalScore = 0;
-    var tableData;
-    var i = 1;
-    var temp;
-    console.log("Complete! ");
-    console.log(result);
-    console.log(result.valuesHash);
-    console.log(result.valuesHash.Question1);
-    Object.keys(result.valuesHash).map(function (key) {
-      tableData+="<tr>"
-      tableData += "<td align='center'>" + "Question " + i + "</td>"
-      finalScore = finalScore + parseInt(result.valuesHash[key], 10) -1;
-      temp = parseInt(result.valuesHash[key], 10) -1;
-      tableData+="<td align='center'>"+temp+"</td>";
-      console.log(finalScore);
-      tableData+="</tr>"
-      i++;
-    })
-
-    $("#tbody1").html(tableData);
-    document.querySelector('#test').textContent = "Final score is " + finalScore;
-  };
-
-
-  componentWillMount() {
-    console.log("componentWillMount logs");
-    const id = "5d0ce7a7fc101609e9765de6";
-
-    getQuestionnaire(id);
   }
 
   componentDidMount() {
@@ -234,7 +231,7 @@ class NewSurvey extends Component {
 
   render() {
     Survey.Survey.cssType = "bootstrap";
-    this.model = new Survey.Model(this.json);
+    this.model = new Survey.Model(this.state.json);
     return (
       <div className="SurveyResult">
         <div className="surveyjs">
