@@ -48,55 +48,43 @@ class NewSurvey extends Component {
     this.state = {
       currentScore: 0
     };
-    this.showValue = this.showValue.bind(this);
-  }
 
-  json = {
-    title: "PHQ-9",
-    showProgressBar: "top",
-    pages: [
-      {
-        elements: [
-          {
-            "type": "radiogroup",
-            "name": "Question1",
-            "title": "Little interest or pleasure in doing things",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      },
+    this.json = {
+      title: "PHQ-9",
+      showProgressBar: "top",
+      pages: [
+        {
+          elements: [
+            {
+              "type": "radiogroup",
+              "name": "Question1",
+              "title": "Little interest or pleasure in doing things",
+              "isRequired": true,
+              "colCount": 0,
+              "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+            }
+          ]
+        },
 
-      {
-        questions: [
-          {
-            "type": "radiogroup",
-            "name": "Question9",
-            "title": "Thoughts that you would be better off dead or of hurting yourself in some way",
-            "isRequired": true,
-            "colCount": 0,
-            "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
-          }
-        ]
-      }
-    ],
-    // completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<button type=\"button\" onClick={this.doSomething}>Click Me!</button>" + "</b></p>"
-    completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<a href=\"/result\">Check Your Result</a>" + "</b></p>"
+        {
+          questions: [
+            {
+              "type": "radiogroup",
+              "name": "Question9",
+              "title": "Thoughts that you would be better off dead or of hurting yourself in some way",
+              "isRequired": true,
+              "colCount": 0,
+              "choices": ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nealy"]
+            }
+          ]
+        }
+      ],
+      //completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<button type=\"button\" onClick={this.doSomething}>Click Me!</button>" + "</b></p>"
+      //completedHtml: "<p><h4>Your Score</h4></p><p>Question 1:<b>" + "<a href=\"/result\">Check Your Result</a>" + "</b></p>"
+        completedHtml: "<center><p><h4>Your Score</h4></p><p><table width = '400' border='1'><tr><td>Question 1</td><td>{Question1}</td></tr><tr><td>Question 9</td><td>{Question9}</td></tr></table></center></p><p><a href=\"/result\">Check Your Result</a></p>"
+    };
+    this.model = new Survey.Model(this.json);
 
-  };
-
-  showValue ()  {
-    return this.state.currentScore;
-  }
-
-  showValue(){
-    // return this.state.currentScore;
-    return 1;
-  }
-  
-  showValue2 = () => {
-    return this.state.currentScore;
   }
 
   sendResult(){
@@ -145,9 +133,14 @@ class NewSurvey extends Component {
       finalScore = finalScore + parseInt(result.valuesHash[key], 10) ;
       console.log(finalScore);
     })
+    //console.log("2 Final Result:" + this.state.currentScore);
+    //this.state.currentScore = finalScore;
+    //console.log("2 Final Result:" + this.state.currentScore);
     console.log("2 Final Result:" + this.state.currentScore);
-    this.state.currentScore = finalScore;
+    // this.state.currentScore = finalScore;
+    this.setState({currentScore: finalScore});
     console.log("2 Final Result:" + this.state.currentScore);
+    document.querySelector('#test').textContent = "final score is " + finalScore;
   };
 
 
@@ -164,14 +157,14 @@ class NewSurvey extends Component {
 
   render() {
     Survey.Survey.cssType = "bootstrap";
-    var model = new Survey.Model(this.json);
+
 
     return (
       <div className="SurveyResult">
         <div className="surveyjs">
           {/*If you want to show survey, uncomment the line below*/}
           <Survey.Survey
-            model={model}
+            model={this.model}
             onComplete={this.onComplete2}
             onValueChanged={this.onValueChanged}
 
@@ -180,7 +173,7 @@ class NewSurvey extends Component {
           {/*<h1>SurveyJS Creator in action:</h1>
           <SurveyCreator /> */}
         </div>
-       
+        <div id="test"></div>
       </div>
     );
   }
