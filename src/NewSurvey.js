@@ -92,8 +92,8 @@ class NewSurvey extends Component {
     Object.keys(result.valuesHash).map(function (key) {
       tableData+="<tr>"
       tableData += "<td align='center'>" + "Question " + i + "</td>"
-      finalScore = finalScore + parseInt(result.valuesHash[key], 10) -1;
-      temp = parseInt(result.valuesHash[key], 10) -1;
+      finalScore = finalScore + parseInt(result.valuesHash[key], 10);
+      temp = parseInt(result.valuesHash[key], 10);
       tableData+="<td align='center'>"+temp+"</td>";
       console.log(finalScore);
       tableData+="</tr>"
@@ -128,8 +128,13 @@ class NewSurvey extends Component {
           new_question["title"] = fetched_data[i].title
           new_question["isRequired"] = true
           new_question["colCount"] = 0
-          new_question["choices"] = ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
-          console.log(new_question);
+          new_question["choices"] = [];
+          for(var j = 0; j < fetched_data[i].choices.length; j++){
+            new_question["choices"].push([j + "|" + fetched_data[i].choices[j].title]);
+          }
+          
+          //new_question["choices"] = ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
+          console.log("test" +new_question["choices"]);
           new_json.pages.push({
             questions: [new_question]
           });
