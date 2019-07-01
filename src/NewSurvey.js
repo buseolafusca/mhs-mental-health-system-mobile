@@ -16,6 +16,7 @@ import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
 import getQuestionnaire from './BackendService';
+import sendResults from './BackendService';
 import "icheck/skins/square/blue.css";
 import axios from "axios";
 
@@ -89,6 +90,7 @@ class NewSurvey extends Component {
     console.log(result);
     console.log(result.valuesHash);
     console.log(result.valuesHash.Question1);
+    var answer=[];
     Object.keys(result.valuesHash).map(function (key) {
       tableData+="<tr>"
       tableData += "<td align='center'>" + "Question " + i + "</td>"
@@ -98,11 +100,35 @@ class NewSurvey extends Component {
       console.log(finalScore);
       tableData+="</tr>"
       i++;
+      answer.push({
+        "questionnode_id": "5d0cbbe6fc101609e9765de3", //must get this as well
+        "title": "Answer's Text", //must get this
+        "value": temp
+      });
     })
-
+    this.postAnswers(answer,"5d135bef865a25190df56822c");
     $("#tbody1").html(tableData);
     document.querySelector('#finalScore').textContent = "Final score is " + finalScore;
   };
+
+
+  /**
+   * Function that posts answers to server. Needs to be intergrated in Bkacend Service
+   * @param {*} ans list of answers
+   * @param {*} questionnaire_id the questionnaire ID
+   */
+  postAnswers(ans,questionnaire_id){
+    const backendURL = "http://178.128.34.125/api/v1/useranswers"; //will change
+    axios({
+      method: 'post',
+      url: 'http://178.128.34.125/api/v1/useranswers',
+      data: { 
+        "questionnaire_id": '5d0cbbe6fc101609e9765de3',
+        "answer": ans 
+      }
+    });
+  }
+
 
 
   componentWillMount() {
@@ -110,7 +136,6 @@ class NewSurvey extends Component {
     const id = "5d0ce7a7fc101609e9765de6";
 
     const testUrl = "http://178.128.34.125/api/v1/questions";
-
     getQuestionnaire(testUrl)
       .then(fetched_data => {
         console.log(fetched_data)
