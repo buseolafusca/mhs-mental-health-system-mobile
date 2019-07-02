@@ -40,87 +40,19 @@ widgets.bootstrapslider(Survey);
 
 class NewSurvey extends Component {
 
-  json = {
-    "title": "PHQ-9",
-    "description": "This is PHQ 9 test",
-    "pages": [
-     {
-      "name": "page1",
-      "elements": [
+   constructor(props) {
+     super(props);
+     this.state = { json: 
        {
-        "type": "radiogroup",
-        "name": "question1",
-        "choices": [
-         "item1",
-         {
-          "value": "item2",
-          "text": "item2aaaa"
-         },
-         {
-          "value": "item3",
-          "text": "item3aa"
-         }
-        ]
-       },
-       {
-        "type": "radiogroup",
-        "name": "question4",
-        "choices": [
-         "item1",
-         {
-          "value": "item2",
-          "text": "item2aaaa"
-         },
-         {
-          "value": "item3",
-          "text": "item3aa"
-         }
-        ]
-       },
-       {
-        "type": "radiogroup",
-        "name": "question5",
-        "choices": [
-         "item1",
-         {
-          "value": "item2",
-          "text": "item2aaaa"
-         },
-         {
-          "value": "item3",
-          "text": "item3aa"
-         }
-        ]
+         "title": "",
+         "description": "",
+         "completedHtml": "",
+         "pages": [],
+         "showProgressBar": ""
        }
-      ]
-     },
-     {
-      "name": "page2",
-      "elements": [
-       {
-        "type": "text",
-        "name": "question3"
-       }
-      ]
-     }
-    ],
-    "showProgressBar": "top"
-   }
-   
+     } ;
+    }
 
-  //  constructor(props) {
-  //    super(props);
-  //    this.state = { json: 
-  //      {
-  //        title: "PHQ-9",
-  //        showProgressBar: "top",
-  //        pages: [],
-  //        completedHtml: "<center><p><h4>Your Score</h4></p>"
-  //      }
-  //    } ;
-  //   }
-  
-  
   sendResult(){
     console.log("value changed!");
   }
@@ -133,7 +65,6 @@ class NewSurvey extends Component {
     console.log("sendResultOnPageNext");
   }
 
-
   goNextPageAutomatic() {
     console.log("goNextPageAutomatic");
   }
@@ -142,8 +73,7 @@ class NewSurvey extends Component {
     var finalScore = 0;
     var tableData;
     var i = 1;
-    var temp;
-    console.log("Complete! ");
+
     console.log(result);
     console.log(result.valuesHash);
     console.log(result.valuesHash.Question1);
@@ -156,7 +86,7 @@ class NewSurvey extends Component {
       tableData+="<tr>"
       tableData += "<td >" +  "Question " + i + "</td>"
       finalScore = finalScore + parseInt(result.valuesHash[key], 10);
-      temp = parseInt(result.valuesHash[key], 10);
+
       tableData+="<td >"+ result.valuesHash[key]+"</td>";
       console.log(finalScore);
       tableData+="</tr>"
@@ -169,11 +99,10 @@ class NewSurvey extends Component {
       i++;
 
     })
-    this.postAnswers(answer,"5d0ce7a7fc101609e9765de3", this.json.title);
+    this.postAnswers(answer,"5d0ce7a7fc101609e9765de3", this.state.json.title);
     $("#tbody1").html(tableData);
     document.querySelector('#finalScore').textContent = "Final score is " + finalScore;
     
-    console.log(this.json.title)
     document.querySelector('#jsonSection').textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
 
   };
@@ -183,7 +112,7 @@ class NewSurvey extends Component {
    * Function that posts answers to server. Needs to be intergrated in Backend Service
    * @param {*} ans list of answers
    * @param {*} questionnaire_id the questionnaire ID
-   *  @param {*} title of the questionnaire
+   * @param {*} title of the questionnaire
    */
   postAnswers(ans,questionnaire_id,title){
     console.log(ans);
@@ -200,50 +129,41 @@ class NewSurvey extends Component {
     });
   }
 
-
-
   componentWillMount() {
     console.log("componentWillMount logs");
     //const id = "5d0ce7a7fc101609e9765de61";
 
     const testUrl = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS/5d1a1d16d910160030d04979";
 
-    // getQuestionnaire(testUrl)
-    //    .then(fetched_data => {
-    //      console.log("test:" + fetched_data);
-    //      console.log("test:" + fetched_data.length);
-    //     //console.log(this.state.json)
-    //     var new_json = this.state.json;
-    //     //console.log(new_json);
-    //     //console.log(new_json.pages);
+     getQuestionnaire(testUrl)
+        .then(fetched_data => {
+          this.setState( {json:fetched_data.body} );
+        //var new_json = this.state.json;
+        //console.log(new_json);
+        //console.log(new_json.pages);
 
-    //     // for (var i = 0; i < fetched_data.length; i++) { 
-    //     //   // var questions = []
-    //     //   var new_question = {};
-    //     //   new_question["type"] = "radiogroup"
-    //     //   new_question["name"] = "Question" + (i + 1)
-    //     //   new_question["title"] = fetched_data[i].title
-    //     //   new_question["isRequired"] = true
-    //     //   new_question["colCount"] = 0
-    //     //   new_question["choices"] = [];
-    //     //   for(var j = 0; j < fetched_data[i].choices.length; j++){
-    //     //     new_question["choices"].push([j + "|" + fetched_data[i].choices[j].title]);
-    //     //   }
+        // for (var i = 0; i < fetched_data.length; i++) { 
+        //   // var questions = []
+        //   var new_question = {};
+        //   new_question["type"] = "radiogroup"
+        //   new_question["name"] = "Question" + (i + 1)
+        //   new_question["title"] = fetched_data[i].title
+        //   new_question["isRequired"] = true
+        //   new_question["colCount"] = 0
+        //   new_question["choices"] = [];
+        //   for(var j = 0; j < fetched_data[i].choices.length; j++){
+        //     new_question["choices"].push([j + "|" + fetched_data[i].choices[j].title]);
+        //   }
           
-    //     //   //new_question["choices"] = ["1|Not At All", "2|Several Days", "3|More the half the days", "4|Nearly"]
-    //     //   //console.log("test" +new_question["choices"]);
-    //     //   new_json.pages.push({
-    //     //     questions: [new_question]
-    //     //   });
-    //      }
-
-    //     this.setState({ new_json });
-
-      //  })
-      //  .catch(error => {
-      //    console.error(error);
-      //  });
-
+        //   //console.log("test" +new_question["choices"]);
+        //   new_json.pages.push({
+        //     questions: [new_question]
+        //   });
+        //}
+        })
+        .catch(error => {
+          console.error(error);
+        });
   }
 
   componentDidMount() {
@@ -252,7 +172,7 @@ class NewSurvey extends Component {
 
   render() {
     Survey.Survey.cssType = "bootstrap";
-    this.model = new Survey.Model(this.json);
+    this.model = new Survey.Model(this.state.json);
     return (
       <div className="SurveyResult">
         <div className="surveyjs" >
