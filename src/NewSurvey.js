@@ -43,13 +43,14 @@ class NewSurvey extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      questionnaireId:"5d1a1d16d910160030d04979" ,
       json:
       {
-        "title": "",
-        "description": "",
-        "completedHtml": "",
-        "pages": [],
-        "showProgressBar": ""
+       title: "",
+        description: "",
+        completedHtml: "",
+        pages: [],
+        showProgressBar: ""
       }
     };
   }
@@ -93,7 +94,8 @@ class NewSurvey extends Component {
       i++;
 
     })
-    postAnswers(this.model.data, "5d0ce7a7fc101609e9765de3", this.state.json.title);
+    console.log(this.state);
+    postAnswers(this.model.data,this.state);
     $("#tbody1").html(tableData);
     document.querySelector('#finalScore').textContent = "Final score is " + finalScore;
     document.querySelector('#jsonSection').textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
@@ -149,7 +151,6 @@ class NewSurvey extends Component {
   render() {
     Survey.Survey.cssType = "bootstrap";
     this.model = new Survey.Model(this.state.json);
-    
     return (
       <div className="SurveyResult">
         <div className="surveyjs" >

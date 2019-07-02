@@ -27,7 +27,8 @@ const getQuestionnaire = async (testUrl) => {
 
 
 
-const postAnswers = async(ans, questionnaire_id, title) =>{
+const postAnswers = async(ans,state) =>{
+  console.log(state);
   var date = new Date();
   var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
   const backendURL = "http://mhsbackend.azurewebsites.net/api/v1/patientanswers"; 
@@ -35,9 +36,9 @@ const postAnswers = async(ans, questionnaire_id, title) =>{
     method: 'post',
     url: backendURL,
     data: {
-      questionnaire_id: "5d19f4108c72f5140a1b11a3", //will change TODO
-      title: "The description", //TODO
-      patient_name: "Draft", //TODO
+      questionnaire_id: state.questionnaireId,
+      title: JSON.parse(state.json).title,
+      patient_name: "Justin", //TODO
       score: "15", //TODO
       timestamp: str,
       body: JSON.stringify(ans)
