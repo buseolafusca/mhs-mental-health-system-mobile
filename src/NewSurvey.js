@@ -169,7 +169,7 @@ class NewSurvey extends Component {
       i++;
 
     })
-    this.postAnswers(answer,"5d0ce7a7fc101609e9765de61", this.json.title);
+    this.postAnswers(answer,"5d0ce7a7fc101609e9765de3", this.json.title);
     $("#tbody1").html(tableData);
     document.querySelector('#finalScore').textContent = "Final score is " + finalScore;
     
@@ -180,19 +180,22 @@ class NewSurvey extends Component {
 
 
   /**
-   * Function that posts answers to server. Needs to be intergrated in Bkacend Service
+   * Function that posts answers to server. Needs to be intergrated in Backend Service
    * @param {*} ans list of answers
    * @param {*} questionnaire_id the questionnaire ID
+   *  @param {*} title of the questionnaire
    */
   postAnswers(ans,questionnaire_id,title){
+    console.log(ans);
+    console.log(questionnaire_id)
     const backendURL = "http://178.128.34.125/api/v1/useranswers"; //will change
     axios({
       method: 'post',
-      url: 'http://178.128.34.125/api/v1/useranswers',
+      url: backendURL,
       data: { 
-        questionnaire_id: questionnaire_id,
-        title: title,
-        answer: ans 
+        "questionnaire_id": questionnaire_id,
+        "title": title,
+        "answer": ans 
       }
     });
   }
@@ -201,13 +204,14 @@ class NewSurvey extends Component {
 
   componentWillMount() {
     console.log("componentWillMount logs");
-    const id = "5d0ce7a7fc101609e9765de61";
+    //const id = "5d0ce7a7fc101609e9765de61";
 
-    const testUrl = "http://178.128.34.125/api/v1/questions";
+    const testUrl = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS/5d1a1d16d910160030d04979";
 
-     //getQuestionnaire(testUrl)
-     //  .then(fetched_data => {
-      //   console.log("test:" + fetched_data)
+    // getQuestionnaire(testUrl)
+    //    .then(fetched_data => {
+    //      console.log("test:" + fetched_data);
+    //      console.log("test:" + fetched_data.length);
     //     //console.log(this.state.json)
     //     var new_json = this.state.json;
     //     //console.log(new_json);
@@ -235,12 +239,11 @@ class NewSurvey extends Component {
 
     //     this.setState({ new_json });
 
-      // })
-      // .catch(error => {
-    //     console.error(error);
-      // });
+      //  })
+      //  .catch(error => {
+      //    console.error(error);
+      //  });
 
-   //this.setState({ json });
   }
 
   componentDidMount() {
