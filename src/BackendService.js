@@ -1,9 +1,5 @@
 import axios from "axios";
 
-// const testUrl = "http://178.128.34.125/api/v1/useranswers/";
-// const id = "5d0ce7a7fc101609e9765de6";
-const testUrl = "http://178.128.34.125/api/v1/useranswers/5d1a03cf8ef5387dbca65dd3";
-const id = "5d1a07368ef5387dbca65dd4";
 
 const getQuestionnaire = async (testUrl) => {
 
@@ -29,4 +25,25 @@ const getQuestionnaire = async (testUrl) => {
 
 };
 
-export default getQuestionnaire;
+
+
+const postAnswers = async(ans,state) =>{
+  console.log(state);
+  var date = new Date();
+  var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  const backendURL = "http://mhsbackend.azurewebsites.net/api/v1/patientanswers"; 
+  axios({
+    method: 'post',
+    url: backendURL,
+    data: {
+      questionnaire_id: state.questionnaireId,
+      title: JSON.parse(state.json).title,
+      patient_name: "Justin", //TODO
+      score: "15", //TODO
+      timestamp: str,
+      body: JSON.stringify(ans)
+    }
+  });
+}
+
+export {getQuestionnaire, postAnswers};

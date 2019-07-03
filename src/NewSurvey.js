@@ -15,7 +15,7 @@ import "jquery-ui/ui/widgets/datepicker.js";
 import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
-import getQuestionnaire from './BackendService';
+import {getQuestionnaire,postAnswers} from './BackendService';
 import sendResults from './BackendService';
 import "icheck/skins/square/blue.css";
 import axios from "axios";
@@ -40,20 +40,22 @@ widgets.bootstrapslider(Survey);
 
 class NewSurvey extends Component {
 
-   constructor(props) {
-     super(props);
-     this.state = { json: 
-       {
-         "title": "",
-         "description": "",
-         "completedHtml": "",
-         "pages": [],
-         "showProgressBar": ""
-       }
-     } ;
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      questionnaireId:"5d1a1d16d910160030d04979" ,
+      json:
+      {
+       title: "",
+        description: "",
+        completedHtml: "",
+        pages: [],
+        showProgressBar: ""
+      }
+    };
+  }
 
-  sendResult(){
+  sendResult() {
     console.log("value changed!");
   }
 
@@ -68,7 +70,7 @@ class NewSurvey extends Component {
   goNextPageAutomatic() {
     console.log("goNextPageAutomatic");
   }
-  
+
   onComplete = (result) => {
     var finalScore = 0;
     var tableData;
@@ -77,57 +79,32 @@ class NewSurvey extends Component {
     console.log(result);
     console.log(result.valuesHash);
     console.log(result.valuesHash.Question1);
-    var answer=[];
-    tableData = "<tr><th scope='col'>" + "Question" + "</th><th scope='col'>" + " Answer" + "</th></tr>" 
+    tableData = "<tr><th scope='col'>" + "Question" + "</th><th scope='col'>" + " Answer" + "</th></tr>"
 
 
     Object.keys(result.valuesHash).map(function (key) {
- 
-      tableData+="<tr>"
-      tableData += "<td >" +  "Question " + i + "</td>"
+
+      tableData += "<tr>"
+      tableData += "<td >" + "Question " + i + "</td>"
       finalScore = finalScore + parseInt(result.valuesHash[key], 10);
 
-      tableData+="<td >"+ result.valuesHash[key]+"</td>";
+      tableData += "<td >" + result.valuesHash[key] + "</td>";
       console.log(finalScore);
-      tableData+="</tr>"
-      
-      answer.push({
-        questionnode_id: "5d0cbbe6fc101609e9765de3", //must get this as well
-        title: "Question" + i, //must get this
-        value: result.valuesHash[key]
-      });
+      tableData += "</tr>"
       i++;
 
     })
-    this.postAnswers(answer,"5d0ce7a7fc101609e9765de3", this.state.json.title);
+    console.log(this.state);
+    postAnswers(this.model.data,this.state);
     $("#tbody1").html(tableData);
     document.querySelector('#finalScore').textContent = "Final score is " + finalScore;
-    
     document.querySelector('#jsonSection').textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
-
   };
 
 
-  /**
-   * Function that posts answers to server. Needs to be intergrated in Backend Service
-   * @param {*} ans list of answers
-   * @param {*} questionnaire_id the questionnaire ID
-   * @param {*} title of the questionnaire
-   */
-  postAnswers(ans,questionnaire_id,title){
-    console.log(ans);
-    console.log(questionnaire_id)
-    const backendURL = "http://178.128.34.125/api/v1/useranswers"; //will change
-    axios({
-      method: 'post',
-      url: backendURL,
-      data: { 
-        "questionnaire_id": questionnaire_id,
-        "title": title,
-        "answer": ans 
-      }
-    });
-  }
+  
+
+  
 
   componentWillMount() {
     console.log("componentWillMount logs");
@@ -135,9 +112,9 @@ class NewSurvey extends Component {
 
     const testUrl = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS/5d1a1d16d910160030d04979";
 
-     getQuestionnaire(testUrl)
-        .then(fetched_data => {
-          this.setState( {json:fetched_data.body} );
+    getQuestionnaire(testUrl)
+      .then(fetched_data => {
+        this.setState({ json: fetched_data.body });
         //var new_json = this.state.json;
         //console.log(new_json);
         //console.log(new_json.pages);
@@ -154,16 +131,17 @@ class NewSurvey extends Component {
         //   for(var j = 0; j < fetched_data[i].choices.length; j++){
         //     new_question["choices"].push([j + "|" + fetched_data[i].choices[j].title]);
         //   }
-          
+
         //   //console.log("test" +new_question["choices"]);
         //   new_json.pages.push({
         //     questions: [new_question]
         //   });
         //}
-        })
-        .catch(error => {
-          console.error(error);
-        });
+        
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   componentDidMount() {
@@ -186,18 +164,19 @@ class NewSurvey extends Component {
           {/*<h1>SurveyJS Creator in action:</h1>
           <SurveyCreator /> */}
           <center>
-            <table border = "1" width = "180" >
+            <table border="1" width="180" >
               <tbody id="tbody1">
-             
+
               </tbody>
             </table>
           </center>
           <div id="finalScore"></div>
           <div id="jsonSection"></div>
         </div>
-        
+
       </div>
     );
+    
   }
 }
 
