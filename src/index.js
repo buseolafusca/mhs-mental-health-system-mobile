@@ -5,7 +5,9 @@ import SurveyResult from './SurveyResult';
 import NewSurvey from './NewSurvey';
 import LandingPage from './landingpage';
 import ResourcesPage from './resourcespage';
+import LocationPage from './locationpage';
 import * as serviceWorker from './serviceWorker';
+
 import {
   Route,
   BrowserRouter as Router,
@@ -18,7 +20,8 @@ const routing = (
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/phq" component={NewSurvey} />
-        <Route exact path="/resources" component={ResourcesPage} />
+        <Route exact path="/locationpage" component={LocationPage} />
+        <Route exact path="/resources" component={ResourcesPage} /> 
         <Route path="/result" component={SurveyResult} />
       </Switch>
   </Router>
