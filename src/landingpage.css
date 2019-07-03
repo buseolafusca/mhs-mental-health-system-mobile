@@ -3,28 +3,46 @@ html, body {
     text-align: center;
   }
 
-  #root {
-      position: relative;
-      height: 100%;
-      padding: 40px;
-  }
+#root {
+    position: relative;
+    height: 100%;
+}
 
-  .wrapper {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap: 10px;
-    background-color: #fff;
-    color: #444;
-    margin: 100px 0px 0px 0px;
-    text-align: center;
-    vertical-align: middle;
-  }
-  
-  .box {
-    background-color: #005eb8;
-    color: #fff;
-    border-radius: 5px;
-    text-align: center;
-    padding: 45px 0px 45px 0px;
-    font-size: 100%;
-  }
+.landing-page-container {
+    position: relative;
+    height: 100%;
+}
+
+.wrapper-container {
+  padding: 40px;
+  position: relative;
+}
+
+.footer-wrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  align-content: center;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 10px;
+  /* background-color: #fff; */
+  color: #444;
+  margin: 100px 0px 0px 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.box {
+  background-color: #005eb8;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  padding: 45px 0px 45px 0px;
+  font-size: 100%;
+}
+

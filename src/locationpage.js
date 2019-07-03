@@ -27,10 +27,13 @@ class LocationPage extends React.Component {
             this.state.latitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Latitude;
             this.state.longitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Longitude;
             console.log(JSON.stringify(this.state));
+            var id=this.state.latitude+","+this.state.longitude;
+            {document.location.href = '/resources/'+id}
+            // this.props.history.push('/resources/'+id);
         });
 
         event.preventDefault();
-        this.props.history.push('/resources');
+        
     }
 
 

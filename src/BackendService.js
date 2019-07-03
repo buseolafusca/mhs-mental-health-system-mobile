@@ -25,8 +25,6 @@ const getQuestionnaire = async (testUrl) => {
 
 };
 
-
-
 const postAnswers = async (ans, state) => {
   console.log(state);
   var date = new Date();
@@ -49,37 +47,57 @@ const postAnswers = async (ans, state) => {
 
 
 const getLocationgivenPostalCode = async (postal) => {
-  const hereAPIURL = "https://geocoder.api.here.com/6.2/geocode.json";
- const response= await axios({
-    method: 'get',
-    url: hereAPIURL,
-    params: {
-      app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
-      app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
-      postalcode: postal,
-      country: "gb"
-    }
-  });
-  return response;
+  try {
+    const hereAPIURL = "https://geocoder.api.here.com/6.2/geocode.json";
+    const response = await axios({
+      method: 'get',
+      url: hereAPIURL,
+      params: {
+        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
+        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        postalcode: postal,
+        country: "gb"
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
 }
 
 
 const getCategoriesBasedOnLocation = async (loc) => {
-  const hereAPIURL = "https://places.cit.api.here.com/places/v1/categories/places";
- const response= await axios({
-    method: 'get',
-    url: hereAPIURL,
-    params: {
-      app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
-      app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
-      at: loc.latitude+","+loc.longitude,
-      pretty: ""
-    }
+  try {
+    const hereAPIURL = "https://places.cit.api.here.com/places/v1/categories/places";
+    const response = await axios({
+      method: 'get',
+      url: hereAPIURL,
+      params: {
+        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
+        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        at: loc,
+        pretty:''
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
+}
+
+const fetchPublishedQuestionnaires = async () => {
+  const url = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS";
+  return await axios.get(url,{ params: {status: 'PUBLISHED' }})
+  .then(function(response){
+
+    const data = response.data.data;
+    return {'questionnaireList': data};
+  })
+  .catch(function (error){
+    console.log(error);
   });
-  return response;
 }
 
 
-
-
-export { getQuestionnaire, postAnswers,getLocationgivenPostalCode };
+export { getQuestionnaire, postAnswers,fetchPublishedQuestionnaires, 
+  getLocationgivenPostalCode,getCategoriesBasedOnLocation };

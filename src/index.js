@@ -19,9 +19,9 @@ const routing = (
   <Router>      
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/phq" component={NewSurvey} />
+        <Route exact path="/questionnaire/:id?" component={NewSurvey} />
         <Route exact path="/locationpage" component={LocationPage} />
-        <Route exact path="/resources" component={ResourcesPage} /> 
+        <Route path="/resources/:id?" component={ResourcesPage} />
         <Route path="/result" component={SurveyResult} />
       </Switch>
   </Router>
