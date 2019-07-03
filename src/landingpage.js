@@ -13,7 +13,7 @@ class Square extends React.Component {
 
     render() {
         return (
-            <a href={this.props.url} className="box">{this.props.title}</a>
+            <a href={this.props.url} className="box" style={{color: '#fff'}}>{this.props.title}</a>
         );
     }
 }
@@ -43,7 +43,7 @@ class LandingPage extends React.Component {
                 <div className="wrapper-container">
                     <div className="wrapper">
                         {this.state.questionnaireList.map((item, key) =>
-                            <Square url="/phq" title={item.title} />
+                            <Square url={"/questionnaire/" + item._id} title={item.title} key={key}/>
                         )}
                         <Square url="/referrals" title="Referrals" />
                         <Square url="/appointments" title="Appointments" />

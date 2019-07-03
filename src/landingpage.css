@@ -30,7 +30,7 @@ html, body {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-gap: 10px;
-  background-color: #fff;
+  /* background-color: #fff; */
   color: #444;
   margin: 100px 0px 0px 0px;
   text-align: center;
@@ -45,3 +45,4 @@ html, body {
   padding: 45px 0px 45px 0px;
   font-size: 100%;
 }
+

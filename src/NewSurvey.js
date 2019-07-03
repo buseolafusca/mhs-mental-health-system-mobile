@@ -101,43 +101,16 @@ class NewSurvey extends Component {
     document.querySelector('#jsonSection').textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
   };
 
-
-  
-
-  
-
   componentWillMount() {
     console.log("componentWillMount logs");
-    //const id = "5d0ce7a7fc101609e9765de61";
+    const { id } = this.props.match.params;
+    console.log(id);
+    const url = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS/" + id;
+    // const testUrl = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS/5d1a1d16d910160030d04979";
 
-    const testUrl = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS/5d1a1d16d910160030d04979";
-
-    getQuestionnaire(testUrl)
+    getQuestionnaire(url)
       .then(fetched_data => {
         this.setState({ json: fetched_data.body });
-        //var new_json = this.state.json;
-        //console.log(new_json);
-        //console.log(new_json.pages);
-
-        // for (var i = 0; i < fetched_data.length; i++) { 
-        //   // var questions = []
-        //   var new_question = {};
-        //   new_question["type"] = "radiogroup"
-        //   new_question["name"] = "Question" + (i + 1)
-        //   new_question["title"] = fetched_data[i].title
-        //   new_question["isRequired"] = true
-        //   new_question["colCount"] = 0
-        //   new_question["choices"] = [];
-        //   for(var j = 0; j < fetched_data[i].choices.length; j++){
-        //     new_question["choices"].push([j + "|" + fetched_data[i].choices[j].title]);
-        //   }
-
-        //   //console.log("test" +new_question["choices"]);
-        //   new_json.pages.push({
-        //     questions: [new_question]
-        //   });
-        //}
-        
       })
       .catch(error => {
         console.error(error);
