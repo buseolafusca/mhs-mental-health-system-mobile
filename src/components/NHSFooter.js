@@ -1,3 +1,5 @@
+import React from 'react';
+
 class NHSFooter extends React.Component {
 
     render() {

@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './landingpage.css';
-import NHSHeader from 'components/NHSHeader.js'
-import NHSFooter from 'components/NHSFooter.js'
+import NHSHeader from './components/NHSHeader.js'
+import NHSFooter from './components/NHSFooter.js'
+import { fetchPublishedQuestionnaires } from './BackendService.js'
 
 class Square extends React.Component {
 
@@ -22,8 +23,17 @@ class LandingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            questionnaireList: []
         };
+    }
+
+    componentWillMount() {
+        fetchPublishedQuestionnaires().then(
+            response => {
+                console.log(response);
+                this.setState({ questionnaireList: response.questionnaireList });
+            }
+        );
     }
 
     render() {
@@ -32,7 +42,9 @@ class LandingPage extends React.Component {
                 <NHSHeader />
                 <div className="wrapper-container">
                     <div className="wrapper">
-                        <Square url="/phq" title="PHQ-9" />
+                        {this.state.questionnaireList.map((item, key) =>
+                            <Square url="/phq" title={item.title} />
+                        )}
                         <Square url="/referrals" title="Referrals" />
                         <Square url="/appointments" title="Appointments" />
                         <Square url="/resources" title="Resources" />

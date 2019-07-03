@@ -1,3 +1,5 @@
+import React from 'react';
+
 class NHSHeader extends React.Component {
 
     render() {

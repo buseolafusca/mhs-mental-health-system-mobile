@@ -25,8 +25,6 @@ const getQuestionnaire = async (testUrl) => {
 
 };
 
-
-
 const postAnswers = async(ans,state) =>{
   console.log(state);
   var date = new Date();
@@ -46,4 +44,17 @@ const postAnswers = async(ans,state) =>{
   });
 }
 
-export {getQuestionnaire, postAnswers};
+const fetchPublishedQuestionnaires = async () => {
+  const url = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS";
+  return await axios.get(url,{ params: {status: 'PUBLISHED' }})
+  .then(function(response){
+
+    const data = response.data.data;
+    return {'questionnaireList': data};
+  })
+  .catch(function (error){
+    console.log(error);
+  });
+}
+
+export {getQuestionnaire, postAnswers, fetchPublishedQuestionnaires};
