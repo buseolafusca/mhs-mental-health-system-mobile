@@ -99,5 +99,25 @@ const fetchPublishedQuestionnaires = async () => {
 }
 
 
+const getListBasedOnCategoryAndLocation = async (loc,category) => {
+  try {
+    const hereAPIURL = "https://places.cit.api.here.com/places/v1/discover/explore";
+    const response = await axios({
+      method: 'get',
+      url: hereAPIURL,
+      params: {
+        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
+        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        in: loc,
+        cat:category,
+        pretty:''
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
+}
+
 export { getQuestionnaire, postAnswers,fetchPublishedQuestionnaires, 
-  getLocationgivenPostalCode,getCategoriesBasedOnLocation };
+  getLocationgivenPostalCode,getCategoriesBasedOnLocation,getListBasedOnCategoryAndLocation };

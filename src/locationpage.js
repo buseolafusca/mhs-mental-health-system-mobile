@@ -1,6 +1,8 @@
 import React from 'react';
 import { getLocationgivenPostalCode } from './BackendService';
 import ReactDOM from 'react-dom';
+import NHSHeader from './components/NHSHeader.js'
+import NHSFooter from './components/NHSFooter.js'
 import './sass/app.scss';
 
 class LocationPage extends React.Component {
@@ -39,18 +41,21 @@ class LocationPage extends React.Component {
 
     render() {
         return (
+           
             <div class="nhsuk-expander-group">
+                 <NHSHeader/>
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        Please enter your PostalCode:
+                        Please enter your postcode:
           <input type="text" value={this.state.value} onChange={this.handleChange} />
                     </label>
                     <input type="submit" value="Submit"/>
                 </form>
 
 
-
+                <NHSFooter/>
             </div>
+            
         );
     }
 
