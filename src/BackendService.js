@@ -25,11 +25,11 @@ const getQuestionnaire = async (testUrl) => {
 
 };
 
-const postAnswers = async(ans,state) =>{
+const postAnswers = async (ans, state) => {
   console.log(state);
   var date = new Date();
   var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-  const backendURL = "http://mhsbackend.azurewebsites.net/api/v1/patientanswers"; 
+  const backendURL = "http://mhsbackend.azurewebsites.net/api/v1/patientanswers";
   axios({
     method: 'post',
     url: backendURL,
@@ -42,6 +42,47 @@ const postAnswers = async(ans,state) =>{
       body: JSON.stringify(ans)
     }
   });
+}
+
+
+
+const getLocationgivenPostalCode = async (postal) => {
+  try {
+    const hereAPIURL = "https://geocoder.api.here.com/6.2/geocode.json";
+    const response = await axios({
+      method: 'get',
+      url: hereAPIURL,
+      params: {
+        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
+        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        postalcode: postal,
+        country: "gb"
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
+}
+
+
+const getCategoriesBasedOnLocation = async (loc) => {
+  try {
+    const hereAPIURL = "https://places.cit.api.here.com/places/v1/categories/places";
+    const response = await axios({
+      method: 'get',
+      url: hereAPIURL,
+      params: {
+        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
+        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        at: loc,
+        pretty:''
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
 }
 
 const fetchPublishedQuestionnaires = async () => {
@@ -57,4 +98,26 @@ const fetchPublishedQuestionnaires = async () => {
   });
 }
 
-export {getQuestionnaire, postAnswers, fetchPublishedQuestionnaires};
+
+const getListBasedOnCategoryAndLocation = async (loc,category) => {
+  try {
+    const hereAPIURL = "https://places.cit.api.here.com/places/v1/discover/explore";
+    const response = await axios({
+      method: 'get',
+      url: hereAPIURL,
+      params: {
+        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
+        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        in: loc,
+        cat:category,
+        pretty:''
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
+}
+
+export { getQuestionnaire, postAnswers,fetchPublishedQuestionnaires, 
+  getLocationgivenPostalCode,getCategoriesBasedOnLocation,getListBasedOnCategoryAndLocation };
