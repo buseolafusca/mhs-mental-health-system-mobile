@@ -3,6 +3,9 @@ import { getLocationgivenPostalCode } from './BackendService';
 import ReactDOM from 'react-dom';
 import NHSHeader from './components/NHSHeader.js'
 import NHSFooter from './components/NHSFooter.js'
+import ResourcesPage from '../src/resourcespage';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { Switch } from 'react-router'
 import './sass/app.scss';
 
 class LocationPage extends React.Component {
@@ -26,36 +29,47 @@ class LocationPage extends React.Component {
     handleSubmit(event) {
         //alert('PostCode Submited ' + this.state.postcode);
         getLocationgivenPostalCode(this.state.postcode).then(loc => {
-            this.state.latitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Latitude;
-            this.state.longitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Longitude;
-            console.log(JSON.stringify(this.state));
-            var id=this.state.latitude+","+this.state.longitude;
-            {document.location.href = '/resources/'+id}
-            // this.props.history.push('/resources/'+id);
+            try {
+                this.state.latitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Latitude;
+                this.state.longitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Longitude;
+                var id = this.state.latitude + "," + this.state.longitude;
+                this.props.history.push('/resources/' + id);
+            } catch (error) {
+                console.log("No results Found for that postcode"); //TODO PUT ON A PAGE
+            }
         });
 
         event.preventDefault();
-        
+
     }
 
 
     render() {
         return (
-           
-            <div class="nhsuk-expander-group">
-                 <NHSHeader/>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Please enter your postcode:
+            <Router>
+                <Switch>
+                    <Route path="/locationpage" exact render={() => {
+                        return (
+                            <div class="nhsuk-expander-group">
+                                <NHSHeader />
+                                <form onSubmit={this.handleSubmit}>
+                                    <label>
+                                        Please enter your postcode:
           <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Submit"/>
-                </form>
+                                    </label>
+                                    <input type="submit" value="Submit" />
+
+                                </form>
 
 
-                <NHSFooter/>
-            </div>
-            
+                                <NHSFooter />
+                            </div>
+
+                        );
+                    }} />
+                    <Route path="/resourcesage" component={ResourcesPage} />
+                </Switch>
+            </Router>
         );
     }
 

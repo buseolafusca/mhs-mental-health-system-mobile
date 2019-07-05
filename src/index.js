@@ -22,6 +22,7 @@ const routing = (
         <Route exact path="/questionnaire/:id?" component={NewSurvey} />
         <Route exact path="/locationpage" component={LocationPage} />
         <Route path="/resources/:id?" component={ResourcesPage} />
+        <Route path="/resources/:id?/:cat?" component={ResourcesPage} />
         <Route path="/result" component={SurveyResult} />
       </Switch>
   </Router>
