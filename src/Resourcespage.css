@@ -88,3 +88,7 @@
 .resourcepage-icon__chevron-left{
 	position: relative;
 }
+
+.place{
+	 font-size: 2.2em; /*what about accesibility, see larger font options */
+}

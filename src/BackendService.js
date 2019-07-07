@@ -120,7 +120,26 @@ const getListBasedOnCategoryAndLocation = async (loc, category,radius) => {
   }
 }
 
+
+
+const getPlaceDetails = async (url) => {
+  try {
+    const hereAPIURL = url;
+    const response = await axios({
+      method: 'get',
+      url: hereAPIURL,
+      params: {
+        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
+        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
+}
+
 export {
   getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
-  getLocationgivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation
+  getLocationgivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation,getPlaceDetails
 };

@@ -4,7 +4,7 @@ import './index.css';
 import SurveyResult from './SurveyResult';
 import NewSurvey from './NewSurvey';
 import LandingPage from './landingpage';
-import ResourcesPage from './resourcespage';
+import {ResourcesPage,PlacesPage,SinglePlacePage} from './resourcespage';
 import LocationPage from './locationpage';
 import * as serviceWorker from './serviceWorker';
 
@@ -21,8 +21,9 @@ const routing = (
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/questionnaire/:id?" component={NewSurvey} />
         <Route exact path="/locationpage" component={LocationPage} />
-        <Route path="/resources/:id?" component={ResourcesPage} />
-        <Route path="/resources/:id?/:cat?" component={ResourcesPage} />
+        <Route path="/resources/:id/:cat/:place" component={SinglePlacePage} />
+        <Route path="/resources/:id/:cat" component={PlacesPage} />
+        <Route path="/resources/:id" component={ResourcesPage} />
         <Route path="/result" component={SurveyResult} />
       </Switch>
   </Router>

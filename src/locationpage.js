@@ -55,10 +55,10 @@ class LocationPage extends React.Component {
                                 <form onSubmit={this.handleSubmit}>
                                     <label>
                                         Please enter your postcode:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
+                                         <input type="text" value={this.state.value} onChange={this.handleChange} />
                                     </label>
-                                    <input type="submit" value="Submit" />
-
+                                    <input class="nhsuk-search__submit" type="submit" value="Submit" />
+                                    
                                 </form>
 
 
@@ -67,7 +67,7 @@ class LocationPage extends React.Component {
 
                         );
                     }} />
-                    <Route path="/resourcesage" component={ResourcesPage} />
+                    {/* <Route path="/resourcesage" component={ResourcesPage} /> */}
                 </Switch>
             </Router>
         );
