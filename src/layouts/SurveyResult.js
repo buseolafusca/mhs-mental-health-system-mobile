@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import './SurveyResult.css';
+import logo from '../assets/images/logo.svg';
+import '../assets/css/SurveyResult.css';
 
 function SurveyResult() {
   return (

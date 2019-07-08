@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import * as Survey from "survey-react";
 import "survey-react/survey.css";
-import SurveyCreator from "./SurveyCreator";
-import logo from "./logo.svg";
-import "./NewSurvey.css";
+import logo from "../assets/images/logo.svg";
+import "icheck/skins/square/blue.css";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import "jquery-ui/themes/base/all.css";
 import "nouislider/distribute/nouislider.css";
@@ -15,10 +15,10 @@ import "jquery-ui/ui/widgets/datepicker.js";
 import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
-import {getQuestionnaire,postAnswers} from './BackendService';
-import sendResults from './BackendService';
-import "icheck/skins/square/blue.css";
-import axios from "axios";
+
+import { getQuestionnaire, postAnswers, sendResults } from '../services/BackendService';
+import SurveyCreator from "./SurveyCreator";
+import "../assets/css/NewSurvey.css";
 
 window["$"] = window["jQuery"] = $;
 require("icheck");
@@ -105,11 +105,7 @@ class NewSurvey extends Component {
     console.log("componentWillMount logs");
     const { id } = this.props.match.params;
     console.log(id);
-    const url = baseUrl + fetchQuestionnaireUrl + id;
-    "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS/" + id;
-    // const testUrl = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS/5d1a1d16d910160030d04979";
-
-    getQuestionnaire(url)
+    getQuestionnaire(id)
       .then(fetched_data => {
         this.setState({ json: fetched_data.body });
       })
