@@ -100,7 +100,7 @@ class ResourcesPage extends React.Component {
 }
 
 
-class PlacesPage extends React.Component { //One component per page /// postcode-->categories-->places-->place
+class PlacesPage extends React.Component {
 
     constructor(props) {
         super(props);
