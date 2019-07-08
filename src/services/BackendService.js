@@ -5,6 +5,7 @@ import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, g
 
 const getQuestionnaire = async (id) => {
   var url = baseUrl + fetchQuestionnaireUrl + id;
+  console.log(id);
   try {
     const response = await axios.get(url);
     return response.data.data;
@@ -74,7 +75,7 @@ const getCategoriesBasedOnLocation = async (loc) => {
 }
 
 const fetchPublishedQuestionnaires = async () => {
-  const url = fetchQuestionnaireUrl;
+  const url = baseUrl+ fetchQuestionnaireUrl;
   return await axios.get(url, { params: { status: 'PUBLISHED' } })
     .then(function (response) {
 

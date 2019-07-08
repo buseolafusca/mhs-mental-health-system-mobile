@@ -27,7 +27,6 @@ class LocationPage extends React.Component {
     }
 
     handleSubmit(event) {
-        //alert('PostCode Submited ' + this.state.postcode);
         getLocationGivenPostalCode(this.state.postcode).then(loc => {
             try {
                 this.state.latitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Latitude;
@@ -64,10 +63,8 @@ class LocationPage extends React.Component {
 
                                 <NHSFooter />
                             </div>
-
                         );
                     }} />
-                    {/* <Route path="/resourcesage" component={ResourcesPage} /> */}
                 </Switch>
             </Router>
         );

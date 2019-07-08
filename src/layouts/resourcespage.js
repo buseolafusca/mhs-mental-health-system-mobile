@@ -11,7 +11,7 @@ import NHSHeader from '../components/NHSHeader.js';
 import NHSFooter from '../components/NHSFooter.js';
 
 
-class ResourcesPage extends React.Component { //One component per page /// postcode-->categories-->places-->place
+class ResourcesPage extends React.Component { 
 
     constructor(props) {
         super(props);
@@ -22,16 +22,12 @@ class ResourcesPage extends React.Component { //One component per page /// postc
         }
         this.handleClickofCategory = this.handleClickofCategory.bind(this);
         this.handleGoBackButton = this.handleGoBackButton.bind(this);
-        // this.handleClickOfPlace = this.handleClickOfPlace.bind(this);
+    
     }
 
     componentWillMount() {
         const { id } = this.props.match.params;
-        // const { cat } = this.props.match.params;
-        // console.log("cat= " + JSON.stringify(this.props.match));
-        // console.log(cat);
         this.setState({ coordinates: id });
-        // console.log(this.state.coordinates);
         var array = [];
         var catID = {};
         getCategoriesBasedOnLocation(id).then(response => {
@@ -49,25 +45,18 @@ class ResourcesPage extends React.Component { //One component per page /// postc
                         array.push(finalCategory);
                     }
                 }
-                //  } catch (error) {
-                //     console.log("Error while parsing Categories");
-                // }
             });
-            //this.setState({ categoriesList: response.questionnaireList });
             this.setState({ categoriesList: array, categoryListID: catID });
         });
     }
 
 
     handleClickofCategory(item) {
-        console.log(item)
         this.props.history.push('/resources/' + this.state.coordinates + '/' + this.state.categoryListID[item]);
-        //this.props.history.push('/resources/'+this.state.coordinates);
     }
 
 
     handleGoBackButton(pg) {
-        console.log(pg);
         this.props.history.push('/locationpage');
 
     }
@@ -102,53 +91,9 @@ class ResourcesPage extends React.Component { //One component per page /// postc
                                     </details>
                                 )}
 
-
-                                {/* <NHSFooter /> Footer causes problems TODO Fix */}
                             </div>
                         );
                     }} />
-                    {/* <Route path="/resources/:id/:cat" render={() => {
-
-                        return (
-                            <div class="nhsuk-expander-group">
-                                <NHSHeader />
-                                <div class="nhsuk-back-link resourcepage-back-link">
-                                    <a class="nhsuk-back-link__link resourcepage-back-link__link" onClick={() => { this.handleGoBackButton("/resources/" + this.state.coordinates) }}>
-                                        <svg class="nhsuk-icon nhsuk-icon__chevron-left recourcepage-icon__Chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z"></path>
-                                        </svg>
-                                        Go back</a>
-                                </div>
-                                {this.state.categoriesList.map((item, key) =>
-                                    <details class="nhsuk-details expander" >
-                                        <summary class="nhsuk-details__summary" onClick={() => { this.handleClickOfPlace(item) }}>
-                                            <span class="nhsuk-details__summary">
-                                                {item}
-                                            </span>
-                                        </summary>
-                                    </details>
-                                )}
-                            </div>
-                        );
-                    }} /> */}
-
-
-                    {/* <Route path="/resources/:id/:cat/:place" exact render={() => {
-
-                        return (
-                            <div class="nhsuk-expander-group">
-                                <NHSHeader />
-                                <div class="nhsuk-back-link resourcepage-back-link">
-                                    <a class="nhsuk-back-link__link resourcepage-back-link__link" onClick={() => { this.handleGoBackButton("/resources/" + this.state.coordinates) }}>
-                                        <svg class="nhsuk-icon nhsuk-icon__chevron-left recourcepage-icon__Chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z"></path>
-                                        </svg>
-                                        Go back</a>
-                                </div>
-                            
-                            </div>
-                        );
-                    }} /> */}
                 </Switch>
             </Router>
         );
@@ -157,7 +102,7 @@ class ResourcesPage extends React.Component { //One component per page /// postc
 }
 
 
-class PlacesPage extends React.Component { //One component per page /// postcode-->categories-->places-->place
+class PlacesPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -214,7 +159,7 @@ class PlacesPage extends React.Component { //One component per page /// postcode
     }
 
     handleClickOfPlace(place) {
-        console.log(place);
+        //console.log(place);
         if (place.id != "-1") {
            // this.props.history.push('/resources/' + this.state.coordinates + '/' + this.state.category + '/' + JSON.stringify(place));
            this.props.history.push({
@@ -274,7 +219,8 @@ class SinglePlacePage extends React.Component {
             coordinates: [],
             category: "",
             place: props.location.state.detail,
-            placeDetails:{}
+            placeDetails:{},
+            placeLocation:{}
         }
         if(this.state.place==""){
             this.state.place={title:"MAPS API ERROR"};
@@ -290,11 +236,11 @@ class SinglePlacePage extends React.Component {
         this.setState({ category: cat }); //!!!!!
        getPlaceDetails(this.state.place.href).then(response=>{
         this.setState({placeDetails:response.data})
-        console.log(response.data);
+        this.state.placeDetails=response.data;
+        console.log(this.state.placeDetails.location.address);
+        this.setState({placeLocation:this.state.placeDetails.location.address});
+        //this.render();
        });
-      // console.log(this.state.place);
-       // this.state.place=JSON.parse();
-       // console.log(JSON.parse(this.state.place).title);
     }
 
     handleGoBackButton(pg) {
@@ -322,7 +268,13 @@ class SinglePlacePage extends React.Component {
                                 </div>
                                 <div class="place">
                                 <a class="place-title" href={this.state.placeDetails.view}>{this.state.placeDetails.name}</a>
-                                
+                                <br/>
+                                <a class="place-address">{this.state.placeLocation.street}</a>
+                                <br/>
+                                <a class="place-address">{this.state.placeLocation.district}</a>
+                                <br/>
+                                <a class="place-address">{this.state.placeLocation.city}</a>
+                                <br/>
                                 </div>
 
 

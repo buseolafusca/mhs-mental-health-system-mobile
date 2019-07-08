@@ -43,7 +43,6 @@ class NewSurvey extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionnaireId:"5d1a1d16d910160030d04979" ,
       json:
       {
        title: "",
@@ -55,33 +54,11 @@ class NewSurvey extends Component {
     };
   }
 
-  sendResult() {
-    console.log("value changed!");
-  }
-
-  onValueChanged = (result) => {
-    console.log("value changed!");
-  }
-
-  sendResultOnPageNext() {
-    console.log("sendResultOnPageNext");
-  }
-
-  goNextPageAutomatic() {
-    console.log("goNextPageAutomatic");
-  }
-
   onComplete = (result) => {
     var finalScore = 0;
     var tableData;
     var i = 1;
-
-    console.log(result);
-    console.log(result.valuesHash);
-    console.log(result.valuesHash.Question1);
     tableData = "<tr><th scope='col'>" + "Question" + "</th><th scope='col'>" + " Answer" + "</th></tr>"
-
-
     Object.keys(result.valuesHash).map(function (key) {
 
       tableData += "<tr>"
@@ -89,12 +66,10 @@ class NewSurvey extends Component {
       finalScore = finalScore + parseInt(result.valuesHash[key], 10);
 
       tableData += "<td >" + result.valuesHash[key] + "</td>";
-      console.log(finalScore);
       tableData += "</tr>"
       i++;
 
     })
-    console.log(this.state);
     postAnswers(this.model.data,this.state);
     $("#tbody1").html(tableData);
     document.querySelector('#finalScore').textContent = "Final score is " + finalScore;
@@ -102,20 +77,16 @@ class NewSurvey extends Component {
   };
 
   componentWillMount() {
-    console.log("componentWillMount logs");
     const { id } = this.props.match.params;
-    console.log(id);
-    getQuestionnaire(id)
-      .then(fetched_data => {
-        this.setState({ json: fetched_data.body });
+    const url = id;
+
+    getQuestionnaire(url)
+      .then(fetchedData => {
+        this.setState({ json: fetchedData.body });
       })
       .catch(error => {
         console.error(error);
       });
-  }
-
-  componentDidMount() {
-    console.log("componentDidMount logs");
   }
 
   render() {
@@ -124,15 +95,11 @@ class NewSurvey extends Component {
     return (
       <div className="SurveyResult">
         <div className="surveyjs" >
-          {/*If you want to show survey, uncomment the line below*/}
           <Survey.Survey
             model={this.model}
             onComplete={this.onComplete}
             onValueChanged={this.onValueChanged}
           />
-          {/*If you do not want to show Survey Creator, comment the line below*/}
-          {/*<h1>SurveyJS Creator in action:</h1>
-          <SurveyCreator /> */}
           <center>
             <table border="1" width="180" >
               <tbody id="tbody1">
