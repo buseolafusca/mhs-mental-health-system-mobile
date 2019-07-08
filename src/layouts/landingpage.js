@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../assets/css/landingpage.css';
+import '../assets/css/LandingPage.css';
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
 import { fetchPublishedQuestionnaires } from '../services/BackendService.js'

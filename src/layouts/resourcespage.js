@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 import '../sass/app.scss';
-import '../assets/css/Resourcespage.css';
+import '../assets/css/ResourcesPage.css';
 
 import { Switch } from 'react-router';
 import NHSHeader from '../components/NHSHeader.js';
@@ -268,7 +268,7 @@ class SinglePlacePage extends React.Component {
                                 <div class="place">
                                 <a class="place-title" href={this.state.placeDetails.view}>{this.state.placeDetails.name}</a>
                                 <br/>
-                                <a class="place-address">{this.state.placeLocation.street}</a>
+                                <a class="place-address">{this.state.placeLocation.house} {this.state.placeLocation.street}</a>
                                 <br/>
                                 <a class="place-address">{this.state.placeLocation.district}</a>
                                 <br/>
