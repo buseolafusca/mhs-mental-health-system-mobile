@@ -1,11 +1,11 @@
 import axios from "axios";
 import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
   getPlacesByCategoryLocationUrl } from '../variables/URLs'
+  import {app_id,app_code} from '../variables/general'
 
 
 const getQuestionnaire = async (id) => {
   var url = baseUrl + fetchQuestionnaireUrl + id;
-  console.log(id);
   try {
     const response = await axios.get(url);
     return response.data.data;
@@ -15,7 +15,6 @@ const getQuestionnaire = async (id) => {
 };
 
 const postAnswers = async (ans, state) => {
-  console.log(state);
   var date = new Date();
   var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
   const backendURL = baseUrl + answersUrl;
@@ -25,7 +24,7 @@ const postAnswers = async (ans, state) => {
     data: {
       questionnaire_id: state.questionnaireId,
       title: JSON.parse(state.json).title,
-      patient_name: "Justin", //TODO
+      patient_name: "Justin", //TODO when we implement the auth
       score: "15", //TODO
       timestamp: str,
       body: JSON.stringify(ans)
@@ -42,8 +41,8 @@ const getLocationGivenPostalCode = async (postal) => {
       method: 'get',
       url: hereAPIURL,
       params: {
-        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
-        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        app_id: app_id, 
+        app_code: app_code,
         postalcode: postal,
         country: "gb"
       }
@@ -62,8 +61,8 @@ const getCategoriesBasedOnLocation = async (loc) => {
       method: 'get',
       url: hereAPIURL,
       params: {
-        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
-        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        app_id: app_id, 
+        app_code: app_code,
         at: loc,
         pretty: ''
       }
@@ -96,8 +95,8 @@ const getListBasedOnCategoryAndLocation = async (loc, category,radius) => {
       method: 'get',
       url: hereAPIURL,
       params: {
-        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
-        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        app_id: app_id, 
+        app_code: app_code,
         in: loc,
         cat: category,
         pretty: ''
@@ -118,8 +117,8 @@ const getPlaceDetails = async (url) => {
       method: 'get',
       url: hereAPIURL,
       params: {
-        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
-        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        app_id: app_id, 
+        app_code: app_code,
       }
     });
     return response;

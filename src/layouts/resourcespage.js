@@ -32,7 +32,6 @@ class ResourcesPage extends React.Component {
         var catID = {};
         getCategoriesBasedOnLocation(id).then(response => {
             response.data.items.forEach(element => {
-                //try {
                 var category = element.within[0];
                 if (category != null) {
                     var splitedCategory = category.split("-");

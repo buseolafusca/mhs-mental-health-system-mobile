@@ -30,7 +30,6 @@ class LandingPage extends React.Component {
     componentWillMount() {
         fetchPublishedQuestionnaires().then(
             response => {
-                console.log(response);
                 this.setState({ questionnaireList: response.questionnaireList });
             }
         );
