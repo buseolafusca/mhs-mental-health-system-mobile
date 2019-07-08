@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import SurveyResult from './SurveyResult';
-import NewSurvey from './NewSurvey';
-import LandingPage from './landingpage';
-import {ResourcesPage,PlacesPage,SinglePlacePage} from './resourcespage';
-import LocationPage from './locationpage';
+import './assets/css/index.css';
+import SurveyResult from './layouts/SurveyResult';
+import NewSurvey from './layouts/NewSurvey';
+import LandingPage from './layouts/landingpage';
+import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/resourcespage';
+import LocationPage from './layouts/locationpage';
 import * as serviceWorker from './serviceWorker';
 
 import {
@@ -31,7 +31,6 @@ const routing = (
 
 
 ReactDOM.render(routing, document.getElementById("root"));
-
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
