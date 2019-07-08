@@ -1,12 +1,12 @@
 import React from 'react';
-import { getLocationgivenPostalCode } from './BackendService';
+import { getLocationGivenPostalCode } from '../services/BackendService';
 import ReactDOM from 'react-dom';
-import NHSHeader from './components/NHSHeader.js'
-import NHSFooter from './components/NHSFooter.js'
-import ResourcesPage from '../src/resourcespage';
+import NHSHeader from '../components/NHSHeader.js'
+import NHSFooter from '../components/NHSFooter.js'
+import ResourcesPage from './resourcespage';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import { Switch } from 'react-router'
-import './sass/app.scss';
+import '../sass/app.scss';
 
 class LocationPage extends React.Component {
 
@@ -27,7 +27,12 @@ class LocationPage extends React.Component {
     }
 
     handleSubmit(event) {
+<<<<<<< HEAD
         getLocationgivenPostalCode(this.state.postcode).then(loc => {
+=======
+        //alert('PostCode Submited ' + this.state.postcode);
+        getLocationGivenPostalCode(this.state.postcode).then(loc => {
+>>>>>>> bba0b73d98807af80b1031bfc60621fefb31d7f6
             try {
                 this.state.latitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Latitude;
                 this.state.longitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Longitude;

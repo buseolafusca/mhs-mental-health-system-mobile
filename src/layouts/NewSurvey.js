@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import * as Survey from "survey-react";
 import "survey-react/survey.css";
-import SurveyCreator from "./SurveyCreator";
-import logo from "./logo.svg";
-import "./NewSurvey.css";
+import logo from "../assets/images/logo.svg";
+import "icheck/skins/square/blue.css";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import "jquery-ui/themes/base/all.css";
 import "nouislider/distribute/nouislider.css";
@@ -15,9 +15,17 @@ import "jquery-ui/ui/widgets/datepicker.js";
 import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
+<<<<<<< HEAD
 import {getQuestionnaire,postAnswers} from './BackendService';
 import "icheck/skins/square/blue.css";
 import {baseUrl} from './general'
+=======
+
+import { getQuestionnaire, postAnswers, sendResults } from '../services/BackendService';
+import SurveyCreator from "./SurveyCreator";
+import "../assets/css/NewSurvey.css";
+
+>>>>>>> bba0b73d98807af80b1031bfc60621fefb31d7f6
 window["$"] = window["jQuery"] = $;
 require("icheck");
 
@@ -76,11 +84,18 @@ class NewSurvey extends Component {
 
   componentWillMount() {
     const { id } = this.props.match.params;
+<<<<<<< HEAD
     const url = baseUrl + fetchQuestionnaireUrl + id;
 
     getQuestionnaire(url)
       .then(fetchedData => {
         this.setState({ json: fetchedData.body });
+=======
+    console.log(id);
+    getQuestionnaire(id)
+      .then(fetched_data => {
+        this.setState({ json: fetched_data.body });
+>>>>>>> bba0b73d98807af80b1031bfc60621fefb31d7f6
       })
       .catch(error => {
         console.error(error);

@@ -1,12 +1,14 @@
 import React from 'react';
-import { getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation,getPlaceDetails } from './BackendService'
+import { getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation,getPlaceDetails } from '../services/BackendService'
 import ReactDOM from 'react-dom';
-import './sass/app.scss';
-import './Resourcespage.css';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+
+import '../sass/app.scss';
+import '../assets/css/Resourcespage.css';
+
 import { Switch } from 'react-router';
-import NHSHeader from './components/NHSHeader.js';
-import NHSFooter from './components/NHSFooter.js';
+import NHSHeader from '../components/NHSHeader.js';
+import NHSFooter from '../components/NHSFooter.js';
 
 
 class ResourcesPage extends React.Component { 

@@ -1,35 +1,23 @@
 import axios from "axios";
+import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
+  getPlacesByCategoryLocationUrl } from '../variables/URLs'
 
 
-const getQuestionnaire = async (testUrl) => {
-
+const getQuestionnaire = async (id) => {
+  var url = baseUrl + fetchQuestionnaireUrl + id;
   try {
-    const response = await axios.get(testUrl);
+    const response = await axios.get(url);
     return response.data.data;
   } catch (error) {
     console.log("GET server error: ", error);
   }
-
-  // axios.get(testUrl)
-  //   .then(function (response) {
-  //     console.log(response);
-  //     var questions = response.data.data;
-  //     console.log(questions);
-  //     return questions;
-
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //     return 0;
-  //   });
-
 };
 
 const postAnswers = async (ans, state) => {
   console.log(state);
   var date = new Date();
   var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-  const backendURL = "http://mhsbackend.azurewebsites.net/api/v1/patientanswers";
+  const backendURL = baseUrl + answersUrl;
   axios({
     method: 'post',
     url: backendURL,
@@ -46,9 +34,9 @@ const postAnswers = async (ans, state) => {
 
 
 
-const getLocationgivenPostalCode = async (postal) => {
+const getLocationGivenPostalCode = async (postal) => {
   try {
-    const hereAPIURL = "https://geocoder.api.here.com/6.2/geocode.json";
+    const hereAPIURL = getLocationByPostCodeUrl;
     const response = await axios({
       method: 'get',
       url: hereAPIURL,
@@ -68,7 +56,7 @@ const getLocationgivenPostalCode = async (postal) => {
 
 const getCategoriesBasedOnLocation = async (loc) => {
   try {
-    const hereAPIURL = "https://places.cit.api.here.com/places/v1/categories/places";
+    const hereAPIURL = getCategoriesByLocationUrl;
     const response = await axios({
       method: 'get',
       url: hereAPIURL,
@@ -86,7 +74,7 @@ const getCategoriesBasedOnLocation = async (loc) => {
 }
 
 const fetchPublishedQuestionnaires = async () => {
-  const url = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS";
+  const url = fetchQuestionnaireUrl;
   return await axios.get(url, { params: { status: 'PUBLISHED' } })
     .then(function (response) {
 
@@ -102,7 +90,7 @@ const fetchPublishedQuestionnaires = async () => {
 const getListBasedOnCategoryAndLocation = async (loc, category,radius) => {
   loc+=';r='+radius;
   try {
-    const hereAPIURL = "https://places.cit.api.here.com/places/v1/discover/explore";
+    const hereAPIURL = getPlacesByCategoryLocationUrl;
     const response = await axios({
       method: 'get',
       url: hereAPIURL,
@@ -141,5 +129,5 @@ const getPlaceDetails = async (url) => {
 
 export {
   getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
-  getLocationgivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation,getPlaceDetails
+  getLocationGivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails
 };
