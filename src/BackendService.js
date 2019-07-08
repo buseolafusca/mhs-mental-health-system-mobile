@@ -76,7 +76,7 @@ const getCategoriesBasedOnLocation = async (loc) => {
         app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
         app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
         at: loc,
-        pretty:''
+        pretty: ''
       }
     });
     return response;
@@ -87,19 +87,20 @@ const getCategoriesBasedOnLocation = async (loc) => {
 
 const fetchPublishedQuestionnaires = async () => {
   const url = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS";
-  return await axios.get(url,{ params: {status: 'PUBLISHED' }})
-  .then(function(response){
+  return await axios.get(url, { params: { status: 'PUBLISHED' } })
+    .then(function (response) {
 
-    const data = response.data.data;
-    return {'questionnaireList': data};
-  })
-  .catch(function (error){
-    console.log(error);
-  });
+      const data = response.data.data;
+      return { 'questionnaireList': data };
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }
 
 
-const getListBasedOnCategoryAndLocation = async (loc,category) => {
+const getListBasedOnCategoryAndLocation = async (loc, category,radius) => {
+  loc+=';r='+radius;
   try {
     const hereAPIURL = "https://places.cit.api.here.com/places/v1/discover/explore";
     const response = await axios({
@@ -109,8 +110,8 @@ const getListBasedOnCategoryAndLocation = async (loc,category) => {
         app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
         app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
         in: loc,
-        cat:category,
-        pretty:''
+        cat: category,
+        pretty: ''
       }
     });
     return response;
@@ -119,5 +120,26 @@ const getListBasedOnCategoryAndLocation = async (loc,category) => {
   }
 }
 
-export { getQuestionnaire, postAnswers,fetchPublishedQuestionnaires, 
-  getLocationgivenPostalCode,getCategoriesBasedOnLocation,getListBasedOnCategoryAndLocation };
+
+
+const getPlaceDetails = async (url) => {
+  try {
+    const hereAPIURL = url;
+    const response = await axios({
+      method: 'get',
+      url: hereAPIURL,
+      params: {
+        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
+        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
+}
+
+export {
+  getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
+  getLocationgivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation,getPlaceDetails
+};
