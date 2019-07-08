@@ -36,7 +36,6 @@ widgets.autocomplete(SurveyKo, $);
 widgets.bootstrapslider(SurveyKo);
 
 class SurveyCreator extends Component {
-  surveyCreator;
   componentDidMount() {
     let options = { showEmbededSurveyTab: true };
     this.surveyCreator = new SurveyJSCreator.SurveyCreator(
