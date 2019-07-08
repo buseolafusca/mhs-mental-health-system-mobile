@@ -105,7 +105,8 @@ class NewSurvey extends Component {
     console.log("componentWillMount logs");
     const { id } = this.props.match.params;
     console.log(id);
-    const url = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS/" + id;
+    const url = baseUrl + fetchQuestionnaireUrl + id;
+    "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS/" + id;
     // const testUrl = "http://mhsbackend.azurewebsites.net/api/v1/questionnaire_sJS/5d1a1d16d910160030d04979";
 
     getQuestionnaire(url)
