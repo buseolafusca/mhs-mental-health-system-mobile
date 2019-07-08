@@ -1,9 +1,7 @@
 import React from 'react';
 import { getLocationGivenPostalCode } from '../services/BackendService';
-import ReactDOM from 'react-dom';
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
-import ResourcesPage from './resourcespage';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import { Switch } from 'react-router'
 import '../sass/app.scss';
