@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './landingpage.css';
 import NHSHeader from './components/NHSHeader.js'
 import NHSFooter from './components/NHSFooter.js'

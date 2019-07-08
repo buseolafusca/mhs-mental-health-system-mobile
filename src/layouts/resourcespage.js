@@ -9,7 +9,7 @@ import NHSHeader from './components/NHSHeader.js';
 import NHSFooter from './components/NHSFooter.js';
 
 
-class ResourcesPage extends React.Component { //One component per page /// postcode-->categories-->places-->place
+class ResourcesPage extends React.Component { 
 
     constructor(props) {
         super(props);
@@ -20,16 +20,12 @@ class ResourcesPage extends React.Component { //One component per page /// postc
         }
         this.handleClickofCategory = this.handleClickofCategory.bind(this);
         this.handleGoBackButton = this.handleGoBackButton.bind(this);
-        // this.handleClickOfPlace = this.handleClickOfPlace.bind(this);
+    
     }
 
     componentWillMount() {
         const { id } = this.props.match.params;
-        // const { cat } = this.props.match.params;
-        // console.log("cat= " + JSON.stringify(this.props.match));
-        // console.log(cat);
         this.setState({ coordinates: id });
-        // console.log(this.state.coordinates);
         var array = [];
         var catID = {};
         getCategoriesBasedOnLocation(id).then(response => {
@@ -47,25 +43,18 @@ class ResourcesPage extends React.Component { //One component per page /// postc
                         array.push(finalCategory);
                     }
                 }
-                //  } catch (error) {
-                //     console.log("Error while parsing Categories");
-                // }
             });
-            //this.setState({ categoriesList: response.questionnaireList });
             this.setState({ categoriesList: array, categoryListID: catID });
         });
     }
 
 
     handleClickofCategory(item) {
-        console.log(item)
         this.props.history.push('/resources/' + this.state.coordinates + '/' + this.state.categoryListID[item]);
-        //this.props.history.push('/resources/'+this.state.coordinates);
     }
 
 
     handleGoBackButton(pg) {
-        console.log(pg);
         this.props.history.push('/locationpage');
 
     }
@@ -100,53 +89,9 @@ class ResourcesPage extends React.Component { //One component per page /// postc
                                     </details>
                                 )}
 
-
-                                {/* <NHSFooter /> Footer causes problems TODO Fix */}
                             </div>
                         );
                     }} />
-                    {/* <Route path="/resources/:id/:cat" render={() => {
-
-                        return (
-                            <div class="nhsuk-expander-group">
-                                <NHSHeader />
-                                <div class="nhsuk-back-link resourcepage-back-link">
-                                    <a class="nhsuk-back-link__link resourcepage-back-link__link" onClick={() => { this.handleGoBackButton("/resources/" + this.state.coordinates) }}>
-                                        <svg class="nhsuk-icon nhsuk-icon__chevron-left recourcepage-icon__Chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z"></path>
-                                        </svg>
-                                        Go back</a>
-                                </div>
-                                {this.state.categoriesList.map((item, key) =>
-                                    <details class="nhsuk-details expander" >
-                                        <summary class="nhsuk-details__summary" onClick={() => { this.handleClickOfPlace(item) }}>
-                                            <span class="nhsuk-details__summary">
-                                                {item}
-                                            </span>
-                                        </summary>
-                                    </details>
-                                )}
-                            </div>
-                        );
-                    }} /> */}
-
-
-                    {/* <Route path="/resources/:id/:cat/:place" exact render={() => {
-
-                        return (
-                            <div class="nhsuk-expander-group">
-                                <NHSHeader />
-                                <div class="nhsuk-back-link resourcepage-back-link">
-                                    <a class="nhsuk-back-link__link resourcepage-back-link__link" onClick={() => { this.handleGoBackButton("/resources/" + this.state.coordinates) }}>
-                                        <svg class="nhsuk-icon nhsuk-icon__chevron-left recourcepage-icon__Chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z"></path>
-                                        </svg>
-                                        Go back</a>
-                                </div>
-                            
-                            </div>
-                        );
-                    }} /> */}
                 </Switch>
             </Router>
         );
