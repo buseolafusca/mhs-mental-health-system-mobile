@@ -212,7 +212,7 @@ class PlacesPage extends React.Component { //One component per page /// postcode
     }
 
     handleClickOfPlace(place) {
-        console.log(place);
+        //console.log(place);
         if (place.id != "-1") {
            // this.props.history.push('/resources/' + this.state.coordinates + '/' + this.state.category + '/' + JSON.stringify(place));
            this.props.history.push({
@@ -272,7 +272,8 @@ class SinglePlacePage extends React.Component {
             coordinates: [],
             category: "",
             place: props.location.state.detail,
-            placeDetails:{}
+            placeDetails:{},
+            placeLocation:{}
         }
         if(this.state.place==""){
             this.state.place={title:"MAPS API ERROR"};
@@ -288,11 +289,11 @@ class SinglePlacePage extends React.Component {
         this.setState({ category: cat }); //!!!!!
        getPlaceDetails(this.state.place.href).then(response=>{
         this.setState({placeDetails:response.data})
-        console.log(response.data);
+        this.state.placeDetails=response.data;
+        console.log(this.state.placeDetails.location.address);
+        this.setState({placeLocation:this.state.placeDetails.location.address});
+        //this.render();
        });
-      // console.log(this.state.place);
-       // this.state.place=JSON.parse();
-       // console.log(JSON.parse(this.state.place).title);
     }
 
     handleGoBackButton(pg) {
@@ -320,7 +321,13 @@ class SinglePlacePage extends React.Component {
                                 </div>
                                 <div class="place">
                                 <a class="place-title" href={this.state.placeDetails.view}>{this.state.placeDetails.name}</a>
-                                
+                                <br/>
+                                <a class="place-address">{this.state.placeLocation.street}</a>
+                                <br/>
+                                <a class="place-address">{this.state.placeLocation.district}</a>
+                                <br/>
+                                <a class="place-address">{this.state.placeLocation.city}</a>
+                                <br/>
                                 </div>
 
 

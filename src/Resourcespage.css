@@ -89,6 +89,10 @@
 	position: relative;
 }
 
-.place{
+.place-title{
 	 font-size: 2.2em; /*what about accesibility, see larger font options */
+}
+
+.place-address{
+	font-size: 1.5em;
 }
