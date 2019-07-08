@@ -1,16 +1,9 @@
 import React from 'react';
-<<<<<<< HEAD
-import './landingpage.css';
-import NHSHeader from './components/NHSHeader.js'
-import NHSFooter from './components/NHSFooter.js'
-import { fetchPublishedQuestionnaires } from './BackendService.js'
-=======
 import ReactDOM from 'react-dom';
 import '../assets/css/landingpage.css';
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
 import { fetchPublishedQuestionnaires } from '../services/BackendService.js'
->>>>>>> bba0b73d98807af80b1031bfc60621fefb31d7f6
 
 class Square extends React.Component {
 
