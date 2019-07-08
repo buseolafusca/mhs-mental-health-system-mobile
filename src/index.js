@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import './assets/css/index.css'
 import SurveyResult from './layouts/SurveyResult'
 import NewSurvey from './layouts/NewSurvey'
-import LandingPage from './layouts/landingpage'
-import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/resourcespage'
-import LocationPage from './layouts/locationpage'
+import LandingPage from './layouts/LandingPage'
+import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/ResourcesPage'
+import LocationPage from './layouts/LocationPage'
 import * as serviceWorker from './serviceWorker'
 
 import {

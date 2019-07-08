@@ -1,7 +1,6 @@
 import React from 'react'
 import { getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails } from '../services/BackendService'
-import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import '../sass/app.scss'
 import '../assets/css/ResourcesPage.css'
