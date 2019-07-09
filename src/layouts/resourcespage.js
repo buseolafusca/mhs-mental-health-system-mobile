@@ -4,11 +4,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import '../sass/app.scss'
 import '../assets/css/ResourcesPage.css'
-
 import { Switch } from 'react-router'
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
-
+import { execute } from '../components/InteractiveMap'
 class ResourcesPage extends React.Component {
   constructor (props) {
     super(props)
@@ -66,7 +65,7 @@ class ResourcesPage extends React.Component {
                     <svg class='nhsuk-icon nhsuk-icon__chevron-left recourcepage-icon__Chevron-left' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden='true'>
                       <path d='M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z' />
                     </svg>
-                                        Go back</a>
+                    Go back</a>
                 </div>
                 {this.state.categoriesList.map((item, key) =>
                   <details class='nhsuk-details expander' >
@@ -157,7 +156,7 @@ class PlacesPage extends React.Component {
                     <svg class='nhsuk-icon nhsuk-icon__chevron-left recourcepage-icon__Chevron-left' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden='true'>
                       <path d='M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z' />
                     </svg>
-                                        Go back</a>
+                    Go back</a>
                 </div>
                 {this.state.placesList.map((item, key) =>
                   <details class='nhsuk-details expander' >
@@ -168,7 +167,6 @@ class PlacesPage extends React.Component {
                     </summary>
                   </details>
                 )}
-
                 {/* <NHSFooter /> Footer causes problems TODO Fix */}
               </div>
             )
@@ -209,6 +207,35 @@ class SinglePlacePage extends React.Component {
       this.setState({ placeLocation: this.state.placeDetails.location.address })
       // this.render();
     })
+
+    const mapsJSCore = document.createElement('script')
+    const mapsJSService = document.createElement('script')
+    const mapsJSUI = document.createElement('script')
+    const mapsJSMapEvents = document.createElement('script')
+    const interactiveMap = document.createElement('script')
+    const mapsJSUICss = document.createElement('link')
+
+    mapsJSCore.src = 'https://js.api.here.com/v3/3.0/mapsjs-core.js'
+    mapsJSCore.async = true
+
+    mapsJSService.src = 'https://js.api.here.com/v3/3.0/mapsjs-service.js'
+    mapsJSService.async = true
+
+    mapsJSUI.src = 'https://js.api.here.com/v3/3.0/mapsjs-ui.js'
+    mapsJSUI.async = true
+
+    mapsJSMapEvents.src = 'https://js.api.here.com/v3/3.0/mapsjs-mapevents.js'
+    mapsJSMapEvents.async = true
+
+    mapsJSUICss.href = 'https://js.api.here.com/v3/3.0/mapsjs-ui.css'
+
+    interactiveMap.src = '../components/interactiveMap'
+    document.body.appendChild(mapsJSCore)
+    document.body.appendChild(mapsJSService)
+    document.body.appendChild(mapsJSUI)
+    document.body.appendChild(mapsJSMapEvents)
+    document.body.appendChild(mapsJSUICss)
+    document.body.appendChild(interactiveMap)
   }
 
   handleGoBackButton (pg) {
@@ -230,7 +257,7 @@ class SinglePlacePage extends React.Component {
                     <svg class='nhsuk-icon nhsuk-icon__chevron-left recourcepage-icon__Chevron-left' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden='true'>
                       <path d='M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z' />
                     </svg>
-                                        Go back</a>
+                    Go back</a>
                 </div>
                 <div class='place'>
                   <a class='place-title' href={this.state.placeDetails.view}>{this.state.placeDetails.name}</a>
@@ -241,8 +268,10 @@ class SinglePlacePage extends React.Component {
                   <br />
                   <a class='place-address'>{this.state.placeLocation.city}</a>
                   <br />
-                </div>
+                  <div id='map' />
 
+                </div>
+                {/* <Helmet></Helmet> */}
                 <NHSFooter />
               </div>
             )
