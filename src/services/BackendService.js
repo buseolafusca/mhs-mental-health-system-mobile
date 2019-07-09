@@ -15,7 +15,6 @@ const getQuestionnaire = async (id) => {
 
 const postAnswers = async (ans, state) => {
   const backendURL = baseUrl + answersUrl
-  console.log(ans)
   axios({
     method: 'post',
     url: backendURL,
