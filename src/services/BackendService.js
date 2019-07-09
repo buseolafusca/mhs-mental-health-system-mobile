@@ -1,134 +1,122 @@
-import axios from "axios";
+import axios from 'axios'
 import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
   getPlacesByCategoryLocationUrl } from '../variables/URLs'
-
+import { appId, appCode } from '../variables/general'
 
 const getQuestionnaire = async (id) => {
-  var url = baseUrl + fetchQuestionnaireUrl + id;
-  console.log(id);
+  var url = baseUrl + fetchQuestionnaireUrl + id
   try {
-    const response = await axios.get(url);
-    return response.data.data;
+    const response = await axios.get(url)
+    return response.data.data
   } catch (error) {
-    console.log("GET server error: ", error);
+    console.log('GET server error: ', error)
   }
-};
+}
 
 const postAnswers = async (ans, state) => {
-  console.log(state);
-  var date = new Date();
-  var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-  const backendURL = baseUrl + answersUrl;
+  const backendURL = baseUrl + answersUrl
   axios({
     method: 'post',
     url: backendURL,
     data: {
       questionnaire_id: state.questionnaireId,
       title: JSON.parse(state.json).title,
-      patient_name: "Justin", //TODO
-      score: "15", //TODO
-      timestamp: str,
+      patient_name: 'Justin', // TODO when we implement the auth
+      score: '15', // TODO
       body: JSON.stringify(ans)
     }
-  });
+  })
 }
-
-
 
 const getLocationGivenPostalCode = async (postal) => {
   try {
-    const hereAPIURL = getLocationByPostCodeUrl;
+    const hereAPIURL = getLocationByPostCodeUrl
     const response = await axios({
       method: 'get',
       url: hereAPIURL,
       params: {
-        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
-        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        app_id: appId,
+        app_code: appCode,
         postalcode: postal,
-        country: "gb"
+        country: 'gb'
       }
-    });
-    return response;
+    })
+    return response
   } catch (error) {
-    console.log("GET server error: ", error);
+    console.log('GET server error: ', error)
   }
 }
 
-
 const getCategoriesBasedOnLocation = async (loc) => {
   try {
-    const hereAPIURL = getCategoriesByLocationUrl;
+    const hereAPIURL = getCategoriesByLocationUrl
     const response = await axios({
       method: 'get',
       url: hereAPIURL,
       params: {
-        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
-        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        app_id: appId,
+        app_code: appCode,
         at: loc,
         pretty: ''
       }
-    });
-    return response;
+    })
+    return response
   } catch (error) {
-    console.log("GET server error: ", error);
+    console.log('GET server error: ', error)
   }
 }
 
 const fetchPublishedQuestionnaires = async () => {
-  const url = baseUrl+ fetchQuestionnaireUrl;
-  return await axios.get(url, { params: { status: 'PUBLISHED' } })
+  const url = baseUrl + fetchQuestionnaireUrl
+  return axios.get(url, { params: { status: 'PUBLISHED' } })
     .then(function (response) {
-
-      const data = response.data.data;
-      return { 'questionnaireList': data };
+      const data = response.data.data
+      return { 'questionnaireList': data }
     })
     .catch(function (error) {
-      console.log(error);
-    });
+      console.log(error)
+    })
 }
 
-
-const getListBasedOnCategoryAndLocation = async (loc, category,radius) => {
-  loc+=';r='+radius;
+const getListBasedOnCategoryAndLocation = async (loc, category, radius) => {
+  loc += ';r=' + radius
   try {
-    const hereAPIURL = getPlacesByCategoryLocationUrl;
+    const hereAPIURL = getPlacesByCategoryLocationUrl
     const response = await axios({
       method: 'get',
       url: hereAPIURL,
       params: {
-        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
-        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        app_id: appId,
+        app_code: appCode,
         in: loc,
         cat: category,
         pretty: ''
       }
-    });
-    return response;
+    })
+    return response
   } catch (error) {
-    console.log("GET server error: ", error);
+    console.log('GET server error: ', error)
   }
 }
 
-
-
 const getPlaceDetails = async (url) => {
   try {
-    const hereAPIURL = url;
+    const hereAPIURL = url
     const response = await axios({
       method: 'get',
       url: hereAPIURL,
       params: {
-        app_id: "nuT8ftiOYvrfFNaFEUyV", //Nick's Credentials
-        app_code: "yNZIQaMP6fRuY1D8DKsuxw", //Nick's Credentials
+        app_id: appId,
+        app_code: appCode
       }
-    });
-    return response;
+    })
+    return response
   } catch (error) {
-    console.log("GET server error: ", error);
+    console.log('GET server error: ', error)
   }
 }
 
 export {
   getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
   getLocationGivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails
-};
+}

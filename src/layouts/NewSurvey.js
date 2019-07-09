@@ -43,6 +43,7 @@ class NewSurvey extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      questionnaireId:"5d1a1d16d910160030d04979" ,
       json:
       {
        title: "",
@@ -53,6 +54,25 @@ class NewSurvey extends Component {
       }
     };
   }
+
+  /* The following 4 methods are needed by SurveyJS */
+  sendResult(){
+    console.log("value changed!");
+  }
+
+  onValueChanged = (result) => {
+    console.log("value changed!");
+  }
+
+  sendResultOnPageNext() {
+    console.log("sendResultOnPageNext");
+  }
+
+
+  goNextPageAutomatic() {
+    console.log("goNextPageAutomatic");
+  }
+
 
   onComplete = (result) => {
     var finalScore = 0;
@@ -70,6 +90,9 @@ class NewSurvey extends Component {
       i++;
 
     })
+    console.log(result);
+    console.log(this.model);
+    console.log(this.state.questionnaireId);
     postAnswers(this.model.data,this.state);
     $("#tbody1").html(tableData);
     document.querySelector('#finalScore').textContent = "Final score is " + finalScore;
@@ -79,7 +102,7 @@ class NewSurvey extends Component {
   componentWillMount() {
     const { id } = this.props.match.params;
     const url = id;
-
+    this.setState({questionnaireId:id});
     getQuestionnaire(url)
       .then(fetchedData => {
         this.setState({ json: fetchedData.body });
