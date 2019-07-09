@@ -93,7 +93,9 @@ class NewSurvey extends Component {
     console.log(result);
     console.log(this.model);
     console.log(this.state.questionnaireId);
-    postAnswers(this.model.data,this.state);
+    console.log(this.model);
+    console.log(this.model.data);
+    postAnswers(this.model,this.state);
     $("#tbody1").html(tableData);
     document.querySelector('#finalScore').textContent = "Final score is " + finalScore;
     document.querySelector('#jsonSection').textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);

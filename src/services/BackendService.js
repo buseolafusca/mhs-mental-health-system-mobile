@@ -15,6 +15,7 @@ const getQuestionnaire = async (id) => {
 
 const postAnswers = async (ans, state) => {
   const backendURL = baseUrl + answersUrl
+  console.log(ans)
   axios({
     method: 'post',
     url: backendURL,
@@ -23,7 +24,8 @@ const postAnswers = async (ans, state) => {
       title: JSON.parse(state.json).title,
       patient_name: 'Justin', // TODO when we implement the auth
       score: '15', // TODO
-      body: JSON.stringify(ans)
+      body: JSON.stringify(ans.data),
+      questionnaireBody: JSON.stringify(ans)
     }
   })
 }
