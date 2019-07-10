@@ -4,6 +4,7 @@ import './assets/css/index.css'
 import SurveyResult from './layouts/SurveyResult'
 import NewSurvey from './layouts/NewSurvey'
 import LandingPage from './layouts/LandingPage'
+import ReviewPage from './layouts/ReviewPage'
 import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/ResourcesPage'
 import LocationPage from './layouts/LocationPage'
 import * as serviceWorker from './serviceWorker'
@@ -24,6 +25,7 @@ const routing = (
       <Route path='/resources/:id/:cat' component={PlacesPage} />
       <Route path='/resources/:id' component={ResourcesPage} />
       <Route path='/result' component={SurveyResult} />
+      <Route path='/review' component={ReviewPage} />
     </Switch>
   </Router>
 )

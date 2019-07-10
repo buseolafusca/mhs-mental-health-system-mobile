@@ -117,6 +117,7 @@ const getPlaceDetails = async (url) => {
   }
 }
 
+
 export {
   getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
   getLocationGivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails
