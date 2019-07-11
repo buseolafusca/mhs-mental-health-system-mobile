@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
+import { baseUrl, fetchQuestionnaireUrl,patientanswersUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
   getPlacesByCategoryLocationUrl } from '../variables/URLs'
 import { appId, appCode } from '../variables/general'
 
@@ -117,8 +117,20 @@ const getPlaceDetails = async (url) => {
   }
 }
 
+const fetchUserAnswers = async () => {
+  console.log('fetchUserAnswers')
+  var userAnswerUrl = baseUrl + answersUrl
+  try {
+    const response = await axios.get(userAnswerUrl)
+    console.log(response)
+    return response.data.data
+  } catch (error) {
+    console.log('GET server error: ', error)
+  }
+}
+
 
 export {
-  getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
+  fetchUserAnswers, getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
   getLocationGivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails
 }
