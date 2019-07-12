@@ -5,6 +5,7 @@ import NHSFooter from '../components/NHSFooter.js'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Switch } from 'react-router'
 import '../sass/app.scss'
+import '../assets/css/ResourcesPage.css'
 
 class LocationPage extends React.Component {
   constructor (props) {
@@ -45,15 +46,17 @@ class LocationPage extends React.Component {
             return (
               <div class='nhsuk-expander-group'>
                 <NHSHeader />
+                <label>
+                      Please enter your postcode:
+                </label>
                 <form onSubmit={this.handleSubmit}>
-                  <label>
-                                        Please enter your postcode:
-                    <input type='text' value={this.state.value} onChange={this.handleChange} />
-                  </label>
-                  <input class='nhsuk-search__submit' type='submit' value='Submit' />
 
+                  <br /><span>
+                    <input type='text' class='postcode' value={this.state.value} onChange={this.handleChange} />
+                    <br />
+                    <input class='nhsuk-search__submit' type='submit' value='Submit' />
+                  </span>
                 </form>
-
                 <NHSFooter />
               </div>
             )

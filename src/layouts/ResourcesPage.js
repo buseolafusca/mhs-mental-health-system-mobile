@@ -194,10 +194,7 @@ class SinglePlacePage extends React.Component {
       place: props.location.state.detail,
       placeDetails: {},
       placeLocation: {},
-      placeCor: {
-        lat: 51.5,
-        lng: 0
-      },
+      placeCoordinates: {},
       appID: apI,
       appCode: apC
     }
@@ -205,7 +202,8 @@ class SinglePlacePage extends React.Component {
       this.state.place = { title: 'MAPS API ERROR' }
     }
     this.handleGoBackButton = this.handleGoBackButton.bind(this)
-    this.loadScript = this.loadScript.bind(this)
+    this.handleGoBackButton = this.handleGoBackButton.bind(this)
+    this.interactiveMap = this.interactiveMap.bind(this)
     console.log(this.state)
   }
 
@@ -220,7 +218,10 @@ class SinglePlacePage extends React.Component {
       this.state.placeDetails = response.data
       console.log(this.state.placeDetails.location.address)
       this.setState({ placeLocation: this.state.placeDetails.location.address })
+      this.setState({ placeCoordinates: this.state.placeDetails.location.position })
       // this.render();
+      console.log(this.state.coordinates)
+      this.interactiveMap()
     })
 
     // this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-core.js')
@@ -231,7 +232,7 @@ class SinglePlacePage extends React.Component {
     const mapsJSUICss = document.createElement('link')
     mapsJSUICss.href = 'https://js.api.here.com/v3/3.0/mapsjs-ui.css'
     mapsJSUICss.type = 'text/css'
-    document.head.appendChild(mapsJSUICss)
+    //document.head.appendChild(mapsJSUICss)
   }
 
   loadScript (src) {
@@ -247,8 +248,14 @@ class SinglePlacePage extends React.Component {
     this.props.history.push('/resources/' + this.state.coordinates + '/' + this.state.category)
   }
 
-  componentDidMount () {
+  interactiveMap () {
+    var coordinates = {
+      lat: this.state.placeCoordinates[0],
+      lng: this.state.placeCoordinates[1]
+    }
+    console.log(coordinates)
     var H = window.H
+
     /**
  * Boilerplate map initialization code starts below:
  */
@@ -261,12 +268,12 @@ class SinglePlacePage extends React.Component {
       useCIT: true,
       useHTTPS: true
     })
-    var defaultLayers = platform.createDefaultLayers()
-
+    
     // Step 2: initialize a map - this map is centered over Europe
     var d = document.createElement('div')
     d.id = 'map'
-    document.body.appendChild(d)
+    document.getElementById('mapcontainer').appendChild(d)
+    var defaultLayers = platform.createDefaultLayers()
     var map = new H.Map(document.getElementById('map'),
       defaultLayers.normal.map, {
         center: { lat: 50, lng: 5 },
@@ -283,10 +290,10 @@ class SinglePlacePage extends React.Component {
     // Create the default UI components
     var ui = H.ui.UI.createDefault(map, defaultLayers)
 
-    var berlinMarker = new H.map.Marker({ lat: 52.5166, lng: 13.3833 })
-    map.addObject(berlinMarker)
+    var placemarker = new H.map.Marker(coordinates)
+    map.addObject(placemarker)
     // Now use the map as required...
-    map.setCenter({ lat: 52.5159, lng: 13.3777 })
+    map.setCenter(coordinates)
     map.setZoom(14)
   }
 
@@ -305,8 +312,8 @@ class SinglePlacePage extends React.Component {
                     </svg>
                     Go back</a>
                 </div>
-                
-                {/* <div id='placeList' class='place'>
+
+                <div id='placeList' class='place'>
                   <a class='place-title' href={this.state.placeDetails.view}>{this.state.placeDetails.name}</a>
                   <br />
                   <a class='place-address'>{this.state.placeLocation.house} {this.state.placeLocation.street}</a>
@@ -315,8 +322,9 @@ class SinglePlacePage extends React.Component {
                   <br />
                   <a class='place-address'>{this.state.placeLocation.city}</a>
                   <br />
+                  <div id='mapcontainer' />
 
-                </div> */}
+                </div>
                 {/* <Helmet></Helmet> */}
                 <NHSFooter />
               </div>
