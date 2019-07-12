@@ -7,7 +7,6 @@ import '../assets/css/ResourcesPage.css'
 import { Switch } from 'react-router'
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
-import { execute } from '../components/InteractiveMap'
 class ResourcesPage extends React.Component {
   constructor (props) {
     super(props)
@@ -192,6 +191,7 @@ class SinglePlacePage extends React.Component {
       this.state.place = { title: 'MAPS API ERROR' }
     }
     this.handleGoBackButton = this.handleGoBackButton.bind(this)
+    this.loadScript = this.loadScript.bind(this)
   }
 
   componentWillMount () {
@@ -208,34 +208,26 @@ class SinglePlacePage extends React.Component {
       // this.render();
     })
 
-    const mapsJSCore = document.createElement('script')
-    const mapsJSService = document.createElement('script')
-    const mapsJSUI = document.createElement('script')
-    const mapsJSMapEvents = document.createElement('script')
-    const interactiveMap = document.createElement('script')
+    this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-core.js')
+    this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-service.js')
+    this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-ui.js')
+    this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-mapevents.js')
+    this.loadScript('/__/src/services/InteractiveMap.js')
     const mapsJSUICss = document.createElement('link')
-
-    mapsJSCore.src = 'https://js.api.here.com/v3/3.0/mapsjs-core.js'
-    mapsJSCore.async = true
-
-    mapsJSService.src = 'https://js.api.here.com/v3/3.0/mapsjs-service.js'
-    mapsJSService.async = true
-
-    mapsJSUI.src = 'https://js.api.here.com/v3/3.0/mapsjs-ui.js'
-    mapsJSUI.async = true
-
-    mapsJSMapEvents.src = 'https://js.api.here.com/v3/3.0/mapsjs-mapevents.js'
-    mapsJSMapEvents.async = true
-
     mapsJSUICss.href = 'https://js.api.here.com/v3/3.0/mapsjs-ui.css'
+    mapsJSUICss.type = 'text/css'
+    document.head.appendChild(mapsJSUICss)
+  }
 
-    interactiveMap.src = '../components/interactiveMap'
-    document.body.appendChild(mapsJSCore)
-    document.body.appendChild(mapsJSService)
-    document.body.appendChild(mapsJSUI)
-    document.body.appendChild(mapsJSMapEvents)
-    document.body.appendChild(mapsJSUICss)
-    document.body.appendChild(interactiveMap)
+  m
+
+
+
+  loadScript (src) {
+    var tag = document.createElement('script')
+    tag.async = false
+    tag.src = src
+    document.head.appendChild(tag)
   }
 
   handleGoBackButton (pg) {
