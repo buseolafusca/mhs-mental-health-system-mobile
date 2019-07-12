@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails } from '../services/BackendService'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -7,6 +7,14 @@ import '../assets/css/ResourcesPage.css'
 import { Switch } from 'react-router'
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
+import 'here-js-api/scripts/mapsjs-core'
+import 'here-js-api/scripts/mapsjs-service'
+import 'here-js-api/scripts/mapsjs-ui'
+import 'here-js-api/scripts/mapsjs-mapevents'
+import 'here-js-api/scripts/mapsjs-clustering'
+import 'here-js-api/scripts/mapsjs-places'
+import { appId as apI, appCode as apC } from '../variables/general'
+
 class ResourcesPage extends React.Component {
   constructor (props) {
     super(props)
@@ -185,13 +193,20 @@ class SinglePlacePage extends React.Component {
       category: '',
       place: props.location.state.detail,
       placeDetails: {},
-      placeLocation: {}
+      placeLocation: {},
+      placeCor: {
+        lat: 51.5,
+        lng: 0
+      },
+      appID: apI,
+      appCode: apC
     }
     if (this.state.place === '') {
       this.state.place = { title: 'MAPS API ERROR' }
     }
     this.handleGoBackButton = this.handleGoBackButton.bind(this)
     this.loadScript = this.loadScript.bind(this)
+    console.log(this.state)
   }
 
   componentWillMount () {
@@ -208,32 +223,71 @@ class SinglePlacePage extends React.Component {
       // this.render();
     })
 
-    this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-core.js')
-    this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-service.js')
-    this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-ui.js')
-    this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-mapevents.js')
-    this.loadScript('/__/src/services/InteractiveMap.js')
+    // this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-core.js')
+    // this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-service.js')
+    // this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-ui.js')
+    // this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-mapevents.js')
+    // this.loadScript('index.js')
     const mapsJSUICss = document.createElement('link')
     mapsJSUICss.href = 'https://js.api.here.com/v3/3.0/mapsjs-ui.css'
     mapsJSUICss.type = 'text/css'
     document.head.appendChild(mapsJSUICss)
   }
 
-  m
-
-
-
   loadScript (src) {
     var tag = document.createElement('script')
     tag.async = false
     tag.src = src
-    document.head.appendChild(tag)
+    document.getElementById('placeList').appendChild(tag)
   }
 
   handleGoBackButton (pg) {
     this.setState({ placesList: [] })
     console.log(this.state)
     this.props.history.push('/resources/' + this.state.coordinates + '/' + this.state.category)
+  }
+
+  componentDidMount () {
+    var H = window.H
+    /**
+ * Boilerplate map initialization code starts below:
+ */
+    // Step 1: initialize communication with the platform
+    // In your own code, replace window.app_id with your own app_id
+    // and window.app_code with your own app_code
+    var platform = new H.service.Platform({
+      app_id: 'nuT8ftiOYvrfFNaFEUyV',
+      app_code: 'yNZIQaMP6fRuY1D8DKsuxw',
+      useCIT: true,
+      useHTTPS: true
+    })
+    var defaultLayers = platform.createDefaultLayers()
+
+    // Step 2: initialize a map - this map is centered over Europe
+    var d = document.createElement('div')
+    d.id = 'map'
+    document.body.appendChild(d)
+    var map = new H.Map(document.getElementById('map'),
+      defaultLayers.normal.map, {
+        center: { lat: 50, lng: 5 },
+        zoom: 4
+      })
+    // add a resize listener to make sure that the map occupies the whole container
+    window.addEventListener('resize', () => map.getViewPort().resize())
+
+    // Step 3: make the map interactive
+    // MapEvents enables the event system
+    // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+    var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map))
+
+    // Create the default UI components
+    var ui = H.ui.UI.createDefault(map, defaultLayers)
+
+    var berlinMarker = new H.map.Marker({ lat: 52.5166, lng: 13.3833 })
+    map.addObject(berlinMarker)
+    // Now use the map as required...
+    map.setCenter({ lat: 52.5159, lng: 13.3777 })
+    map.setZoom(14)
   }
 
   render () {
@@ -251,7 +305,8 @@ class SinglePlacePage extends React.Component {
                     </svg>
                     Go back</a>
                 </div>
-                <div class='place'>
+                
+                {/* <div id='placeList' class='place'>
                   <a class='place-title' href={this.state.placeDetails.view}>{this.state.placeDetails.name}</a>
                   <br />
                   <a class='place-address'>{this.state.placeLocation.house} {this.state.placeLocation.street}</a>
@@ -260,9 +315,8 @@ class SinglePlacePage extends React.Component {
                   <br />
                   <a class='place-address'>{this.state.placeLocation.city}</a>
                   <br />
-                  <div id='map' />
 
-                </div>
+                </div> */}
                 {/* <Helmet></Helmet> */}
                 <NHSFooter />
               </div>
