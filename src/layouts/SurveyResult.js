@@ -37,6 +37,14 @@ widgets.ckeditor(Survey);
 widgets.autocomplete(Survey, $);
 widgets.bootstrapslider(Survey);
 
+class Square extends React.Component {
+  render () {
+    return (
+      <a href={this.props.url} className='box' style={{ color: '#fff' }}>&nbsp;&nbsp;&nbsp;&nbsp;Work on your next survey&nbsp;&nbsp;&nbsp;&nbsp;</a>
+    )
+  }
+}
+
 class SurveyResult extends Component {
 
   constructor(props) {
@@ -181,7 +189,7 @@ class SurveyResult extends Component {
           </center>
           <div id="finalScore"></div>
           <div id="jsonSection"></div>
-          <div> sss </div>
+          <div> <Square url='/referrals' title='Referrals' /> </div>
         </div>
         
       </div>
