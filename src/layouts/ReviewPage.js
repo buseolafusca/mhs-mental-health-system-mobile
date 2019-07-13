@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import {fetchUserAnswers} from "../services/BackendService";
 import $ from "jquery";
 
+$(document).ready(function($) {
+    $(".nhsuk-table__row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
 class ReviewPage extends Component {
     constructor (props) {
       super(props)
@@ -18,8 +23,8 @@ class ReviewPage extends Component {
           for (var i = 0; i < response.length; i++) {
             var row = [response[i].title, 'PENDING']
             rows.push(row)
-
-            tableData += "<tr class='nhsuk-table__row'>"
+            console.log('test'+response[i].questionnaire_id);
+            tableData += "<tr class='nhsuk-table__row' data-href='http://localhost:3001/result'>"
             tableData += "<td class='nhsuk-table__cell'>" + response[i].title + "</td>"
 
             tableData += "<td class='nhsuk-table__cell'>" + 'PENDING' + "</td>"
@@ -33,11 +38,28 @@ class ReviewPage extends Component {
         })
     }
   
+    addRowHandlers() {
+        var table = document.getElementById("aaa");
+        var rows = table.getElementsByTagName("tr");
+        for (var i = 0; i < rows.length; i++) {
+          var currentRow = table.rows[i];
+          var createClickHandler = function(row) {
+            return function() {
+              var cell = row.getElementsByTagName("td")[0];
+              var id = cell.innerHTML;
+              alert("id:" + id);
+            };
+          };
+          currentRow.onclick = createClickHandler(currentRow);
+        }
+      }
+
+  
     render () {
       return (
    
        <div class="nhsuk-table-responsive">
-        <table class="nhsuk-table">
+        <table id = "aaa" class="nhsuk-table">
             <caption class="nhsuk-table__caption">Your Questionnaire Status</caption>
             <thead class="nhsuk-table__head">
 
