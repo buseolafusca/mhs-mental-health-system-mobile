@@ -230,8 +230,8 @@ class SinglePlacePage extends React.Component {
     // this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-mapevents.js')
     // this.loadScript('index.js')
     const mapsJSUICss = document.createElement('link')
-    mapsJSUICss.href = 'https://js.api.here.com/v3/3.0/mapsjs-ui.css'
-    mapsJSUICss.type = 'text/css'
+  //  mapsJSUICss.href = 'https://js.api.here.com/v3/3.0/mapsjs-ui.css'
+    //mapsJSUICss.type = 'text/css'
     //document.head.appendChild(mapsJSUICss)
   }
 
@@ -263,8 +263,8 @@ class SinglePlacePage extends React.Component {
     // In your own code, replace window.app_id with your own app_id
     // and window.app_code with your own app_code
     var platform = new H.service.Platform({
-      app_id: 'nuT8ftiOYvrfFNaFEUyV',
-      app_code: 'yNZIQaMP6fRuY1D8DKsuxw',
+      app_id: this.state.appID,
+      app_code:  this.state.appCode,
       useCIT: true,
       useHTTPS: true
     })

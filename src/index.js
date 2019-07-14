@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import './assets/css/index.css'
 import SurveyResult from './layouts/SurveyResult'
 import NewSurvey from './layouts/NewSurvey'
-import LandingPage from './layouts/LandingPage'
+import { LandingPage, SignUpInPage } from './layouts/LandingPage'
 import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/ResourcesPage'
 import LocationPage from './layouts/LocationPage'
 import * as serviceWorker from './serviceWorker'
@@ -17,7 +17,8 @@ import {
 const routing = (
   <Router>
     <Switch>
-      <Route exact path='/' component={LandingPage} />
+      <Route exact path='/dashboard' component={LandingPage} />
+      <Route exact path='/' component={SignUpInPage} />
       <Route exact path='/questionnaire/:id?' component={NewSurvey} />
       <Route exact path='/locationpage' component={LocationPage} />
       <Route path='/resources/:id/:cat/:place' component={SinglePlacePage} />
