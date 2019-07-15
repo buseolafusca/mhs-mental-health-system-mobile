@@ -204,7 +204,6 @@ class SinglePlacePage extends React.Component {
     this.handleGoBackButton = this.handleGoBackButton.bind(this)
     this.handleGoBackButton = this.handleGoBackButton.bind(this)
     this.interactiveMap = this.interactiveMap.bind(this)
-    console.log(this.state)
   }
 
   componentWillMount () {
@@ -223,23 +222,6 @@ class SinglePlacePage extends React.Component {
       console.log(this.state.coordinates)
       this.interactiveMap()
     })
-
-    // this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-core.js')
-    // this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-service.js')
-    // this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-ui.js')
-    // this.loadScript('https://js.api.here.com/v3/3.0/mapsjs-mapevents.js')
-    // this.loadScript('index.js')
-    const mapsJSUICss = document.createElement('link')
-  //  mapsJSUICss.href = 'https://js.api.here.com/v3/3.0/mapsjs-ui.css'
-    //mapsJSUICss.type = 'text/css'
-    //document.head.appendChild(mapsJSUICss)
-  }
-
-  loadScript (src) {
-    var tag = document.createElement('script')
-    tag.async = false
-    tag.src = src
-    document.getElementById('placeList').appendChild(tag)
   }
 
   handleGoBackButton (pg) {
@@ -264,11 +246,11 @@ class SinglePlacePage extends React.Component {
     // and window.app_code with your own app_code
     var platform = new H.service.Platform({
       app_id: this.state.appID,
-      app_code:  this.state.appCode,
+      app_code: this.state.appCode,
       useCIT: true,
       useHTTPS: true
     })
-    
+
     // Step 2: initialize a map - this map is centered over Europe
     var d = document.createElement('div')
     d.id = 'map'

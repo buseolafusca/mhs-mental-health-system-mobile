@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import NewSurvey from './NewSurvey'
+import NewSurvey from '../layouts/NewSurvey'
 
 it('renders without crashing', () => {
   const div = document.createElement('div')
