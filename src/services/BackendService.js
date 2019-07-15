@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
   getPlacesByCategoryLocationUrl } from '../variables/URLs'
-import { appId, appCode } from '../variables/general'
+import { appId, appCode, patientanswersUrl } from '../variables/general'
 
 const getQuestionnaire = async (id) => {
   var url = baseUrl + fetchQuestionnaireUrl + id
@@ -117,7 +117,29 @@ const getPlaceDetails = async (url) => {
   }
 }
 
-export {
-  getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
-  getLocationGivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails
+const fetchUserAnswers = async () => {
+  console.log('fetchUserAnswers')
+  var userAnswerUrl = baseUrl + answersUrl
+  try {
+    const response = await axios.get(userAnswerUrl)
+    console.log(response)
+    return response.data.data
+  } catch (error) {
+    console.log('GET server error: ', error)
+  }
 }
+
+const getAnsweredQuestionnaire= async(theId) => {
+  try {
+    const response = await axios.get(baseUrl + "/api/v1/" + patientanswersUrl + '/' +theId);
+    return response.data.data.body;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
+}
+
+
+export {
+  fetchUserAnswers, getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
+  getLocationGivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails,
+  getAnsweredQuestionnaire}

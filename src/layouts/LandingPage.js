@@ -40,6 +40,7 @@ class LandingPage extends React.Component {
             <Square url='/referrals' title='Referrals' />
             <Square url='/appointments' title='Appointments' />
             <Square url='/locationpage' title='Resources' />
+            <Square url='/review' title='Review' />
           </div>
         </div>
         <NHSFooter />
