@@ -2,9 +2,9 @@ import React from 'react'
 import '../assets/css/LandingPage.css'
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
-//import { firebaseConfig } from '../variables/general'
+// import { firebaseConfig } from '../variables/general'
 import { fetchPublishedQuestionnaires } from '../services/BackendService.js'
-//import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+// import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import '../assets/css/firebaseui-styling.global.css'
 
 class Square extends React.Component {
@@ -108,7 +108,6 @@ class LandingPage extends React.Component {
             <Square url='/referrals' title='Referrals' />
             <Square url='/appointments' title='Appointments' />
             <Square url='/locationpage' title='Resources' />
-            <Square url='/review' title='Review' />
           </div>
         </div>
         <NHSFooter />
@@ -118,4 +117,4 @@ class LandingPage extends React.Component {
 }
 
 // export { LandingPage , SignUpInPage }
- export { LandingPage }
+export default LandingPage
