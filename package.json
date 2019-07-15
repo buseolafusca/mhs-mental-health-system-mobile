@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "start-sw": "http-server ./build"
   },
@@ -40,6 +40,9 @@
     ]
   },
   "devDependencies": {
-    "http-server": "^0.11.1"
+    "babel-jest": "^24.8.0",
+    "babel-preset-env": "^1.6.1",
+    "http-server": "^0.11.1",
+    "jest": "^22.4.4"
   }
 }
