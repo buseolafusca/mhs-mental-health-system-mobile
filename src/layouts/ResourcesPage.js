@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails } from '../services/BackendService'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import '../sass/app.scss'
 import '../assets/css/ResourcesPage.css'
-
 import { Switch } from 'react-router'
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
+import 'here-js-api/scripts/mapsjs-core'
+import 'here-js-api/scripts/mapsjs-service'
+import 'here-js-api/scripts/mapsjs-ui'
+import 'here-js-api/scripts/mapsjs-mapevents'
+import 'here-js-api/scripts/mapsjs-clustering'
+import 'here-js-api/scripts/mapsjs-places'
+import { appId as apI, appCode as apC } from '../variables/general'
 
 class ResourcesPage extends React.Component {
   constructor (props) {
@@ -66,7 +72,7 @@ class ResourcesPage extends React.Component {
                     <svg class='nhsuk-icon nhsuk-icon__chevron-left recourcepage-icon__Chevron-left' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden='true'>
                       <path d='M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z' />
                     </svg>
-                                        Go back</a>
+                    Go back</a>
                 </div>
                 {this.state.categoriesList.map((item, key) =>
                   <details class='nhsuk-details expander' >
@@ -157,7 +163,7 @@ class PlacesPage extends React.Component {
                     <svg class='nhsuk-icon nhsuk-icon__chevron-left recourcepage-icon__Chevron-left' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden='true'>
                       <path d='M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z' />
                     </svg>
-                                        Go back</a>
+                    Go back</a>
                 </div>
                 {this.state.placesList.map((item, key) =>
                   <details class='nhsuk-details expander' >
@@ -168,7 +174,6 @@ class PlacesPage extends React.Component {
                     </summary>
                   </details>
                 )}
-
                 {/* <NHSFooter /> Footer causes problems TODO Fix */}
               </div>
             )
@@ -188,12 +193,17 @@ class SinglePlacePage extends React.Component {
       category: '',
       place: props.location.state.detail,
       placeDetails: {},
-      placeLocation: {}
+      placeLocation: {},
+      placeCoordinates: {},
+      appID: apI,
+      appCode: apC
     }
     if (this.state.place === '') {
       this.state.place = { title: 'MAPS API ERROR' }
     }
     this.handleGoBackButton = this.handleGoBackButton.bind(this)
+    this.handleGoBackButton = this.handleGoBackButton.bind(this)
+    this.interactiveMap = this.interactiveMap.bind(this)
   }
 
   componentWillMount () {
@@ -207,7 +217,10 @@ class SinglePlacePage extends React.Component {
       this.state.placeDetails = response.data
       console.log(this.state.placeDetails.location.address)
       this.setState({ placeLocation: this.state.placeDetails.location.address })
+      this.setState({ placeCoordinates: this.state.placeDetails.location.position })
       // this.render();
+      console.log(this.state.coordinates)
+      this.interactiveMap()
     })
   }
 
@@ -215,6 +228,55 @@ class SinglePlacePage extends React.Component {
     this.setState({ placesList: [] })
     console.log(this.state)
     this.props.history.push('/resources/' + this.state.coordinates + '/' + this.state.category)
+  }
+
+  interactiveMap () {
+    var coordinates = {
+      lat: this.state.placeCoordinates[0],
+      lng: this.state.placeCoordinates[1]
+    }
+    console.log(coordinates)
+    var H = window.H
+
+    /**
+ * Boilerplate map initialization code starts below:
+ */
+    // Step 1: initialize communication with the platform
+    // In your own code, replace window.app_id with your own app_id
+    // and window.app_code with your own app_code
+    var platform = new H.service.Platform({
+      app_id: this.state.appID,
+      app_code: this.state.appCode,
+      useCIT: true,
+      useHTTPS: true
+    })
+
+    // Step 2: initialize a map - this map is centered over Europe
+    var d = document.createElement('div')
+    d.id = 'map'
+    document.getElementById('mapcontainer').appendChild(d)
+    var defaultLayers = platform.createDefaultLayers()
+    var map = new H.Map(document.getElementById('map'),
+      defaultLayers.normal.map, {
+        center: { lat: 50, lng: 5 },
+        zoom: 4
+      })
+    // add a resize listener to make sure that the map occupies the whole container
+    window.addEventListener('resize', () => map.getViewPort().resize())
+
+    // Step 3: make the map interactive
+    // MapEvents enables the event system
+    // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+    var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map))
+
+    // Create the default UI components
+    var ui = H.ui.UI.createDefault(map, defaultLayers)
+
+    var placemarker = new H.map.Marker(coordinates)
+    map.addObject(placemarker)
+    // Now use the map as required...
+    map.setCenter(coordinates)
+    map.setZoom(14)
   }
 
   render () {
@@ -230,9 +292,10 @@ class SinglePlacePage extends React.Component {
                     <svg class='nhsuk-icon nhsuk-icon__chevron-left recourcepage-icon__Chevron-left' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden='true'>
                       <path d='M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z' />
                     </svg>
-                                        Go back</a>
+                    Go back</a>
                 </div>
-                <div class='place'>
+
+                <div id='placeList' class='place'>
                   <a class='place-title' href={this.state.placeDetails.view}>{this.state.placeDetails.name}</a>
                   <br />
                   <a class='place-address'>{this.state.placeLocation.house} {this.state.placeLocation.street}</a>
@@ -241,8 +304,10 @@ class SinglePlacePage extends React.Component {
                   <br />
                   <a class='place-address'>{this.state.placeLocation.city}</a>
                   <br />
-                </div>
+                  <div id='mapcontainer' />
 
+                </div>
+                {/* <Helmet></Helmet> */}
                 <NHSFooter />
               </div>
             )

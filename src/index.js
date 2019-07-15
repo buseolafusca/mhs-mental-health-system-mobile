@@ -19,6 +19,8 @@ const routing = (
   <Router>
     <Switch>
       <Route exact path='/' component={LandingPage} />
+      {/* <Route exact path='/dashboard' component={LandingPage} /> */}
+      {/* <Route exact path='/' component={SignUpInPage} /> */}
       <Route exact path='/questionnaire/:id?' component={NewSurvey} />
       <Route exact path='/locationpage' component={LocationPage} />
       <Route path='/resources/:id/:cat/:place' component={SinglePlacePage} />
