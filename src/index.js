@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom'
 import './assets/css/index.css'
 import SurveyResult from './layouts/SurveyResult'
 import NewSurvey from './layouts/NewSurvey'
+<<<<<<< HEAD
 import { LandingPage, SignUpInPage } from './layouts/LandingPage'
+=======
+import LandingPage from './layouts/LandingPage'
+import ReviewPage from './layouts/ReviewPage'
+>>>>>>> d9794299da3f56462a2d7d61eec35201fe848b07
 import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/ResourcesPage'
 import LocationPage from './layouts/LocationPage'
 import * as serviceWorker from './serviceWorker'
@@ -26,6 +31,7 @@ const routing = (
       <Route path='/resources/:id/:cat' component={PlacesPage} />
       <Route path='/resources/:id' component={ResourcesPage} />
       <Route path='/result' component={SurveyResult} />
+      <Route path='/review' component={ReviewPage} />
     </Switch>
   </Router>
 )
