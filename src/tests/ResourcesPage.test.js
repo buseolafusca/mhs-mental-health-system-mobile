@@ -2,7 +2,6 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { ResourcesPage, SinglePlacePage, PlacesPage } from '../layouts/ResourcesPage'
 import { configure } from 'enzyme'
-import './SetupTests'
 import Adapter from 'enzyme-adapter-react-16'
 
 
