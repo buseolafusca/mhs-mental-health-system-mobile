@@ -39,7 +39,7 @@ class ReviewPage extends Component {
     }
   
     addRowHandlers() {
-        var table = document.getElementById("aaa");
+        var table = document.getElementById("get-table");
         var rows = table.getElementsByTagName("tr");
         for (var i = 0; i < rows.length; i++) {
           var currentRow = table.rows[i];
@@ -59,7 +59,7 @@ class ReviewPage extends Component {
       return (
    
        <div class="nhsuk-table-responsive">
-        <table id = "aaa" class="nhsuk-table">
+        <table id = "get-table" class="nhsuk-table">
             <caption class="nhsuk-table__caption">Your Questionnaire Status</caption>
             <thead class="nhsuk-table__head">
 

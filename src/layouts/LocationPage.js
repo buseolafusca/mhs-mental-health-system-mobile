@@ -66,5 +66,5 @@ class LocationPage extends React.Component {
     )
   }
 }
-  
+
 export default LocationPage

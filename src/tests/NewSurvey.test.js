@@ -8,4 +8,5 @@ it('renders without crashing', () => {
   const div = document.createElement('div')
   ReactDOM.render(<NewSurvey match={match} />, div)
   ReactDOM.unmountComponentAtNode(div)
+  
 })
