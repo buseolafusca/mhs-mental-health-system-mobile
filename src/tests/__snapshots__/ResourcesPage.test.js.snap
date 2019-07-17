@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResourcesPage should render correctly in "debug" mode 1`] = `
+<BrowserRouter>
+  <Switch>
+    <Route
+      exact={true}
+      path="/resources/:id"
+      render={[Function]}
+    />
+  </Switch>
+</BrowserRouter>
+`;

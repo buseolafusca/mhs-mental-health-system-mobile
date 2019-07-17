@@ -134,9 +134,6 @@ class SurveyResult extends Component {
     
     getAnsweredQuestionnaire(answerId)
         .then(fetched_answers => {
-          console.log("fetched_answers")
-          console.log(fetched_answers)
-
           this.setState( {answers: JSON.parse(fetched_answers) } );
 
          getQuestionnaire(qustionId)
@@ -166,10 +163,7 @@ class SurveyResult extends Component {
   render() {
     Survey.Survey.cssType = "bootstrap";
     this.model = new Survey.Model(this.state.json);
-
     this.model.data = this.state.answers;
-    console.log("this.model.data");
-    console.log(this.model.data);
     //set as read only
     this.model.mode="display";
 
