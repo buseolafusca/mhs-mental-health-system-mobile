@@ -28,7 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "cross-env CI=true react-scripts test --env=jsdom --passWithNoTests",
+    "test": "cross-env CI=true react-scripts test --coverage --env=jsdom --passWithNoTests",
     "eject": "react-scripts eject",
     "start-sw": "http-server ./build"
   },
@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "codecov": "^3.5.0",
     "cross-env": "^5.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
