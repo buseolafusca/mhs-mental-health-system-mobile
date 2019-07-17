@@ -2,7 +2,6 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import LocationPage from '../layouts/LocationPage'
 import { configure } from 'enzyme'
-import './SetupTests'
 import Adapter from 'enzyme-adapter-react-16'
 
 describe('Location page', () => {

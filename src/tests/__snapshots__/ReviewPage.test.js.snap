@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Review page should render correctly in mode 1`] = `
+<div
+  class="nhsuk-table-responsive"
+>
+  <table
+    class="nhsuk-table"
+    id="get-table"
+  >
+    <caption
+      class="nhsuk-table__caption"
+    >
+      Your Questionnaire Status
+    </caption>
+    <thead
+      class="nhsuk-table__head"
+    >
+      <tr
+        class="nhsuk-table__row"
+      >
+        <th
+          class="nhsuk-table__header"
+          scope="col"
+        >
+          Questionnaire
+        </th>
+        <th
+          class="nhsuk-table__header"
+          scope="col"
+        >
+          Status
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="nhsuk-table__body"
+      id="tbody1"
+    />
+  </table>
+</div>
+`;
