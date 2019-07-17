@@ -122,7 +122,7 @@ const fetchUserAnswers = async () => {
   var userAnswerUrl = baseUrl + answersUrl
   try {
     const response = await axios.get(userAnswerUrl)
-    console.log(response)
+    // console.log(response)
     return response.data.data
   } catch (error) {
     console.log('GET server error: ', error)
