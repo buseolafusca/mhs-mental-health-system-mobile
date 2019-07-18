@@ -15,7 +15,8 @@ import "jquery-ui/ui/widgets/datepicker.js";
 import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
-
+import NHSHeader from '../components/NHSHeader.js'
+import NHSFooter from '../components/NHSFooter.js'
 import { getQuestionnaire, postAnswers, sendResults } from '../services/BackendService';
 import SurveyCreator from "./SurveyCreator";
 import "../assets/css/NewSurvey.css";
@@ -116,6 +117,7 @@ class NewSurvey extends Component {
     this.model = new Survey.Model(this.state.json);
     return (
       <div className="SurveyResult">
+        <NHSHeader/>
         <div className="surveyjs" >
           <Survey.Survey
             model={this.model}
@@ -132,7 +134,7 @@ class NewSurvey extends Component {
           <div id="finalScore"></div>
           <div id="jsonSection"></div>
         </div>
-
+      <NHSFooter/>
       </div>
     );
     
