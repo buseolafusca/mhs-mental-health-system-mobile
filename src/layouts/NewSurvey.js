@@ -19,7 +19,6 @@ import * as widgets from "surveyjs-widgets";
 import { getQuestionnaire, postAnswers, sendResults } from '../services/BackendService';
 import SurveyCreator from "./SurveyCreator";
 import "../assets/css/NewSurvey.css";
-import "../assets/css/SurveyResult.css";
 
 window["$"] = window["jQuery"] = $;
 require("icheck");

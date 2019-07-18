@@ -3,6 +3,10 @@
   height: 80px;
 }
 
+.sv_row{
+  text-align: left;
+}
+
 .NewSurvey-header {
   background-color: #222;
   height: 150px;
