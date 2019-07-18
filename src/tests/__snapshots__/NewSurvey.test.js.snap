@@ -4,6 +4,7 @@ exports[`NewSurvey should render correctly in "debug" mode 1`] = `
 <div
   className="SurveyResult"
 >
+  <NHSHeader />
   <div
     className="surveyjs"
   >
@@ -33,5 +34,6 @@ exports[`NewSurvey should render correctly in "debug" mode 1`] = `
       id="jsonSection"
     />
   </div>
+  <NHSFooter />
 </div>
 `;
