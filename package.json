@@ -28,7 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "cross-env CI=true react-scripts test --coverage --env=jsdom --passWithNoTests",
+    "test": "cross-env CI=true react-scripts test --coverage --env=jsdom --passWithNoTests -u",
     "eject": "react-scripts eject",
     "start-sw": "http-server ./build"
   },
