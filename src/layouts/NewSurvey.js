@@ -99,7 +99,6 @@ class NewSurvey extends Component {
 
   componentWillMount() {
     const { id } = this.props.match.params;
-    // console.log(id);
 
     const url = id;
     this.setState({questionnaireId:id});
@@ -116,25 +115,26 @@ class NewSurvey extends Component {
     Survey.Survey.cssType = "bootstrap";
     this.model = new Survey.Model(this.state.json);
     return (
-      <div className="SurveyResult">
+      <div id = "page-container">
         <NHSHeader/>
-        <div className="surveyjs" >
-          <Survey.Survey
-            model={this.model}
-            onComplete={this.onComplete}
-            onValueChanged={this.onValueChanged}
-          />
-          <center>
-            <table border="1" width="180" >
-              <tbody id="tbody1">
-
-              </tbody>
-            </table>
-          </center>
-          <div id="finalScore"></div>
-          <div id="jsonSection"></div>
+        <div className="SurveyResult">
+          <div className="surveyjs" >
+            <Survey.Survey
+              model={this.model}
+              onComplete={this.onComplete}
+              onValueChanged={this.onValueChanged}
+            />
+            <center>
+              <table border="1" width="180" >
+                <tbody id="tbody1">
+                </tbody>
+              </table>
+            </center>
+            <div id="finalScore"></div>
+            <div id="jsonSection"></div>
+          </div>
         </div>
-      <NHSFooter/>
+        <NHSFooter/>
       </div>
     );
     
