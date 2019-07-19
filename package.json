@@ -15,11 +15,13 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-firebaseui": "^3.1.2",
+    "react-form-login": "^1.1.4",
     "react-here-maps": "^0.4.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-test-renderer": "^16.8.6",
     "standard": "^12.0.1",
+    "style": "0.0.3",
     "survey-creator": "latest",
     "survey-react": "latest",
     "surveyjs-widgets": "latest",
@@ -53,7 +55,8 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
-    "http-server": "^0.11.1"
+    "http-server": "^0.11.1",
+    "style-loader": "^0.23.1"
   },
   "jest": {
     "snapshotSerializers": [
