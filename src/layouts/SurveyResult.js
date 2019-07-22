@@ -17,7 +17,9 @@ import axios from "axios";
 import { getAnsweredQuestionnaire, getQuestionnaire, getAuthenticationToken, getQuestionnaireWithoutToken, getQuestionnaireWithToken } from "../services/BackendService";
 
 import { backendUrl, createUserAnswers } from "../variables/general";
-
+import NHSHeader from '../components/NHSHeader.js'
+import NHSFooter from '../components/NHSFooter.js'
+import "../assets/css/SurveyResult.css";
 
 window["$"] = window["jQuery"] = $;
 require("icheck");
@@ -40,7 +42,7 @@ widgets.bootstrapslider(Survey);
 class Square extends React.Component {
   render () {
     return (
-      <a href={this.props.url} className='box' style={{ color: '#fff' }}>&nbsp;&nbsp;&nbsp;&nbsp;Work on your next survey&nbsp;&nbsp;&nbsp;&nbsp;</a>
+      <a href={this.props.url} className='box1' style={{ color: '#fff' }}>&nbsp;&nbsp;&nbsp;&nbsp;Next survey&nbsp;&nbsp;&nbsp;&nbsp;</a>
     )
   }
 }
@@ -94,15 +96,17 @@ class SurveyResult extends Component {
     this.model.mode="display";
 
     return (
-      <div className="SurveyResult">
-        <div className="surveyjs" >
-          <Survey.Survey
-            model={this.model}
-          />
-
-          <div> <Square url='/referrals' title='Referrals' /> </div>
+      <div id = "page-container">
+        <NHSHeader/>
+        <div className="SurveyResult">
+          <div className="surveyjs" >
+            <Survey.Survey
+              model={this.model}
+            />
+            <div> <Square url='/referrals' title='Referrals' /> </div>
+          </div>
         </div>
-        
+        <NHSFooter/>
       </div>
     );
   }

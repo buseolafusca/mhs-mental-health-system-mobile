@@ -5,13 +5,6 @@ import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
 import "../assets/css/ReviewPage.css";
 
-// $(document).ready(function($) {
-//     $(".nhsuk-table__row").click(function() {
-//         var thisdata = $(this).getAttribute('data-id');
-//         console.log(thisdata);
-//         window.location = $(this).data("href");
-//     });
-// });
 class ReviewPage extends Component {
     constructor (props) {
       super(props)
@@ -35,7 +28,6 @@ class ReviewPage extends Component {
             tableData += "<td class='nhsuk-table__cell'>" + 'PENDING' + "</td>"
             tableData += "</tr>"
           }
-          //this.setState({ userAnswers: rows })
           $("#tbody1").html(tableData);
           this.addRowHandlers();
         })
@@ -51,8 +43,7 @@ class ReviewPage extends Component {
           var currentRow = table.rows[i];
           var createClickHandler = function(row) {
             return function() {
-              //console.log(row.getAttribute('data-id'));
-              window.location.href='http://localhost:3000/result/' + row.getAttribute('data-id');
+              window.location.href='result/' + row.getAttribute('data-id');
             };
           };
           currentRow.onclick = createClickHandler(currentRow);
