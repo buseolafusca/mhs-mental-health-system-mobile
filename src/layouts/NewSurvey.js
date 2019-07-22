@@ -98,6 +98,7 @@ class NewSurvey extends Component {
   };
 
   componentWillMount() {
+    
     const { id } = this.props.match.params;
 
     const url = id;

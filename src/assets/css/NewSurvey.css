@@ -2,13 +2,17 @@
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
+
 .SurveyResult{
   padding-bottom: 0.5rem;  
+  min-height: calc(100vh - 165px);
+  position: relative;
+  
 }
 
 #page-container {
   position: relative;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 .sv_row{

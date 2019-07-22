@@ -5,11 +5,13 @@ import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
 import "../assets/css/ReviewPage.css";
 
-$(document).ready(function($) {
-    $(".nhsuk-table__row").click(function() {
-        window.location = $(this).data("href");
-    });
-});
+// $(document).ready(function($) {
+//     $(".nhsuk-table__row").click(function() {
+//         var thisdata = $(this).getAttribute('data-id');
+//         console.log(thisdata);
+//         window.location = $(this).data("href");
+//     });
+// });
 class ReviewPage extends Component {
     constructor (props) {
       super(props)
@@ -18,6 +20,7 @@ class ReviewPage extends Component {
     }
   
     componentWillMount () {
+        
       fetchUserAnswers()
         .then(response => {
           var rows = []
@@ -25,7 +28,8 @@ class ReviewPage extends Component {
           for (var i = 0; i < response.length; i++) {
             var row = [response[i].title, 'PENDING']
             rows.push(row)
-            tableData += "<tr class='nhsuk-table__row' data-id=" + response[i].questionnaire_id + " >"
+            console.log(response[i]._id)
+            tableData += "<tr class='nhsuk-table__row' data-id=" + response[i]._id + " >"
             tableData += "<td class='nhsuk-table__cell'>" + response[i].title + "</td>"
 
             tableData += "<td class='nhsuk-table__cell'>" + 'PENDING' + "</td>"
@@ -47,8 +51,8 @@ class ReviewPage extends Component {
           var currentRow = table.rows[i];
           var createClickHandler = function(row) {
             return function() {
-              console.log(currentRow.getAttribute('data-id'));
-              window.location.href='http://localhost:3000/result';
+              //console.log(row.getAttribute('data-id'));
+              window.location.href='http://localhost:3000/result/' + row.getAttribute('data-id');
             };
           };
           currentRow.onclick = createClickHandler(currentRow);
