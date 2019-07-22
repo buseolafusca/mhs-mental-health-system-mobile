@@ -7,6 +7,7 @@ import LandingPage from './layouts/LandingPage'
 import ReviewPage from './layouts/ReviewPage'
 import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/ResourcesPage'
 import LocationPage from './layouts/LocationPage'
+import LoginForm from './layouts/LoginPage'
 import * as serviceWorker from './serviceWorker'
 
 import {
@@ -28,6 +29,8 @@ const routing = (
       <Route path='/resources/:id' component={ResourcesPage} />
       <Route path='/result' component={SurveyResult} />
       <Route path='/review' component={ReviewPage} />
+      <Route path='/login' component={LoginForm} />
+
     </Switch>
   </Router>
 )
