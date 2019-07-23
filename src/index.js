@@ -7,15 +7,26 @@ import LandingPage from './layouts/LandingPage'
 import ReviewPage from './layouts/ReviewPage'
 import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/ResourcesPage'
 import LocationPage from './layouts/LocationPage'
-import { LoginForm } from './layouts/LoginPage'
+import LoginForm from './layouts/LoginPage'
 import * as serviceWorker from './serviceWorker'
 import { render } from "react-dom";
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk';
+import rootReducer from "./reducers/RootReducer"
+import { createBrowserHistory } from 'history'
 
 import {
   Route,
-  BrowserRouter as Router,
-  Switch
+  Router,
+  Switch,
+  Redirect
 } from 'react-router-dom'
+
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+const history = createBrowserHistory();
+
 
 class Routing extends Component {
 
@@ -46,34 +57,16 @@ class Routing extends Component {
     const isAuthenticated = false;
 
     return (
-        <Router>
+      <Provider store={store}>
+
+        <Router history={history}>
 
           <Switch>
-            <Route
-              exact
-              path='/'
-              render={props => (
 
-                <LoginForm
-                  {...props}
-                  childProps={childProps}
-                />
-              )}
-            />
+            <Route path="/" component={ LoginForm } />
+            <Route path="/landingpage" render={() => (isLoggedIn() ? ( <LandingPage /> ) : ( <Redirect to="/"/> )) } />
 
-            
-            
-            <Route
-              exact
-              path="/landingpage"
-              render={props => (
 
-                <LandingPage
-                  {...props}
-                  childProps={childProps}
-                />
-              )}
-            />
 
             <Route exact path='/questionnaire/:id?' component={NewSurvey} />
             <Route exact path='/locationpage' component={LocationPage} />
@@ -85,7 +78,24 @@ class Routing extends Component {
 
           </Switch>
         </Router>
+      </Provider>
+
     )
+  }
+}
+
+function isLoggedIn(){
+  console.log('in the isLoggedIn function')
+  return sessionStorage.jwt;
+}
+
+function requireAuth(nextState, replace) {
+  console.log('in the require auth function')
+  if (!sessionStorage.jwt) {
+    replace({
+      pathname: '/',
+      state: { nextPathname: nextState.location.pathname }
+    })
   }
 }
 
@@ -96,3 +106,33 @@ render(<Routing />, document.getElementById("root"));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister()
+
+
+            // <Route path="/landingpage" render={() => (isLoggedIn() ? ( <LandingPage /> ) : ( <Redirect to="/"/> )) } />
+                        // <Route path="/landingpage" component={ LandingPage } />
+
+            // <Route
+            //   exact
+            //   path='/'
+            //   render={props => (
+
+            //     <LoginForm
+            //       {...props}
+            //       childProps={childProps}
+            //     />
+            //   )}
+            // />
+
+            
+            
+            // <Route
+            //   exact
+            //   path="/landingpage"
+            //   render={props => (
+
+            //     <LandingPage
+            //       {...props}
+            //       childProps={childProps}
+            //     />
+            //   )}
+            // />
