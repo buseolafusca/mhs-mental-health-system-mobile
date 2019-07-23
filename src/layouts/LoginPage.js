@@ -4,15 +4,23 @@ import ErrorText from '../components/ErrorText';
 import styles from '../sass/style.scss';
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
+import LandingPage from './LandingPage'
+import { render } from "react-dom";
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { getAuthenticationToken } from '../services/BackendService.js'
+
+var isLoggedIn = false;
+
 
 class LoginForm extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.state = {
       Username: '',
       Password: '',
       remember: false,
-      error: {}
+      error: {},
+      isAuthenticated: false
     };
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -20,14 +28,38 @@ class LoginForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+
   handleLogin() {
     this.setState({
       error: {}
     });
 
-    const { Username, Password, isRemember } = this.state;
+    const { Username, Password, remember } = this.state;
+    console.log(Username);
+    console.log(Password);
+    console.log(remember);
 
-    return this.props.onSubmit(Username, Password, isRemember);
+    const testUsername = "aaa";
+    const testPassword = "aaa";
+
+    if (true){
+    // if (Username === testUsername && Password === testPassword) {
+      console.log("AAA");
+      this.props.childProps.userHasAuthenticated(true);
+      this.props.childProps.isAuthenticated = true;
+      console.log("this.props.childProps")
+      console.log(this.props.childProps)
+      this.props.history.push('/landingpage')
+
+      // this.props.history.push({
+      //   pathname: '/landingpage',
+      //   state: { isLoggedIn: true }
+      // })
+    }
+    else {
+      console.log("BBB")
+    }
+    // return this.props.onSubmit(Username, Password, isRemember);
   }
 
   componentDidMount() {
@@ -36,6 +68,12 @@ class LoginForm extends React.Component {
     //   radioClass: 'iradio_square-blue',
     //   increaseArea: '20%' // optional
     // });
+  }
+
+  componentWillMount () {
+      console.log("this.props.childProps")
+      console.log(this.props.childProps)
+
   }
 
   handleChange(name, e) {
@@ -171,4 +209,4 @@ LoginForm.defaultProps = {
   password: {}
 };
 
-export default LoginForm;
+export {LoginForm, isLoggedIn};

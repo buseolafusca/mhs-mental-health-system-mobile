@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
   getPlacesByCategoryLocationUrl } from '../variables/URLs'
-import { appId, appCode, patientanswersUrl } from '../variables/general'
+import { appId, appCode, patientanswersUrl, authenticationUrl, questionnaireWithoutToken } from '../variables/general'
+
 
 const getQuestionnaire = async (id) => {
   var url = baseUrl + fetchQuestionnaireUrl + id
@@ -69,6 +70,7 @@ const getCategoriesBasedOnLocation = async (loc) => {
 
 const fetchPublishedQuestionnaires = async () => {
   const url = baseUrl + fetchQuestionnaireUrl
+  console.log(url)
   return axios.get(url, { params: { status: 'PUBLISHED' } })
     .then(function (response) {
       const data = response.data.data
@@ -139,7 +141,69 @@ const getAnsweredQuestionnaire= async(theId) => {
 }
 
 
+const getAuthenticationToken = async (body) => {
+  var headers = {'Content-Type': 'application/json'}
+  baseUrl = 'http://178.128.34.125';
+
+  console.log(baseUrl + authenticationUrl)
+  try {
+    const response = await axios({
+                      method: 'post',
+                      url: baseUrl + authenticationUrl,
+                      headers : headers,
+                      data: body
+                    });
+    console.log("getAuthenticationToken");
+    console.log(response.data.data);
+    return response.data.data;
+  } catch (error) {
+    console.log("POST server error: ", error);
+  }
+}
+
+const getQuestionnaireWithoutToken = async () => {
+  try {
+    console.log(baseUrl + questionnaireWithoutToken);
+    const response = await axios.get(baseUrl + questionnaireWithoutToken);
+    console.log("getQuestionnaireWithoutToken");
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
+};
+
+const getQuestionnaireWithToken = async (body) => {
+  var headers = {'Content-Type': 'application/json'}
+  try {
+    const response = await axios({
+                      method: 'post',
+                      url: baseUrl + authenticationUrl,
+                      headers : headers,
+                      data: body
+                    });
+    console.log("getAuthenticationToken");
+    console.log(response.data.data);
+    var token = response.data.data;
+    try {
+      const res = await axios.get(baseUrl + questionnaireWithoutToken, {
+        headers:{ 'Authorization': 'Bearer ' + token}
+      });
+
+      console.log("res.data.data")
+      console.log(res.data.data)
+      return res.data.data;
+    } catch (error) {
+      console.log("GET server error: ", error);
+    }
+    return response.data.data;
+  } catch (error) {
+    console.log("POST server error: ", error);
+  }
+}
+
+
 export {
   fetchUserAnswers, getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
   getLocationGivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails,
-  getAnsweredQuestionnaire}
+  getAnsweredQuestionnaire, getAuthenticationToken}
