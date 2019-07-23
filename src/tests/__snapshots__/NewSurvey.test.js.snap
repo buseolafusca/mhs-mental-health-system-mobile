@@ -2,37 +2,41 @@
 
 exports[`NewSurvey should render correctly in "debug" mode 1`] = `
 <div
-  className="SurveyResult"
+  id="page-container"
 >
   <NHSHeader />
   <div
-    className="surveyjs"
+    className="SurveyResult"
   >
-    <Survey
-      model={
-        Object {
-          "showProgressBar": "",
+    <div
+      className="surveyjs"
+    >
+      <Survey
+        model={
+          Object {
+            "showProgressBar": "",
+          }
         }
-      }
-      onComplete={[Function]}
-      onValueChanged={[Function]}
-    />
-    <center>
-      <table
-        border="1"
-        width="180"
-      >
-        <tbody
-          id="tbody1"
-        />
-      </table>
-    </center>
-    <div
-      id="finalScore"
-    />
-    <div
-      id="jsonSection"
-    />
+        onComplete={[Function]}
+        onValueChanged={[Function]}
+      />
+      <center>
+        <table
+          border="1"
+          width="180"
+        >
+          <tbody
+            id="tbody1"
+          />
+        </table>
+      </center>
+      <div
+        id="finalScore"
+      />
+      <div
+        id="jsonSection"
+      />
+    </div>
   </div>
   <NHSFooter />
 </div>
