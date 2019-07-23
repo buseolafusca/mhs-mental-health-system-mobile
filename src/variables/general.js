@@ -6,5 +6,8 @@ var createUserAnswers = "useranswers";
 var patientanswersUrl = "patientanswers";
 var baseUrl = 'http://mhsbackend.azurewebsites.net'
 var fetchQuestionnaireUrl = '/api/v1/questionnaire_sJS/'
+var authenticationUrl = "patients/authenticate";
+var questionnaireWithoutToken = "questionnaires";
 
-export { baseUrl, fetchQuestionnaireUrl, appCode, appId, backendUrl, createUserAnswers, patientanswersUrl }
+export { baseUrl, fetchQuestionnaireUrl, appCode, appId, backendUrl, createUserAnswers, patientanswersUrl, questionnaireWithoutToken, authenticationUrl
+ }
