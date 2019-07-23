@@ -1,5 +1,5 @@
 
-var baseUrl = 'http://mhsbackend.azurewebsites.net'
+var baseUrl = 'http://178.128.34.125'
 var fetchQuestionnaireUrl = '/api/v1/questionnaire_sJS/'
 var answersUrl = '/api/v1/patientanswers/'
 

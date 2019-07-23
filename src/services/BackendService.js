@@ -134,7 +134,7 @@ const fetchUserAnswers = async () => {
 const getAnsweredQuestionnaire= async(theId) => {
   try {
     const response = await axios.get(baseUrl + "/api/v1/" + patientanswersUrl + '/' +theId);
-    return response.data.data.body;
+    return response.data.data;
   } catch (error) {
     console.log("GET server error: ", error);
   }

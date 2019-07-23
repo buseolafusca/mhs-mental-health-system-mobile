@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Switch } from 'react-router'
 import '../sass/app.scss'
 import '../assets/css/ResourcesPage.css'
+import "../assets/css/LocationPage.css";
+
 
 class LocationPage extends React.Component {
   constructor (props) {
@@ -49,7 +51,7 @@ class LocationPage extends React.Component {
                 <label>
                       Please enter your postcode:
                 </label>
-                <form onSubmit={this.handleSubmit}>
+                <form className="SurveyResult1" onSubmit={this.handleSubmit}>
 
                   <br /><span>
                     <input type='text' class='postcode' value={this.state.value} onChange={this.handleChange} />
