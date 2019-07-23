@@ -29,6 +29,7 @@ class ResourcesPage extends React.Component {
 
   componentWillMount () {
     const { id } = this.props.match.params
+
     this.setState({ coordinates: id })
     var array = []
     var catID = {}
@@ -106,14 +107,13 @@ class PlacesPage extends React.Component {
   }
 
   componentWillMount () {
-
     const { id } = this.props.match.params
     const { cat } = this.props.match.params
-    // console.log('*********')
-    // console.log(cat)
+    console.log('*********')
+    console.log(cat)
     this.setState({ coordinates: id })
     this.setState({ category: cat })
-    // console.log(this.state.coordinates)
+    console.log(this.state.coordinates)
     try {
       getListBasedOnCategoryAndLocation(id, cat, 1000).then(response => {
         var placesArray = []
@@ -136,7 +136,7 @@ class PlacesPage extends React.Component {
 
   handleGoBackButton (pg) {
     this.setState({ placesList: [] })
-    // console.log(this.state.placesList)
+    console.log(this.state.placesList)
     this.props.history.push('/resources/' + this.state.coordinates)
   }
 
@@ -216,18 +216,18 @@ class SinglePlacePage extends React.Component {
     getPlaceDetails(this.state.place.href).then(response => {
       this.setState({ placeDetails: response.data })
       this.state.placeDetails = response.data
-      // console.log(this.state.placeDetails.location.address)
+      console.log(this.state.placeDetails.location.address)
       this.setState({ placeLocation: this.state.placeDetails.location.address })
       this.setState({ placeCoordinates: this.state.placeDetails.location.position })
       // this.render();
-      // console.log(this.state.coordinates)
+      console.log(this.state.coordinates)
       this.interactiveMap()
     })
   }
 
   handleGoBackButton (pg) {
     this.setState({ placesList: [] })
-    // console.log(this.state)
+    console.log(this.state)
     this.props.history.push('/resources/' + this.state.coordinates + '/' + this.state.category)
   }
 
@@ -236,7 +236,7 @@ class SinglePlacePage extends React.Component {
       lat: this.state.placeCoordinates[0],
       lng: this.state.placeCoordinates[1]
     }
-    // console.log(coordinates)
+    console.log(coordinates)
     var H = window.H
 
     /**
@@ -286,6 +286,7 @@ class SinglePlacePage extends React.Component {
         <Switch>
           <Route path='/resources/:id/:cat' render={() => {
             return (
+             
               <div class='nhsuk-expander-group'>
                 <NHSHeader />
                 <div class='nhsuk-back-link resourcepage-back-link'>

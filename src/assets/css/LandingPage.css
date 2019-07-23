@@ -1,5 +1,4 @@
 html, body {
-   
     text-align: center;
   }
 
@@ -16,11 +15,10 @@ html, body {
 .wrapper-container {
   padding: 40px;
   position: relative;
+  min-height:calc(100vh - 165px);
 }
 
 .footer-wrapper {
-  /*position: absolute;
-  bottom: 0;*/
   width: 100%;
   text-align: center;
   align-content: center;

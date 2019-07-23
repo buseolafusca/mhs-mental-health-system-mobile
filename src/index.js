@@ -27,7 +27,7 @@ const routing = (
       <Route path='/resources/:id/:cat/:place' component={SinglePlacePage} />
       <Route path='/resources/:id/:cat' component={PlacesPage} />
       <Route path='/resources/:id' component={ResourcesPage} />
-      <Route path='/result' component={SurveyResult} />
+      <Route path='/result/:id?' component={SurveyResult} />
       <Route path='/review' component={ReviewPage} />
       <Route path='/login' component={LoginForm} />
 
