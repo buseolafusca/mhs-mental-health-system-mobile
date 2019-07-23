@@ -1,8 +1,8 @@
 import * as types from './ActionTypes';
 import { getAuthenticationToken } from '../services/BackendService';
-import { createBrowserHistory } from 'history';
- 
-const history = createBrowserHistory();
+ import { push } from 'react-router-redux'
+
+import history from '../history'
 
 export function loginSuccess() {
   return {type: types.LOG_IN_SUCCESS}
@@ -16,8 +16,11 @@ export function logInUser(body) {
 
         console.log(response);
         sessionStorage.setItem('jwt', response.data.token);
-        dispatch(loginSuccess());        
+        dispatch(loginSuccess());    
+        console.log('before')
+
         history.push('/landingpage');
+        console.log('after')
 
 
     }).catch(error => {

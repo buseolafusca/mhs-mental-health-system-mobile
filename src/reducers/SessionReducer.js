@@ -6,7 +6,8 @@ import { push } from 'react-router-redux'
 export default function sessionReducer(state = initialState.session, action) {
   switch(action.type) {
     case types.LOG_IN_SUCCESS:
-        history.push('/');
+            // history.push('/landingpage');
+
       return !!sessionStorage.jwt
     default: 
       return state;
