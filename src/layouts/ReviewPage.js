@@ -21,8 +21,8 @@ class ReviewPage extends Component {
           for (var i = 0; i < response.length; i++) {
             var row = [response[i].title, 'PENDING']
             rows.push(row)
-            console.log(response[i]._id)
             tableData += "<tr class='nhsuk-table__row' data-id=" + response[i]._id + " >"
+
             tableData += "<td class='nhsuk-table__cell'>" + response[i].title + "</td>"
 
             tableData += "<td class='nhsuk-table__cell'>" + 'PENDING' + "</td>"
@@ -43,7 +43,9 @@ class ReviewPage extends Component {
           var currentRow = table.rows[i];
           var createClickHandler = function(row) {
             return function() {
+              
               window.location.href='result/' + row.getAttribute('data-id');
+
             };
           };
           currentRow.onclick = createClickHandler(currentRow);

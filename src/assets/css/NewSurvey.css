@@ -2,6 +2,14 @@
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
+.SurveyResult{
+  padding-bottom: 0.5rem;  
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
 
 .SurveyResult{
   padding-bottom: 0.5rem;  
