@@ -8,6 +8,7 @@ import ReviewPage from './layouts/ReviewPage'
 import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/ResourcesPage'
 import LocationPage from './layouts/LocationPage'
 import LoginForm from './layouts/LoginPage'
+import {RegisterPage} from './layouts/RegisterPage'
 import * as serviceWorker from './serviceWorker'
 import { render } from "react-dom";
 import { Provider } from 'react-redux'
@@ -31,6 +32,7 @@ ReactDOM.render(
   <Router history={history}>
     <Switch>
       <Route exact path="/login" component={ LoginForm } />
+      <Route exact path="/register" component={ RegisterPage } />
       <Route path="/landingpage" render={() => (isLoggedIn() ? ( <LandingPage /> ) : ( <Redirect to="/login"/> )) } />
       <Route path="/locationpage" render={() => (isLoggedIn() ? ( <LocationPage /> ) : ( <Redirect to="/login"/> )) } />
       <Route path='/questionnaire/:id?' render={() => (isLoggedIn() ? ( <NewSurvey /> ) : ( <Redirect to="/login"/> )) } />
