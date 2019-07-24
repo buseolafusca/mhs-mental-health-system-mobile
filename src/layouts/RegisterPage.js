@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { userActions } from '../actions/userActions';
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
+import { registerUser } from '../services/BackendService.js'
 
 class RegisterPage extends React.Component {
     constructor(props) {
@@ -26,6 +27,7 @@ class RegisterPage extends React.Component {
     handleChange(event) {
         const { name, value } = event.target;
         const { user } = this.state;
+        console.log("AAA");
         this.setState({
             user: {
                 ...user,
@@ -39,8 +41,21 @@ class RegisterPage extends React.Component {
 
         this.setState({ submitted: true });
         const { user } = this.state;
+        console.log("aaa");
+
+        registerUser({"email":"chongyang1995@gmail.com", "password": "1234"})
+          .then(fetchedData => {
+            console.log("fetchedData")
+            console.log(fetchedData)
+          })
+          .catch(error => {
+            console.error(error);
+          });
+
         if (user.firstName && user.lastName && user.username && user.password) {
             this.props.register(user);
+            console.log("www");
+            console.log(user);
         }
     }
 
@@ -50,9 +65,7 @@ class RegisterPage extends React.Component {
         return (
           <div className='landing-page-container'>
             <NHSHeader />
-
             <div className="col-md-6 col-md-offset-3">
-
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
                         <label htmlFor="firstName">First Name</label>
