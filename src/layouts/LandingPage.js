@@ -89,9 +89,7 @@ class LandingPage extends React.Component {
   }
 
   componentWillMount () {
-    if (!this.props.childProps.isAuthenticated){
-      this.props.history.push('/')
-    }
+    console.log("in LandingPage")
   }
 
   render () {

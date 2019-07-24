@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
   getPlacesByCategoryLocationUrl } from '../variables/URLs'
-import { appId, appCode, patientanswersUrl, authenticationUrl, questionnaireWithoutToken } from '../variables/general'
+import { appId, appCode, patientanswersUrl, authenticationUrl, questionnaireWithoutToken, backendUrl } from '../variables/general'
 
 
 const getQuestionnaire = async (id) => {
@@ -143,19 +143,21 @@ const getAnsweredQuestionnaire= async(theId) => {
 
 const getAuthenticationToken = async (body) => {
   var headers = {'Content-Type': 'application/json'}
-  baseUrl = 'http://178.128.34.125';
-
-  console.log(baseUrl + authenticationUrl)
+  // var baseUrl = 'http://178.128.34.125/';
+// http://178.128.34.125/api/v1/patients/authenticate
+  // console.log(baseUrl + '/' + authenticationUrl)
+  var url = baseUrl + '/api/v1/' + authenticationUrl
+  console.log(url)
   try {
     const response = await axios({
                       method: 'post',
-                      url: baseUrl + authenticationUrl,
+                      url: url,
                       headers : headers,
                       data: body
                     });
     console.log("getAuthenticationToken");
-    console.log(response.data.data);
-    return response.data.data;
+    console.log(response);
+    return response;
   } catch (error) {
     console.log("POST server error: ", error);
   }
