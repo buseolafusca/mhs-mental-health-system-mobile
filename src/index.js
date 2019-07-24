@@ -31,19 +31,15 @@ ReactDOM.render(
   <Router history={history}>
     <Switch>
       <Route exact path="/login" component={ LoginForm } />
-      <Route path="/landingpage" component={ LandingPage } />
-
-            <Route path="/locationpage" render={() => (isLoggedIn() ? ( <LocationPage /> ) : ( <Redirect to="/login"/> )) } />
-
-            <Route exact path='/questionnaire/:id?' component={NewSurvey} />
-            <Route path='/resources/:id/:cat/:place' component={SinglePlacePage} />
-            <Route path='/resources/:id/:cat' component={PlacesPage} />
-            <Route path='/resources/:id' component={ResourcesPage} />
-            <Route path='/result' component={SurveyResult} />
-            <Route path='/review' component={ReviewPage} />
-            <Redirect from="/login" to="/landingpage" />
-
-
+      <Route path="/landingpage" render={() => (isLoggedIn() ? ( <LandingPage /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path="/locationpage" render={() => (isLoggedIn() ? ( <LocationPage /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/questionnaire/:id?' render={() => (isLoggedIn() ? ( <NewSurvey /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/resources/:id/:cat/:place' render={() => (isLoggedIn() ? ( <SinglePlacePage /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/resources/:id/:cat' render={() => (isLoggedIn() ? ( <PlacesPage /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/resources/:id' render={() => (isLoggedIn() ? ( <ResourcesPage /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path="/result" render={() => (isLoggedIn() ? ( <SurveyResult /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path="/review" render={() => (isLoggedIn() ? ( <ReviewPage /> ) : ( <Redirect to="/login"/> )) } />
+      <Redirect from="/" to="/login" />
 
     </Switch>
   </Router>
