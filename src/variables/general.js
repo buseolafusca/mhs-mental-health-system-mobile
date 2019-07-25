@@ -1,7 +1,7 @@
 /* HERE MAPS API CREDENTIALS */
 var appId = 'nuT8ftiOYvrfFNaFEUyV'
 var appCode = 'yNZIQaMP6fRuY1D8DKsuxw'
-var backendUrl = "mhsbackend.azurewebsites.net/api/v1/";
+var backendUrl = 'http://178.128.34.125/api/v1/'//"mhsbackend.azurewebsites.net/api/v1/";
 var createUserAnswers = "useranswers";
 var patientanswersUrl = "patientanswers";
 var baseUrl = 'mhsbackend.azurewebsites.net'
