@@ -5,6 +5,7 @@ import { userActions } from '../actions/userActions';
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
 import { registerUser } from '../services/BackendService.js'
+import history from '../history'
 
 class RegisterPage extends React.Component {
     constructor(props) {
@@ -14,8 +15,9 @@ class RegisterPage extends React.Component {
             user: {
                 firstName: '',
                 lastName: '',
-                username: '',
-                password: ''
+                email: '',
+                password: '',
+                repeatedPassword: ''
             },
             submitted: false
         };
@@ -27,7 +29,6 @@ class RegisterPage extends React.Component {
     handleChange(event) {
         const { name, value } = event.target;
         const { user } = this.state;
-        console.log("AAA");
         this.setState({
             user: {
                 ...user,
@@ -41,21 +42,31 @@ class RegisterPage extends React.Component {
 
         this.setState({ submitted: true });
         const { user } = this.state;
-        console.log("aaa");
+        // registerUser({"email":"chongyang1995@gmail.com", "password": "1234"})
+        //   .then(fetchedData => {
+        //     console.log("fetchedData")
+        //     console.log(fetchedData)
+        //   })
+        //   .catch(error => {
+        //     console.error(error);
+        //   });
 
-        registerUser({"email":"chongyang1995@gmail.com", "password": "1234"})
-          .then(fetchedData => {
-            console.log("fetchedData")
-            console.log(fetchedData)
-          })
-          .catch(error => {
-            console.error(error);
-          });
-
-        if (user.firstName && user.lastName && user.username && user.password) {
-            this.props.register(user);
-            console.log("www");
-            console.log(user);
+        if (user.firstName && user.lastName && user.email && user.password && user.repeatedPassword) {
+            if (user.password !== user.repeatedPassword){
+                alert("Passwords don't match");
+            }
+            else{
+                registerUser({"email":user.email, "password": user.password})
+                  .then(fetchedData => {
+                    console.log("fetchedData")
+                    console.log(fetchedData)
+                    alert("Registered successfully");
+                    history.push('/login');
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+            }
         }
     }
 
@@ -68,40 +79,41 @@ class RegisterPage extends React.Component {
             <div className="col-md-6 col-md-offset-3">
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
-                        <label htmlFor="firstName">First Name</label>
-                        <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleChange} />
+                        <label htmlFor="firstName"></label>
+                        <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleChange} placeholder={'First Name'}/>
                         {submitted && !user.firstName &&
                             <div className="help-block">First Name is required</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
-                        <label htmlFor="lastName">Last Name</label>
-                        <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleChange} />
+                        <label htmlFor="lastName"></label>
+                        <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleChange} placeholder={'Last Name'}/>
                         {submitted && !user.lastName &&
                             <div className="help-block">Last Name is required</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
-                        <label htmlFor="username">Username</label>
-                        <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleChange} />
-                        {submitted && !user.username &&
-                            <div className="help-block">Username is required</div>
+                    <div className={'form-group' + (submitted && !user.email ? ' has-error' : '')}>
+                        <label htmlFor="email"></label>
+                        <input type="text" className="form-control" name="email" value={user.email} onChange={this.handleChange} placeholder={'Email'}/>
+                        {submitted && !user.email &&
+                            <div className="help-block">email is required</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} />
+                        <label htmlFor="password"></label>
+                        <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} placeholder={'Password'}/>
                         {submitted && !user.password &&
                             <div className="help-block">Password is required</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
-                        <label htmlFor="password">Repeat Password</label>
-                        <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} />
-                        {submitted && !user.password &&
-                            <div className="help-block">Password is required</div>
+                    <div className={'form-group' + (submitted && !user.repeatedPassword ? ' has-error' : '')}>
+                        <label htmlFor="password"></label>
+                        <input type="password" className="form-control" name="repeatedPassword" value={user.repeatedPassword} onChange={this.handleChange} placeholder={'Repeat your password'}/>
+                        {submitted && !user.repeatedPassword &&
+                            <div className="help-block">Repeated Password is required</div>
                         }
                     </div>
+                    
 
                     <div className="form-group">
                         <button className="btn btn-primary">Register</button>

@@ -35,14 +35,16 @@ const registerUser = async (body) => {
   console.log("backendURL")
   console.log(backendURL)
   console.log(body)
+  var headers = {'Content-Type': 'application/json'}
+
   //http://178.128.34.125/api/v1/patients/register
   //http://178.128.34.125/api/v1/patients/register
   try {
     const response = await axios({
                       method: 'post',
                       url: backendURL,
-                      headers : {'Content-Type': 'application/json'},
-                      body: body
+                      headers : headers,
+                      data: body
                     });
     console.log("response");
     console.log(response);
