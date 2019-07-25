@@ -3,7 +3,6 @@ import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, g
   getPlacesByCategoryLocationUrl, registerUrl } from '../variables/URLs'
 import { appId, appCode, patientanswersUrl, authenticationUrl, questionnaireWithoutToken, backendUrl } from '../variables/general'
 
-
 const getQuestionnaire = async (id) => {
   var url = baseUrl + fetchQuestionnaireUrl + id
   try {
@@ -155,81 +154,81 @@ const fetchUserAnswers = async () => {
   }
 }
 
-const getAnsweredQuestionnaire= async(theId) => {
+const getAnsweredQuestionnaire = async (theId) => {
   try {
-    const response = await axios.get(baseUrl + "/api/v1/" + patientanswersUrl + '/' +theId);
-    return response.data.data;
+    const response = await axios.get(baseUrl + '/api/v1/' + patientanswersUrl + '/' + theId)
+    return response.data.data
   } catch (error) {
-    console.log("GET server error: ", error);
+    console.log('GET server error: ', error)
   }
 }
 
-
 const getAuthenticationToken = async (body) => {
-  var headers = {'Content-Type': 'application/json'}
+  var headers = { 'Content-Type': 'application/json' }
   // var baseUrl = 'http://178.128.34.125/';
-// http://178.128.34.125/api/v1/patients/authenticate
+  // http://178.128.34.125/api/v1/patients/authenticate
   // console.log(baseUrl + '/' + authenticationUrl)
   var url = baseUrl + '/api/v1/' + authenticationUrl
   console.log(url)
   try {
     const response = await axios({
-                      method: 'post',
-                      url: url,
-                      headers : headers,
-                      data: body
-                    });
-    console.log("getAuthenticationToken");
-    console.log(response);
-    return response;
+      method: 'post',
+      url: url,
+      headers: headers,
+      data: body
+    })
+    console.log('getAuthenticationToken')
+    console.log(response)
+    return response
   } catch (error) {
-    console.log("POST server error: ", error);
+    console.log('POST server error: ', error)
   }
 }
 
 const getQuestionnaireWithoutToken = async () => {
   try {
-    console.log(baseUrl + questionnaireWithoutToken);
-    const response = await axios.get(baseUrl + questionnaireWithoutToken);
-    console.log("getQuestionnaireWithoutToken");
-    console.log(response);
-    return response;
+    console.log(baseUrl + questionnaireWithoutToken)
+    const response = await axios.get(baseUrl + questionnaireWithoutToken)
+    console.log('getQuestionnaireWithoutToken')
+    console.log(response)
+    return response
   } catch (error) {
-    console.log("GET server error: ", error);
-  }
-};
-
-const getQuestionnaireWithToken = async (body) => {
-  var headers = {'Content-Type': 'application/json'}
-  try {
-    const response = await axios({
-                      method: 'post',
-                      url: baseUrl + authenticationUrl,
-                      headers : headers,
-                      data: body
-                    });
-    console.log("getAuthenticationToken");
-    console.log(response.data.data);
-    var token = response.data.data;
-    try {
-      const res = await axios.get(baseUrl + questionnaireWithoutToken, {
-        headers:{ 'Authorization': 'Bearer ' + token}
-      });
-
-      console.log("res.data.data")
-      console.log(res.data.data)
-      return res.data.data;
-    } catch (error) {
-      console.log("GET server error: ", error);
-    }
-    return response.data.data;
-  } catch (error) {
-    console.log("POST server error: ", error);
+    console.log('GET server error: ', error)
   }
 }
 
+const getQuestionnaireWithToken = async (body) => {
+  var headers = { 'Content-Type': 'application/json' }
+  try {
+    const response = await axios({
+      method: 'post',
+      url: baseUrl + fetchQuestionnaireUrl,
+      headers: headers,
+      data: body
+    })
+    console.log('getAuthenticationToken')
+    console.log(response.data.data)
+    var token = response.data.data
+    try {
+      const res = await axios.get(baseUrl + questionnaireWithoutToken, {
+        headers: { 'Authorization': 'Bearer ' + token }
+      })
+
+      console.log('res.data.data')
+      console.log(res.data.data)
+      return res.data.data
+    } catch (error) {
+      console.log('GET server error: ', error)
+    }
+    return response.data.data
+  } catch (error) {
+    console.log('POST server error: ', error)
+  }
+}
 
 export {
   fetchUserAnswers, getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
   getLocationGivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails,
   getAnsweredQuestionnaire, getAuthenticationToken, registerUser}
+
+  
