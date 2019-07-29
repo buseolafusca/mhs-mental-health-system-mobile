@@ -8,6 +8,7 @@ import ReviewPage from './layouts/ReviewPage'
 import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/ResourcesPage'
 import LocationPage from './layouts/LocationPage'
 import LoginForm from './layouts/LoginPage'
+import {RegisterPage} from './layouts/RegisterPage'
 import * as serviceWorker from './serviceWorker'
 import { render } from "react-dom";
 import { Provider } from 'react-redux'
@@ -31,15 +32,16 @@ ReactDOM.render(
   <Router history={history}>
     <Switch>
       <Route exact path="/login" component={ LoginForm } />
-      <Route path="/landingpage" render={(props) => (isLoggedIn() ? ( <LandingPage {...props}/> ) : ( <Redirect to="/login"/> )) } />
-      <Route path="/locationpage" render={(props) => (isLoggedIn() ? ( <LocationPage {...props}/> ) : ( <Redirect to="/login"/> )) } />
-      <Route path='/questionnaire/:id?' render={(props) => (isLoggedIn() ? ( <NewSurvey {...props}/> ) : ( <Redirect to="/login"/> )) } />
-      <Route path='/resources/:id/:cat/:place' render={(props) => (isLoggedIn() ? ( <SinglePlacePage {...props}/> ) : ( <Redirect to="/login"/> )) } />
-      <Route path='/resources/:id/:cat' render={(props) => (isLoggedIn() ? ( <PlacesPage {...props}/> ) : ( <Redirect to="/login"/> )) } />
-      <Route path='/resources/:id' render={(props) => (isLoggedIn() ? ( <ResourcesPage {...props}/> ) : ( <Redirect to="/login"/> )) } />
-      <Route path="/result" render={(props) => (isLoggedIn() ? ( <SurveyResult {...props}/> ) : ( <Redirect to="/login"/> )) } />
-      <Route path="/review" render={(props) => (isLoggedIn() ? ( <ReviewPage {...props}/> ) : ( <Redirect to="/login"/> )) } />
-      <Redirect from="/" to="/login" />
+      <Route exact path="/register" component={ RegisterPage } />
+      <Route path="/landingpage" render={(params) => (isLoggedIn() ? ( <LandingPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path="/locationpage" render={(params) => (isLoggedIn() ? ( <LocationPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/questionnaire/:id?' render={(params) => (isLoggedIn() ? ( <NewSurvey {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/resources/:id/:cat/:place' render={(params) => (isLoggedIn() ? ( <SinglePlacePage {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/resources/:id/:cat' render={(params) => (isLoggedIn() ? ( <PlacesPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/resources/:id' render={(params) => (isLoggedIn() ? ( <ResourcesPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path="/result" render={(params) => (isLoggedIn() ? ( <SurveyResult {...params} /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path="/review" render={(params) => (isLoggedIn() ? ( <ReviewPage {...params} /> ) : ( <Redirect to="/login"/> )) } />
+      <Redirect from="/" to="/landingpage" />
 
     </Switch>
   </Router>

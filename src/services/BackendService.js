@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
-  getPlacesByCategoryLocationUrl } from '../variables/URLs'
+  getPlacesByCategoryLocationUrl, registerUrl } from '../variables/URLs'
 import { appId, appCode, patientanswersUrl, authenticationUrl, questionnaireWithoutToken, backendUrl } from '../variables/general'
 
 const getQuestionnaire = async (id) => {
@@ -27,6 +27,27 @@ const postAnswers = async (ans, state) => {
       questionnaireBody: JSON.stringify(ans)
     }
   })
+}
+
+const registerUser = async (body) => {
+  const backendURL = baseUrl + registerUrl
+  console.log("backendURL")
+  console.log(backendURL)
+  console.log(body)
+  var headers = {'Content-Type': 'application/json'}
+  try {
+    const response = await axios({
+                      method: 'post',
+                      url: backendURL,
+                      headers : headers,
+                      data: body
+                    });
+    console.log("response");
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log("POST server error: ", error);
+  }
 }
 
 const getLocationGivenPostalCode = async (postal) => {
@@ -132,7 +153,7 @@ const fetchUserAnswers = async () => {
 
 const getAnsweredQuestionnaire = async (theId) => {
   try {
-    const response = await axios.get(baseUrl + '/api/v1/' + patientanswersUrl + '/' + theId)
+    const response = await axios.get(baseUrl + patientanswersUrl + '/' + theId)
     return response.data.data
   } catch (error) {
     console.log('GET server error: ', error)
@@ -205,4 +226,6 @@ const getQuestionnaireWithToken = async (body) => {
 export {
   fetchUserAnswers, getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
   getLocationGivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails,
-  getAnsweredQuestionnaire, getAuthenticationToken }
+  getAnsweredQuestionnaire, getAuthenticationToken, registerUser}
+
+  

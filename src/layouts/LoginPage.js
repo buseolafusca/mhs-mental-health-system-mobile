@@ -11,6 +11,7 @@ import { getAuthenticationToken } from '../services/BackendService.js'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as sessionActions from '../actions/SessionActions';
+import { Link } from 'react-router-dom';
 
 
 class LoginForm extends React.Component {
@@ -151,18 +152,9 @@ class LoginForm extends React.Component {
             marginLeft: -15
           }}
         >
-          <div className="remember-container">
-            <div>
-              <label htmlFor="remember">
-                <input
-                  id="remember"
-                  checked={this.state.remember}
-                  onChange={this.handleCheck}
-                  type="checkbox"
-                /> {i18n.rememberMe}
-              </label>
-            </div>
-          </div>
+          
+          <Link to="/register" className="btn btn-link">Register</Link>
+
           <div className="button-container">
             <button type="submit" className="btnSubmit">{i18n.submitLabel}</button>
           </div>

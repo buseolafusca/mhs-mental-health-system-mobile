@@ -12,16 +12,15 @@ export function logInUser(body) {
   return function(dispatch) {
     console.log("DDD")
     return getAuthenticationToken(body).then(response => {
-        console.log("response");
-
-        console.log(response);
+      try {
         sessionStorage.setItem('jwt', response.data.token);
         dispatch(loginSuccess());    
-        console.log('before')
-
         history.push('/landingpage');
-        console.log('after')
-
+      }
+      catch(error) {
+        console.error(error);
+        alert("Input the correct username and password please")
+      }
 
     }).catch(error => {
       console.log('Session Actions error: ', error)
