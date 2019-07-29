@@ -29,6 +29,7 @@ class ResourcesPage extends React.Component {
 
   componentWillMount () {
     const { id } = this.props.match.params
+
     this.setState({ coordinates: id })
     var array = []
     var catID = {}
@@ -285,6 +286,7 @@ class SinglePlacePage extends React.Component {
         <Switch>
           <Route path='/resources/:id/:cat' render={() => {
             return (
+             
               <div class='nhsuk-expander-group'>
                 <NHSHeader />
                 <div class='nhsuk-back-link resourcepage-back-link'>

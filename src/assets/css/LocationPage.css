@@ -1,0 +1,5 @@
+.SurveyResult1{
+    padding-bottom: 0.5rem;  
+    min-height: calc(100vh - 200px);
+    position: relative;
+  }

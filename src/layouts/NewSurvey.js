@@ -15,7 +15,8 @@ import "jquery-ui/ui/widgets/datepicker.js";
 import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
-
+import NHSHeader from '../components/NHSHeader.js'
+import NHSFooter from '../components/NHSFooter.js'
 import { getQuestionnaire, postAnswers, sendResults } from '../services/BackendService';
 import SurveyCreator from "./SurveyCreator";
 import "../assets/css/NewSurvey.css";
@@ -97,7 +98,9 @@ class NewSurvey extends Component {
   };
 
   componentWillMount() {
+    
     const { id } = this.props.match.params;
+
     const url = id;
     this.setState({questionnaireId:id});
     getQuestionnaire(url)
@@ -113,24 +116,26 @@ class NewSurvey extends Component {
     Survey.Survey.cssType = "bootstrap";
     this.model = new Survey.Model(this.state.json);
     return (
-      <div className="SurveyResult">
-        <div className="surveyjs" >
-          <Survey.Survey
-            model={this.model}
-            onComplete={this.onComplete}
-            onValueChanged={this.onValueChanged}
-          />
-          <center>
-            <table border="1" width="180" >
-              <tbody id="tbody1">
-
-              </tbody>
-            </table>
-          </center>
-          <div id="finalScore"></div>
-          <div id="jsonSection"></div>
+      <div id = "page-container">
+        <NHSHeader/>
+        <div className="SurveyResult">
+          <div className="surveyjs" >
+            <Survey.Survey
+              model={this.model}
+              onComplete={this.onComplete}
+              onValueChanged={this.onValueChanged}
+            />
+            <center>
+              <table border="1" width="180" >
+                <tbody id="tbody1">
+                </tbody>
+              </table>
+            </center>
+            <div id="finalScore"></div>
+            <div id="jsonSection"></div>
+          </div>
         </div>
-
+        <NHSFooter/>
       </div>
     );
     

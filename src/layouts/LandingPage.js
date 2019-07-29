@@ -6,6 +6,7 @@ import NHSFooter from '../components/NHSFooter.js'
 import { fetchPublishedQuestionnaires } from '../services/BackendService.js'
 // import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import '../assets/css/firebaseui-styling.global.css'
+import {isLoggedIn } from './LoginPage'
 
 class Square extends React.Component {
   render () {
@@ -83,7 +84,7 @@ class LandingPage extends React.Component {
     super(props)
     this.state = {
       questionnaireList: [],
-      firebase: ''
+      user: null
     }
   }
 
@@ -108,6 +109,7 @@ class LandingPage extends React.Component {
             <Square url='/referrals' title='Referrals' />
             <Square url='/appointments' title='Appointments' />
             <Square url='/locationpage' title='Resources' />
+            <Square url='/review' title='Previous Contact' />
           </div>
         </div>
         <NHSFooter />
