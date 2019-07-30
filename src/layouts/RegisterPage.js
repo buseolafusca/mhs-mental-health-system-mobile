@@ -21,7 +21,8 @@ class RegisterPage extends React.Component {
                 telephone: '',
                 password: '',
                 repeatedPassword: '',
-                service: null
+                service: null,
+                postcode: ''
             },
             submitted: false
         };
@@ -55,8 +56,8 @@ class RegisterPage extends React.Component {
                 alert("Passwords don't match");
             }
             else{
-                console.log(this.state.user);
-                registerUser({"email":user.email, "password": user.password})
+                registerUser({"email":user.email, "password": user.password, "first_name": user.firstName, "last_name": user.lastName,
+            "postcode": user.postcode})
                   .then(fetchedData => {
                     console.log("fetchedData")
                     console.log(fetchedData)
@@ -136,13 +137,21 @@ class RegisterPage extends React.Component {
                         <label htmlFor="password"></label>
                         <input type="password" className="form-control" name="repeatedPassword" value={user.repeatedPassword} onChange={this.handleChange} placeholder={'Repeat your password'}/>
                         {submitted && !user.repeatedPassword &&
-                            <div className="help-block">Repeated Password is required</div>
+                            <div className="help-block">Password is required</div>
+                        }
+                    </div>
+                    <div className={'form-group' + (submitted && !user.postcode ? ' has-error' : '')}>
+                        <label htmlFor="postcode"></label>
+                        <input type="text" className="form-control" name="postcode" value={user.postcode} onChange={this.handleChange} placeholder={'Post Code'}/>
+                        {submitted && !user.postcode &&
+                            <div className="help-block">Post Code is required</div>
                         }
                     </div>
                     <div>
                         <SelectableTable callbackFromParent={this.myCallback}/>
                     </div>
-
+                        
+                 
                     <div className="form-group">
                         <button className="btn btn-primary">Register</button>
                         {registering && 

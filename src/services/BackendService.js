@@ -30,14 +30,11 @@ const postAnswers = async (ans, state) => {
 }
 
 const registerUser = async (body) => {
-  const backendURL = baseUrl + '/api/v1' + registerUrl
+  const backendURL = baseUrl + registerUrl
   console.log("backendURL")
   console.log(backendURL)
   console.log(body)
   var headers = {'Content-Type': 'application/json'}
-
-  //http://178.128.34.125/api/v1/patients/register
-  //http://178.128.34.125/api/v1/patients/register
   try {
     const response = await axios({
                       method: 'post',
@@ -156,7 +153,7 @@ const fetchUserAnswers = async () => {
 
 const getAnsweredQuestionnaire = async (theId) => {
   try {
-    const response = await axios.get(baseUrl + '/api/v1/' + patientanswersUrl + '/' + theId)
+    const response = await axios.get(baseUrl + patientanswersUrl + '/' + theId)
     return response.data.data
   } catch (error) {
     console.log('GET server error: ', error)
@@ -168,7 +165,7 @@ const getAuthenticationToken = async (body) => {
   // var baseUrl = 'http://178.128.34.125/';
   // http://178.128.34.125/api/v1/patients/authenticate
   // console.log(baseUrl + '/' + authenticationUrl)
-  var url = baseUrl + '/api/v1/' + authenticationUrl
+  var url = baseUrl + authenticationUrl
   console.log(url)
   try {
     const response = await axios({

@@ -1,7 +1,9 @@
 var nhsUrl = 'http://mhsbackend.azurewebsites.net'
-var baseUrl = 'http://178.128.34.125'
-var fetchQuestionnaireUrl = '/api/v1/questionnaire_sJS/'
-var answersUrl = '/api/v1/patientanswers/'
+
+// var baseUrl = 'http://mhsbackend.azurewebsites.net'
+var baseUrl = "http://178.128.34.125/api/v1";
+var fetchQuestionnaireUrl = '/questionnaire_sJS/'
+var answersUrl = '/patientanswers/'
 var registerUrl = '/patients/register'
 var serviceUrl = '/api/v1/organisations/services/'
 
