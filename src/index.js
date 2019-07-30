@@ -33,15 +33,15 @@ ReactDOM.render(
     <Switch>
       <Route exact path="/login" component={ LoginForm } />
       <Route exact path="/register" component={ RegisterPage } />
-      <Route path="/landingpage" render={() => (isLoggedIn() ? ( <LandingPage /> ) : ( <Redirect to="/login"/> )) } />
-      <Route path="/locationpage" render={() => (isLoggedIn() ? ( <LocationPage /> ) : ( <Redirect to="/login"/> )) } />
-      <Route path='/questionnaire/:id?' render={() => (isLoggedIn() ? ( <NewSurvey /> ) : ( <Redirect to="/login"/> )) } />
-      <Route path='/resources/:id/:cat/:place' render={() => (isLoggedIn() ? ( <SinglePlacePage /> ) : ( <Redirect to="/login"/> )) } />
-      <Route path='/resources/:id/:cat' render={() => (isLoggedIn() ? ( <PlacesPage /> ) : ( <Redirect to="/login"/> )) } />
-      <Route path='/resources/:id' render={() => (isLoggedIn() ? ( <ResourcesPage /> ) : ( <Redirect to="/login"/> )) } />
-      <Route path="/result" render={() => (isLoggedIn() ? ( <SurveyResult /> ) : ( <Redirect to="/login"/> )) } />
-      <Route path="/review" render={() => (isLoggedIn() ? ( <ReviewPage /> ) : ( <Redirect to="/login"/> )) } />
-      <Redirect from="/" to="/login" />
+      <Route path="/landingpage" render={(params) => (isLoggedIn() ? ( <LandingPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path="/locationpage" render={(params) => (isLoggedIn() ? ( <LocationPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/questionnaire/:id?' render={(params) => (isLoggedIn() ? ( <NewSurvey {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/resources/:id/:cat/:place' render={(params) => (isLoggedIn() ? ( <SinglePlacePage {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/resources/:id/:cat' render={(params) => (isLoggedIn() ? ( <PlacesPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/resources/:id' render={(params) => (isLoggedIn() ? ( <ResourcesPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
+      <Route path="/result" render={(params) => (isLoggedIn() ? ( <SurveyResult {...params} /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path="/review" render={(params) => (isLoggedIn() ? ( <ReviewPage {...params} /> ) : ( <Redirect to="/login"/> )) } />
+      <Redirect from="/" to="/landingpage" />
 
     </Switch>
   </Router>
