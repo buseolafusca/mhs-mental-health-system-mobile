@@ -32,12 +32,16 @@ class SelectableTable extends Component {
         console.log("dadada");
         getServices().then(data => {
           console.log(data)
-          var dataList = []
-          for (var i = 0; i < data.length; i++) { 
-            dataList.push({id: data[i]._id, checked: false, serviceName: data[i].name});
+
+          if (data){
+            var dataList = []
+            for (var i = 0; i < data.length; i++) { 
+              dataList.push({id: data[i]._id, checked: false, serviceName: data[i].name});
+            }
+            this.setState({ selectionData: dataList })
+
           }
-          this.setState({ selectionData: dataList })
-          // console.log(dataList)
+          
           })
     }
 

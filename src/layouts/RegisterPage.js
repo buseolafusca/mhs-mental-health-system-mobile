@@ -56,7 +56,13 @@ class RegisterPage extends React.Component {
             }
             else{
                 console.log(this.state.user);
-                registerUser({"email":user.email, "password": user.password})
+                registerUser({"email":user.email, 
+                    "password": user.password,
+                    "first_name": user.firstName,
+                    "last_name": user.lastName,
+                    "postcode": user.postcode,
+                    "organisation_id": "ddd"
+                })
                   .then(fetchedData => {
                     console.log("fetchedData")
                     console.log(fetchedData)
