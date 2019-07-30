@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
-  getPlacesByCategoryLocationUrl, registerUrl } from '../variables/URLs'
+import { nhsUrl, baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
+  getPlacesByCategoryLocationUrl, registerUrl, serviceUrl } from '../variables/URLs'
 import { appId, appCode, patientanswersUrl, authenticationUrl, questionnaireWithoutToken, backendUrl } from '../variables/general'
 
 const getQuestionnaire = async (id) => {
@@ -226,9 +226,20 @@ const getQuestionnaireWithToken = async (body) => {
   }
 }
 
+const getServices = async () => {
+  try {
+    console.log(nhsUrl + serviceUrl)
+    const response = await axios.get(nhsUrl + serviceUrl)
+    console.log(response)
+    return response.data.data
+  } catch (error) {
+    console.log('GET server error: ', error)
+  }
+}
+
 export {
   fetchUserAnswers, getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
   getLocationGivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails,
-  getAnsweredQuestionnaire, getAuthenticationToken, registerUser}
+  getAnsweredQuestionnaire, getAuthenticationToken, registerUser, getServices}
 
   

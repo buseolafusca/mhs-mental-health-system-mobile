@@ -1,0 +1,6 @@
+.log-container{
+    margin-top: 150px;
+    padding-bottom: 0.5rem;
+    min-height: calc(100vh-190px);
+    position: relative;
+}

@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { userActions } from '../actions/userActions';
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
-import { registerUser } from '../services/BackendService.js'
+import { registerUser, getServices } from '../services/BackendService.js'
+
 import history from '../history'
 
 class RegisterPage extends React.Component {
@@ -24,6 +25,13 @@ class RegisterPage extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentWillMount() {
+        console.log("dadada");
+        getServices().then(data => {
+          console.log(data)
+          })
     }
 
     handleChange(event) {
