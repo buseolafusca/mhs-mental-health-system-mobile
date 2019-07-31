@@ -91,14 +91,34 @@ const getCategoriesBasedOnLocation = async (loc) => {
 const fetchPublishedQuestionnaires = async () => {
   const url = baseUrl + fetchQuestionnaireUrl
   console.log(url)
-  return axios.get(url, { params: { status: 'PUBLISHED' } })
-    .then(function (response) {
+  console.log(sessionStorage.jwt)
+  var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
+
+  await axios({
+    method: 'get',
+    url: url,
+    params: { status: 'PUBLISHED' },
+    headers: headers
+  }).then(function (response) {
+      console.log("response")
+      console.log(response)
       const data = response.data.data
       return { 'questionnaireList': data }
+
     })
     .catch(function (error) {
       console.log(error)
     })
+  // return axios.get(url, { params: { status: 'PUBLISHED' } })
+  //   .then(function (response) {
+  //     console.log("response")
+  //     console.log(response)
+  //     const data = response.data.data
+  //     return { 'questionnaireList': data }
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error)
+  //   })
 }
 
 const getListBasedOnCategoryAndLocation = async (loc, category, radius) => {
