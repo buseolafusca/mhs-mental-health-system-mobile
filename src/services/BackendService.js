@@ -59,15 +59,13 @@ const registerUser = async (body) => {
   }
 }
 
+// No token is required for this location function
 const getLocationGivenPostalCode = async (postal) => {
   try {
-    var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
-
     const hereAPIURL = getLocationByPostCodeUrl
     const response = await axios({
       method: 'get',
       url: hereAPIURL,
-      headers: headers, // check later
       params: {
         app_id: appId,
         app_code: appCode,
@@ -109,31 +107,14 @@ const fetchPublishedQuestionnaires = async () => {
   console.log(sessionStorage.jwt)
   var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
 
-  await axios({
+  const response = await axios({
     method: 'get',
     url: url,
     params: { is_published: true },
     headers: headers
-  }).then(function (response) {
-      console.log("response")
-      console.log(response)
-      const data = response.data.data
-      return { 'questionnaireList': data }
-
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
-  // return axios.get(url, { params: { status: 'PUBLISHED' } })
-  //   .then(function (response) {
-  //     console.log("response")
-  //     console.log(response)
-  //     const data = response.data.data
-  //     return { 'questionnaireList': data }
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error)
-  //   })
+  })
+  return response
+  
 }
 
 const getListBasedOnCategoryAndLocation = async (loc, category, radius) => {
