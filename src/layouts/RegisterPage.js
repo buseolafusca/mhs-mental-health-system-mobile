@@ -51,7 +51,7 @@ class RegisterPage extends React.Component {
         this.setState({ submitted: true });
         const { user } = this.state;
 
-        if (user.firstName && user.lastName && user.email && user.password && user.repeatedPassword && user.postcode && user.telephone) {
+        if (user.firstName && user.lastName && user.email && user.password && user.repeatedPassword && user.postcode && user.telephone && user.service) {
             if (user.password !== user.repeatedPassword){
                 alert("Passwords don't match");
             }
@@ -146,15 +146,12 @@ class RegisterPage extends React.Component {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !user.postcode ? ' has-error' : '')}>
-                        <label htmlFor="postcode"></label>
-                        <input type="text" className="form-control" name="postcode" value={user.postcode} onChange={this.handleChange} placeholder={'Post Code'}/>
-                        {submitted && !user.postcode &&
-                            <div className="help-block">Post Code is required</div>
-                        }
-                    </div>
                     <div>
                         <SelectableTable callbackFromParent={this.myCallback}/>
+                        {submitted && !user.service &&
+                            <div className="help-block">Service is required</div>
+                        }
+
                     </div>
                         
                  

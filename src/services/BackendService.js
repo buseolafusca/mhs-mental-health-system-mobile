@@ -170,7 +170,7 @@ const fetchUserAnswers = async () => {
       url: userAnswerUrl,
       headers: headers // check later
     })
-    // console.log(response)
+    console.log(response)
     return response.data.data
   } catch (error) {
     console.log('GET server error: ', error)
