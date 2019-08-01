@@ -61,15 +61,13 @@ const registerUser = async (body) => {
   }
 }
 
+// No token is required for this location function
 const getLocationGivenPostalCode = async (postal) => {
   try {
-    var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
-
     const hereAPIURL = getLocationByPostCodeUrl
     const response = await axios({
       method: 'get',
       url: hereAPIURL,
-      headers: headers, // check later
       params: {
         app_id: appId,
         app_code: appCode,
@@ -105,10 +103,6 @@ const getCategoriesBasedOnLocation = async (loc) => {
   }
 }
 
-
-
-
-
 const fetchPublishedQuestionnaires = async () => {
   try {
     var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
@@ -118,20 +112,8 @@ const fetchPublishedQuestionnaires = async () => {
       url: baseUrl + fetchQuestionnaireUrl,
       headers: headers
     })
-
     const data = response.data.data
     return data
-    // const idPublishedList = []
-
-
-    // data.forEach(element => {
-     
-    //   idPublishedList.push([element.title, element.description, element.is_published])
-        
-    // })
-    // return {
-    //   'idPublishedList': idPublishedList,
-    // }
   } catch (error) {
     console.log('GET server error: ', error)
   }
@@ -189,7 +171,7 @@ const fetchUserAnswers = async () => {
       url: userAnswerUrl,
       headers: headers // check later
     })
-    // console.log(response)
+    console.log(response)
     return response.data.data
   } catch (error) {
     console.log('GET server error: ', error)
