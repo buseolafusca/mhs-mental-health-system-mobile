@@ -183,3 +183,6 @@ const actionCreators = {
 const connectedRegisterPage = connect(null, actionCreators)(RegisterPage);
 export { connectedRegisterPage as RegisterPage };
 
+
+// song@gmail.com
+// 1234
