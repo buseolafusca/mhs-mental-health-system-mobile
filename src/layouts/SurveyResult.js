@@ -64,11 +64,11 @@ class SurveyResult extends Component {
   }
 
   componentWillMount() {
-      const { id } = this.props.match.params;
-      const answerId = id;
-
+    const { id } = this.props.match.params;
+    const answerId = id;
     getAnsweredQuestionnaire(answerId)
         .then(fetched_answers => {
+          console.log("fetched_answers");
           console.log(fetched_answers);
           this.setState( {answers: JSON.parse(fetched_answers["body"]) } );
           var jsonData = fetched_answers["questionnaireBody"];

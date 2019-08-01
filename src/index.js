@@ -39,7 +39,7 @@ ReactDOM.render(
       <Route path='/resources/:id/:cat/:place' render={(params) => (isLoggedIn() ? ( <SinglePlacePage {...params}/> ) : ( <Redirect to="/login"/> )) } />
       <Route path='/resources/:id/:cat' render={(params) => (isLoggedIn() ? ( <PlacesPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
       <Route path='/resources/:id' render={(params) => (isLoggedIn() ? ( <ResourcesPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
-      <Route path="/result" render={(params) => (isLoggedIn() ? ( <SurveyResult {...params} /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path="/result/:id" render={(params) => (isLoggedIn() ? ( <SurveyResult {...params} /> ) : ( <Redirect to="/login"/> )) } />
       <Route path="/review" render={(params) => (isLoggedIn() ? ( <ReviewPage {...params} /> ) : ( <Redirect to="/login"/> )) } />
       <Redirect from="/" to="/landingpage" />
 
