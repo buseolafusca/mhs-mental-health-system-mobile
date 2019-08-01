@@ -92,11 +92,10 @@ class LandingPage extends React.Component {
     fetchPublishedQuestionnaires().then(
       response => {
         console.log("response.questionnaireList")
-        // console.log(response.questionnaireList)
+        console.log(response)
         if (response){
-          this.setState({ questionnaireList: response.questionnaireList})
+          this.setState({ questionnaireList: response})
         }
-        
       }
     )
   }

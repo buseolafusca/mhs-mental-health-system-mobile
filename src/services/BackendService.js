@@ -29,9 +29,11 @@ const postAnswers = async (ans, state) => {
     headers: headers, // check later
     data: {
       questionnaire_id: state.questionnaireId,
+      role:'FORM1ANSWER',
       title: JSON.parse(state.json).title,
-      patient_name: 'Justin', // TODO when we implement the auth
-      score: '15', // TODO
+      service_id:'5d41690f7fd534225b83b347',
+      score: 15, // TODO
+      status:'PENDING',
       body: JSON.stringify(ans.data),
       questionnaireBody: JSON.stringify(ans)
     }
@@ -103,39 +105,37 @@ const getCategoriesBasedOnLocation = async (loc) => {
   }
 }
 
+
+
+
+
 const fetchPublishedQuestionnaires = async () => {
-  const url = baseUrl + fetchQuestionnaireUrl
-  console.log(url)
-  console.log(sessionStorage.jwt)
-  var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
+  try {
+    var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
 
-  await axios({
-    method: 'get',
-    url: url,
-    params: { is_published: true },
-    headers: headers
-  }).then(function (response) {
-      console.log("response")
-      console.log(response)
-      const data = response.data.data
-      return { 'questionnaireList': data }
+    const response = await axios({
+      method: 'get',
+      url: baseUrl + fetchQuestionnaireUrl,
+      headers: headers
+    })
 
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
-  // return axios.get(url, { params: { status: 'PUBLISHED' } })
-  //   .then(function (response) {
-  //     console.log("response")
-  //     console.log(response)
-  //     const data = response.data.data
-  //     return { 'questionnaireList': data }
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error)
-  //   })
+    const data = response.data.data
+    return data
+    // const idPublishedList = []
+
+
+    // data.forEach(element => {
+     
+    //   idPublishedList.push([element.title, element.description, element.is_published])
+        
+    // })
+    // return {
+    //   'idPublishedList': idPublishedList,
+    // }
+  } catch (error) {
+    console.log('GET server error: ', error)
+  }
 }
-
 const getListBasedOnCategoryAndLocation = async (loc, category, radius) => {
   loc += ';r=' + radius
   var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
@@ -204,7 +204,7 @@ const getAnsweredQuestionnaire = async (theId) => {
     const response = await axios({
       method: 'get',
       url: baseUrl + patientanswersUrl + '/' + theId,
-      headers: headers // check later
+      headers: headers 
     })
     return response.data.data
   } catch (error) {
