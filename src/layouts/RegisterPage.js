@@ -61,7 +61,8 @@ class RegisterPage extends React.Component {
                     "password": user.password,
                     "first_name": user.firstName,
                     "last_name": user.lastName,
-                    "postcode": user.postcode
+                    "postcode": user.postcode,
+                    "service_id": user.service
                 })
 
                   .then(fetchedData => {
