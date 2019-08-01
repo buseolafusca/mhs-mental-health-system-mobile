@@ -6,7 +6,13 @@ import { appId, appCode, patientanswersUrl, authenticationUrl, questionnaireWith
 const getQuestionnaire = async (id) => {
   var url = baseUrl + fetchQuestionnaireUrl + id
   try {
-    const response = await axios.get(url)
+    var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
+    const response = await axios({
+      method: 'get',
+      url: url,
+      headers: headers // check later
+    })
+
     return response.data.data
   } catch (error) {
     console.log('GET server error: ', error)
@@ -15,9 +21,12 @@ const getQuestionnaire = async (id) => {
 
 const postAnswers = async (ans, state) => {
   const backendURL = baseUrl + answersUrl
+  var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
+
   axios({
     method: 'post',
     url: backendURL,
+    headers: headers, // check later
     data: {
       questionnaire_id: state.questionnaireId,
       title: JSON.parse(state.json).title,
@@ -50,6 +59,7 @@ const registerUser = async (body) => {
   }
 }
 
+// No token is required for this location function
 const getLocationGivenPostalCode = async (postal) => {
   try {
     const hereAPIURL = getLocationByPostCodeUrl
@@ -71,10 +81,13 @@ const getLocationGivenPostalCode = async (postal) => {
 
 const getCategoriesBasedOnLocation = async (loc) => {
   try {
+    var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
+
     const hereAPIURL = getCategoriesByLocationUrl
     const response = await axios({
       method: 'get',
       url: hereAPIURL,
+      headers: headers, // check later
       params: {
         app_id: appId,
         app_code: appCode,
@@ -91,22 +104,28 @@ const getCategoriesBasedOnLocation = async (loc) => {
 const fetchPublishedQuestionnaires = async () => {
   const url = baseUrl + fetchQuestionnaireUrl
   console.log(url)
-  return axios.get(url, { params: { status: 'PUBLISHED' } })
-    .then(function (response) {
-      const data = response.data.data
-      return { 'questionnaireList': data }
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
+  console.log(sessionStorage.jwt)
+  var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
+
+  const response = await axios({
+    method: 'get',
+    url: url,
+    params: { is_published: true },
+    headers: headers
+  })
+  return response
+  
 }
 
 const getListBasedOnCategoryAndLocation = async (loc, category, radius) => {
   loc += ';r=' + radius
+  var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
+
   try {
     const hereAPIURL = getPlacesByCategoryLocationUrl
     const response = await axios({
       method: 'get',
+      headers: headers, // check later
       url: hereAPIURL,
       params: {
         app_id: appId,
@@ -123,11 +142,13 @@ const getListBasedOnCategoryAndLocation = async (loc, category, radius) => {
 }
 
 const getPlaceDetails = async (url) => {
+  var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
   try {
     const hereAPIURL = url
     const response = await axios({
       method: 'get',
       url: hereAPIURL,
+      headers: headers, // check later
       params: {
         app_id: appId,
         app_code: appCode
@@ -140,11 +161,16 @@ const getPlaceDetails = async (url) => {
 }
 
 const fetchUserAnswers = async () => {
+  var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
   console.log('fetchUserAnswers')
   var userAnswerUrl = baseUrl + answersUrl
   try {
-    const response = await axios.get(userAnswerUrl)
-    // console.log(response)
+    const response = await axios({
+      method: 'get',
+      url: userAnswerUrl,
+      headers: headers // check later
+    })
+    console.log(response)
     return response.data.data
   } catch (error) {
     console.log('GET server error: ', error)
@@ -152,8 +178,15 @@ const fetchUserAnswers = async () => {
 }
 
 const getAnsweredQuestionnaire = async (theId) => {
+
   try {
-    const response = await axios.get(baseUrl + patientanswersUrl + '/' + theId)
+    var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
+
+    const response = await axios({
+      method: 'get',
+      url: baseUrl + patientanswersUrl + '/' + theId,
+      headers: headers // check later
+    })
     return response.data.data
   } catch (error) {
     console.log('GET server error: ', error)
