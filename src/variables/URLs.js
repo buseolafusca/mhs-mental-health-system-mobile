@@ -6,6 +6,7 @@ var fetchQuestionnaireUrl = '/questionnaire_sJS/'
 var answersUrl = '/patientanswers/'
 var registerUrl = '/patients/register'
 var serviceUrl = '/api/v1/organisations/services/'
+var patientUrl = '/patients/'
 
 // HERE Related API
 var getLocationByPostCodeUrl = 'https://geocoder.api.here.com/6.2/geocode.json'
@@ -21,5 +22,6 @@ module.exports = {
   getCategoriesByLocationUrl,
   getPlacesByCategoryLocationUrl,
   registerUrl,
-  serviceUrl
+  serviceUrl,
+  patientUrl
 }

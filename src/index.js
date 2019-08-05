@@ -8,6 +8,7 @@ import ReviewPage from './layouts/ReviewPage'
 import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/ResourcesPage'
 import LocationPage from './layouts/LocationPage'
 import LoginForm from './layouts/LoginPage'
+import {ProfilePage} from './layouts/ProfilePage'
 import {RegisterPage} from './layouts/RegisterPage'
 import * as serviceWorker from './serviceWorker'
 import { render } from "react-dom";
@@ -41,6 +42,7 @@ ReactDOM.render(
       <Route path='/resources/:id' render={(params) => (isLoggedIn() ? ( <ResourcesPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
       <Route path="/result/:id" render={(params) => (isLoggedIn() ? ( <SurveyResult {...params} /> ) : ( <Redirect to="/login"/> )) } />
       <Route path="/review" render={(params) => (isLoggedIn() ? ( <ReviewPage {...params} /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path="/profile" render={(params) => (isLoggedIn() ? ( <ProfilePage {...params} /> ) : ( <Redirect to="/login"/> )) } />
       <Route path='/logout' render={(props) => isLoggedOut() ? (<Redirect to='/login' />) : (<Redirect to='/login' />) } />
       <Redirect from="/" to="/landingpage" />
 
