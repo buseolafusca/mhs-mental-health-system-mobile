@@ -41,6 +41,7 @@ ReactDOM.render(
       <Route path='/resources/:id' render={(params) => (isLoggedIn() ? ( <ResourcesPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
       <Route path="/result/:id" render={(params) => (isLoggedIn() ? ( <SurveyResult {...params} /> ) : ( <Redirect to="/login"/> )) } />
       <Route path="/review" render={(params) => (isLoggedIn() ? ( <ReviewPage {...params} /> ) : ( <Redirect to="/login"/> )) } />
+      <Route path='/logout' render={(props) => isLoggedOut() ? (<Redirect to='/login' />) : (<Redirect to='/login' />) } />
       <Redirect from="/" to="/landingpage" />
 
     </Switch>
@@ -55,6 +56,12 @@ function isLoggedIn(){
   return sessionStorage.jwt;
 }
 
+function isLoggedOut () {
+  console.log('in the log out function')
+  sessionStorage.removeItem('jwt')
+  sessionStorage.removeItem('role')
+  return true
+}
 
 // ReactDOM.render(Routing, document.getElementById('root'))
 // If you want your app to work offline and load faster, you can change
