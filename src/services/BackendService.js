@@ -22,7 +22,8 @@ const getQuestionnaire = async (id) => {
 const postAnswers = async (ans, state) => {
   const backendURL = baseUrl + answersUrl
   var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
-
+  console.log(ans);
+  console.log(state);
   axios({
     method: 'post',
     url: backendURL,
@@ -34,8 +35,11 @@ const postAnswers = async (ans, state) => {
       service_id:'5d41690f7fd534225b83b347',
       score: 15, // TODO
       status:'PENDING',
-      body: JSON.stringify(ans.data),
-      questionnaireBody: JSON.stringify(ans)
+      // body: JSON.stringify(ans.data),
+      body: ans.data,
+      questionnaireBody: state.json,
+      rules: state.rules
+      // JSON.stringify(ans)
     }
   })
 }

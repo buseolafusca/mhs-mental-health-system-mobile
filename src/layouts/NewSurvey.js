@@ -52,7 +52,8 @@ class NewSurvey extends Component {
         completedHtml: "",
         pages: [],
         showProgressBar: ""
-      }
+      },
+      rules: []
     };
   }
 
@@ -105,7 +106,7 @@ class NewSurvey extends Component {
     this.setState({questionnaireId:id});
     getQuestionnaire(url)
       .then(fetchedData => {
-        this.setState({ json: fetchedData.body });
+        this.setState({ json: fetchedData.body, rules: fetchedData.rules });
       })
       .catch(error => {
         console.error(error);
