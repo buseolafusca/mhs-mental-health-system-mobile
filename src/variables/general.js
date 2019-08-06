@@ -5,7 +5,7 @@ var backendUrl = "mhsbackend.azurewebsites.net/api/v1";
 // 'http://178.128.34.125/api/v1'//"
 var createUserAnswers = "/useranswers";
 var patientanswersUrl = "/patientanswers";
-var baseUrl = 'mhsbackend.azurewebsites.net'
+var baseUrl = 'http://178.128.34.125/api/v1'//'mhsbackend.azurewebsites.net'
 var fetchQuestionnaireUrl = '/questionnaire_sJS/'
 var authenticationUrl = "/patients/authenticate";
 var questionnaireWithoutToken = "/questionnaires";
