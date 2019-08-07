@@ -1,11 +1,12 @@
-var nhsUrl = 'http://mhsbackend.azurewebsites.net'
+var nhsUrl = "http://178.128.34.125/api/v1"; //'https://mhsbackend.azurewebsites.net/api/v1'
 
 // var baseUrl = 'http://mhsbackend.azurewebsites.net'
-var baseUrl = "http://178.128.34.125/api/v1";
+var baseUrl = "http://178.128.34.125/api/v1"; //'https://mhsbackend.azurewebsites.net/api/v1' //
 var fetchQuestionnaireUrl = '/questionnaire_sJS/'
 var answersUrl = '/patientanswers/'
 var registerUrl = '/patients/register'
 var serviceUrl = '/api/v1/organisations/services/'
+var patientUrl = '/patients/'
 
 // HERE Related API
 var getLocationByPostCodeUrl = 'https://geocoder.api.here.com/6.2/geocode.json'
@@ -21,5 +22,6 @@ module.exports = {
   getCategoriesByLocationUrl,
   getPlacesByCategoryLocationUrl,
   registerUrl,
-  serviceUrl
+  serviceUrl,
+  patientUrl
 }

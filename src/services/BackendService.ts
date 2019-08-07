@@ -38,7 +38,8 @@ const postAnswers = async (ans: any, state: any) => {
       patient_name: "Justin", //TODO
       score: "15", //TODO
       timestamp: str,
-      body: JSON.stringify(ans)
+      body: ans
+      // body: JSON.stringify(ans)
     }
   });
 }

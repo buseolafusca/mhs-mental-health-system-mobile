@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { nhsUrl, baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
-  getPlacesByCategoryLocationUrl, registerUrl, serviceUrl } from '../variables/URLs'
+  getPlacesByCategoryLocationUrl, registerUrl, serviceUrl, patientUrl } from '../variables/URLs'
 import { appId, appCode, patientanswersUrl, authenticationUrl, questionnaireWithoutToken, backendUrl } from '../variables/general'
 
 const getQuestionnaire = async (id) => {
@@ -19,6 +19,24 @@ const getQuestionnaire = async (id) => {
   }
 }
 
+const getPatientProfile = async () => {
+  var url = baseUrl + patientUrl + sessionStorage.jwt
+  console.log("getPatientProfile")
+  console.log(url)
+  try {
+    var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
+    const response = await axios({
+      method: 'get',
+      url: url,
+      headers: headers // check later
+    })
+    console.log(response)
+    return response.data.data
+  } catch (error) {
+    console.log('GET server error: ', error)
+  }
+}
+
 const postAnswers = async (ans, state) => {
   const backendURL = baseUrl + answersUrl
   var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
@@ -31,10 +49,10 @@ const postAnswers = async (ans, state) => {
     data: {
       questionnaire_id: state.questionnaireId,
       role:'FORM1ANSWER',
-      title: JSON.parse(state.json).title,
+      title: state.json.title,
       service_id:'5d41690f7fd534225b83b347',
-      score: 15, // TODO
       status:'PENDING',
+      score: 0,
       // body: JSON.stringify(ans.data),
       body: ans.data,
       questionnaireBody: state.json,
@@ -214,6 +232,7 @@ const getAuthenticationToken = async (body) => {
     })
     console.log('getAuthenticationToken')
     console.log(response)
+    console.log(response.data.token)
     return response
   } catch (error) {
     console.log('POST server error: ', error)
@@ -275,6 +294,6 @@ const getServices = async () => {
 export {
   fetchUserAnswers, getQuestionnaire, postAnswers, fetchPublishedQuestionnaires,
   getLocationGivenPostalCode, getCategoriesBasedOnLocation, getListBasedOnCategoryAndLocation, getPlaceDetails,
-  getAnsweredQuestionnaire, getAuthenticationToken, registerUser, getServices}
+  getAnsweredQuestionnaire, getAuthenticationToken, registerUser, getServices, getPatientProfile}
 
   

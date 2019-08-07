@@ -37,14 +37,9 @@ class LoginForm extends React.Component {
     });
 
     const { Username, Password, remember } = this.state;
-    // console.log(Username);
-    // console.log(Password);
-    // console.log(remember);
     console.log({'email': Username, 'password': Password})
 // {credentials: {email: "ss", password: "aaa"}}
     this.props.actions.logInUser({'email': Username, 'password': Password});
-
-    
 
   }
 
