@@ -36,12 +36,15 @@ import Adapter from 'enzyme-adapter-react-16'
 
 
 describe('ResourcesPage', () => {
-  it('should render correctly in "debug" mode', () => {
+  it('should render correctly in "debug" mode', async () => {
     // the id is for E1 4EY
     const match = { params: { id: 'aaa' } }
-    const component = shallow(<ResourcesPage match={match} />)
+    const component = await shallow(<ResourcesPage match={match} />)
     expect(component).toMatchSnapshot()
     expect(component.find(SinglePlacePage).length).toEqual(0); 
+    expect(component.state().categoriesList).toEqual([]);
+
+
     // expect(component.contains(<div className='nhsuk-expander-group' />)).to.equal(true);
   })
 })

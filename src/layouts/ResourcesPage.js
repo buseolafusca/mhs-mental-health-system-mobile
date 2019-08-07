@@ -109,11 +109,8 @@ class PlacesPage extends React.Component {
   componentWillMount () {
     const { id } = this.props.match.params
     const { cat } = this.props.match.params
-    console.log('*********')
-    console.log(cat)
     this.setState({ coordinates: id })
     this.setState({ category: cat })
-    console.log(this.state.coordinates)
     try {
       getListBasedOnCategoryAndLocation(id, cat, 1000).then(response => {
         var placesArray = []
@@ -136,12 +133,10 @@ class PlacesPage extends React.Component {
 
   handleGoBackButton (pg) {
     this.setState({ placesList: [] })
-    console.log(this.state.placesList)
     this.props.history.push('/resources/' + this.state.coordinates)
   }
 
   handleClickOfPlace (place) {
-    // console.log(place);
     if (place.id !== '-1') {
       // this.props.history.push('/resources/' + this.state.coordinates + '/' + this.state.category + '/' + JSON.stringify(place));
       this.props.history.push({
@@ -216,18 +211,15 @@ class SinglePlacePage extends React.Component {
     getPlaceDetails(this.state.place.href).then(response => {
       this.setState({ placeDetails: response.data })
       this.state.placeDetails = response.data
-      console.log(this.state.placeDetails.location.address)
       this.setState({ placeLocation: this.state.placeDetails.location.address })
       this.setState({ placeCoordinates: this.state.placeDetails.location.position })
       // this.render();
-      console.log(this.state.coordinates)
       this.interactiveMap()
     })
   }
 
   handleGoBackButton (pg) {
     this.setState({ placesList: [] })
-    console.log(this.state)
     this.props.history.push('/resources/' + this.state.coordinates + '/' + this.state.category)
   }
 
@@ -236,7 +228,6 @@ class SinglePlacePage extends React.Component {
       lat: this.state.placeCoordinates[0],
       lng: this.state.placeCoordinates[1]
     }
-    console.log(coordinates)
     var H = window.H
 
     /**
