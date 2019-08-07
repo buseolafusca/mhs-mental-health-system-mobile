@@ -1,6 +1,20 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import ReviewPage from '../layouts/ReviewPage'
+import Enzyme, { mount } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import { MemoryRouter } from "react-router-dom";
+
+Enzyme.configure({ adapter: new Adapter() });
+
+it("renders without crashing", () => {
+  mount(
+    <MemoryRouter>
+      <ReviewPage />
+    </MemoryRouter>
+  );
+});
+
 
 describe('Review page', () => {
   it('should render correctly in mode', () => {
@@ -14,3 +28,6 @@ describe('Review page', () => {
     expect(wrapper.find('#get-table')).toHaveLength(1);
   });
 })
+
+  // ReviewPage.js                                     |       16 |      100 |     37.5 |    17.39 |... 43,44,45,47,51 |
+

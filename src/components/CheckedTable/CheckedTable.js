@@ -14,16 +14,6 @@ class SelectableTable extends Component {
 
       this.state = {
           selectionData: [
-            // { id: 1, checked: true, serviceName: '200000000000000000000200000000000000000000ss'},
-            // { id: 2, checked: false, serviceName: 20},
-            // { id: 3, checked: false, serviceName: 15},
-            // {
-            //     id: 4,
-            //     checked: false,
-            //     serviceName: 15
-            // },
-            // { id: 5, checked: false, serviceName: 15},
-            // { id: 6, checked: false, serviceName: 0}
         ]
       };
     }
@@ -90,12 +80,10 @@ class SelectableTable extends Component {
             });
             this.setState({ selectionData: data });
 
-
             e.stopPropagation();
         },
         renderHeaderCheckbox: () => {
             let className = 'input-checkbox';
-            // const selectedItems = _.filter(this.state.selectionData, { 'checked': true });
             const dataLength = this.state.selectionData.length;
             const selectedLength = this.state.selectionData.length;
             const isSelectedAll = selectedLength > 0 && selectedLength === dataLength;
