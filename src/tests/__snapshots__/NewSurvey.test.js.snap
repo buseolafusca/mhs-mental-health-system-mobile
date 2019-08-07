@@ -30,12 +30,6 @@ exports[`NewSurvey should render correctly in "debug" mode 1`] = `
           />
         </table>
       </center>
-      <div
-        id="finalScore"
-      />
-      <div
-        id="jsonSection"
-      />
     </div>
   </div>
   <NHSFooter />

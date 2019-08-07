@@ -28,8 +28,10 @@ class LocationPage extends React.Component {
   handleSubmit (event) {
     getLocationGivenPostalCode(this.state.postcode).then(loc => {
       try {
-        this.state.latitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Latitude
-        this.state.longitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Longitude
+        //this.state.latitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Latitude
+        this.setState({latitude:loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Latitude})
+        //this.state.longitude = loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Longitude
+        this.setState({longitude: loc.data.Response.View[0].Result[0].Location.NavigationPosition[0].Longitude})
         var id = this.state.latitude + ',' + this.state.longitude
         this.props.history.push('/resources/' + id)
       } catch (error) {
