@@ -44,15 +44,15 @@ class NewSurvey extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionnaireId:"5d1a1d16d910160030d04979" ,
       json:
       {
-       title: "",
+        title: "",
         description: "",
         completedHtml: "",
         pages: [],
         showProgressBar: ""
-      }
+      },
+      score:0
     };
   }
 
@@ -74,27 +74,8 @@ class NewSurvey extends Component {
     console.log("goNextPageAutomatic");
   }
 
-
   onComplete = (result) => {
-    var finalScore = 0;
-    var tableData;
-    var i = 1;
-    tableData = "<tr><th scope='col'>" + "Question" + "</th><th scope='col'>" + " Answer" + "</th></tr>"
-    Object.keys(result.valuesHash).map(function (key) {
-
-      tableData += "<tr>"
-      tableData += "<td >" + "Question " + i + "</td>"
-      finalScore = finalScore + parseInt(result.valuesHash[key], 10);
-
-      tableData += "<td >" + result.valuesHash[key] + "</td>";
-      tableData += "</tr>"
-      i++;
-
-    })
     postAnswers(this.model,this.state);
-    $("#tbody1").html(tableData);
-    document.querySelector('#finalScore').textContent = "Final score is " + finalScore;
-    document.querySelector('#jsonSection').textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
   };
 
   componentWillMount() {
@@ -102,7 +83,7 @@ class NewSurvey extends Component {
     const { id } = this.props.match.params;
 
     const url = id;
-    this.setState({questionnaireId:id});
+
     getQuestionnaire(url)
       .then(fetchedData => {
         this.setState({ json: fetchedData.body });
@@ -131,8 +112,7 @@ class NewSurvey extends Component {
                 </tbody>
               </table>
             </center>
-            <div id="finalScore"></div>
-            <div id="jsonSection"></div>
+ 
           </div>
         </div>
         <NHSFooter/>
