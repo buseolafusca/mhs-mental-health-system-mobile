@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<Table
+  bordered={true}
+  columns={
+    Array [
+      Object {
+        "dataIndex": "checked",
+        "render": [Function],
+        "title": "Select service",
+        "width": 80,
+      },
+      Object {
+        "dataIndex": "serviceName",
+        "title": "Service Name",
+      },
+    ]
+  }
+  data={Array []}
+  hoverable={true}
+  justified={true}
+  loading={false}
+  maxHeight={0}
+  onRowClick={[Function]}
+  rowClassName={[Function]}
+  rowKey="id"
+  useFixedHeader={false}
+/>
+`;

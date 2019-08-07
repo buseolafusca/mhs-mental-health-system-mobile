@@ -61,9 +61,7 @@ const postAnswers = async (ans, state) => {
 
 const registerUser = async (body) => {
   const backendURL = baseUrl + registerUrl
-  console.log("backendURL")
-  console.log(backendURL)
-  console.log(body)
+
   var headers = {'Content-Type': 'application/json'}
   try {
     const response = await axios({

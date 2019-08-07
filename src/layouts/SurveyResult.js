@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import * as Survey from "survey-react";
+
+//import css style
 import "survey-react/survey.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "jquery-ui/themes/base/all.css";
@@ -7,17 +9,18 @@ import "nouislider/distribute/nouislider.css";
 import "select2/dist/css/select2.css";
 import "bootstrap-slider/dist/css/bootstrap-slider.css";
 import "jquery-bar-rating/dist/themes/css-stars.css";
+import "icheck/skins/square/blue.css";
+import "../assets/css/SurveyResult.css";
+
 import $ from "jquery";
 import "jquery-ui/ui/widgets/datepicker.js";
 import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
-import "icheck/skins/square/blue.css";
 import { getAnsweredQuestionnaire} from "../services/BackendService";
 
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
-import "../assets/css/SurveyResult.css";
 
 window["$"] = window["jQuery"] = $;
 require("icheck");
@@ -64,6 +67,7 @@ class SurveyResult extends Component {
   componentWillMount() {
     const { id } = this.props.match.params;
     const answerId = id;
+ 
     getAnsweredQuestionnaire(answerId)
         .then(fetched_answers => {
           console.log("fetched_answers");
