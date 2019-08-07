@@ -41,7 +41,8 @@ const getPatientProfile = async () => {
 const postAnswers = async (ans, state) => {
   const backendURL = baseUrl + answersUrl
   var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
-
+  console.log(ans);
+  console.log(state);
   axios({
     method: 'post',
     url: backendURL,
@@ -49,12 +50,15 @@ const postAnswers = async (ans, state) => {
     data: {
       questionnaire_id: state.questionnaireId,
       role:'FORM1ANSWER',
-      title: JSON.parse(state.json).title,
+      title: state.json.title,
       service_id:'5d41690f7fd534225b83b347',
-      score: 15, // TODO
       status:'PENDING',
-      body: JSON.stringify(ans.data),
-      questionnaireBody: JSON.stringify(ans)
+      score: 0,
+      // body: JSON.stringify(ans.data),
+      body: ans.data,
+      questionnaireBody: state.json,
+      rules: state.rules
+      // JSON.stringify(ans)
     }
   })
 }

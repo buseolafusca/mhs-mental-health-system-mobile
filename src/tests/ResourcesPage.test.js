@@ -48,17 +48,3 @@ describe('ResourcesPage', () => {
     // expect(component.contains(<div className='nhsuk-expander-group' />)).to.equal(true);
   })
 })
-// describe('SinglePlacePage', () => {
-//   it('should render correctly in "debug" mode', () => {
-//     const component = shallow(<SinglePlacePage  />)
-
-//     expect(component).toMatchSnapshot()
-//   })
-// })
-// describe('PlacesPage', () => {
-//   it('should render correctly in "debug" mode', () => {
-//     const component = shallow(<PlacesPage  />)
-
-//     expect(component).toMatchSnapshot()
-//   })
-// })

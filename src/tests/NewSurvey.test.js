@@ -22,8 +22,5 @@ describe('NewSurvey', () => {
     expect(component).toMatchSnapshot()
     expect(component.find(".surveyjs")).toHaveLength(1);
     expect(component.find("Survey")).toHaveLength(1);
-
-    // expect(component.find(Survey).length).toEqual(1); 
-    // expect(component.contains(<div className='nhsuk-expander-group' />)).to.equal(true);
   })
 })

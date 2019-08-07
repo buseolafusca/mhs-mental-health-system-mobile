@@ -47,7 +47,6 @@ class Square extends React.Component {
     )
   }
 }
-
 class SurveyResult extends Component {
 
   constructor(props) {
@@ -70,25 +69,24 @@ class SurveyResult extends Component {
  
     getAnsweredQuestionnaire(answerId)
         .then(fetched_answers => {
-          console.log("fetched_answers");
-          console.log(fetched_answers);
-          this.setState( {answers: JSON.parse(fetched_answers["body"]) } );
-          var jsonData = fetched_answers["questionnaireBody"];
-          var jsonFormatData = JSON.parse(jsonData);
-          for (var i=1; i<jsonFormatData.pages.length; i++){
-            if (jsonFormatData.pages[i].elements){
-                jsonFormatData.pages[0].elements = jsonFormatData.pages[0].elements.concat(jsonFormatData.pages[i].elements)
+
+          this.setState( {answers: fetched_answers.body } );
+          var jsonData = fetched_answers.questionnaireBody;
+     
+          for (var i=1; i<jsonData.pages.length; i++){
+            if (jsonData.pages[i].elements){
+              jsonData.pages[0].elements = jsonData.pages[0].elements.concat(jsonData.pages[i].elements)
             }
           }
-          jsonFormatData.pages = [jsonFormatData.pages[0]]
-          jsonFormatData.pages[0].title = ""
-          jsonData = JSON.stringify(jsonFormatData);
+          jsonData.pages = [jsonData.pages[0]]
+          jsonData.pages[0].title = ""
           this.setState( {json: jsonData} );   
         })
         .catch(error => {
           console.error(error);
         });
   }
+
 
   render() {
     Survey.Survey.cssType = "bootstrap";
@@ -105,7 +103,7 @@ class SurveyResult extends Component {
             <Survey.Survey
               model={this.model}
             />
-            <div> <Square url='/referrals' title='Referrals' /> </div>
+            <div> <Square url='/landingpage' title='Back' /> </div>
           </div>
         </div>
         <NHSFooter/>

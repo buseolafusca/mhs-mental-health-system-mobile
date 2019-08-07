@@ -7,6 +7,20 @@ import { MemoryRouter } from "react-router-dom";
 
 Enzyme.configure({ adapter: new Adapter() });
 
+
+
+const setup = () => {
+  const wrapper = shallow(<ReviewPage />);
+  return {
+    wrapper,
+  };
+};
+
+it('should has table', () => {
+  const { wrapper } = setup();
+  expect(wrapper.find('#get-table')).toHaveLength(1);
+});
+
 it("renders without crashing", () => {
   mount(
     <MemoryRouter>
@@ -14,6 +28,14 @@ it("renders without crashing", () => {
     </MemoryRouter>
   );
 });
+
+// it('calls component handleTest', () => {
+//   const { wrapper } = setup();
+//   const spyFunction = jest.spyOn(wrapper.instance(), 'addRowHandlers');
+//   wrapper.instance().addRowHandlers();
+//   expect(spyFunction).toHaveBeenCalled();
+//   spyFunction.mockRestore();
+// });
 
 
 describe('Review page', () => {
@@ -28,6 +50,4 @@ describe('Review page', () => {
     expect(wrapper.find('#get-table')).toHaveLength(1);
   });
 })
-
-  // ReviewPage.js                                     |       16 |      100 |     37.5 |    17.39 |... 43,44,45,47,51 |
 

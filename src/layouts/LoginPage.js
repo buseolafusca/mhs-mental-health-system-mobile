@@ -17,7 +17,6 @@ class LoginForm extends React.Component {
       Password: '',
       remember: false,
       error: {}
-
     };
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -33,18 +32,12 @@ class LoginForm extends React.Component {
 
     const { Username, Password, remember } = this.state;
     console.log({'email': Username, 'password': Password})
-// {credentials: {email: "ss", password: "aaa"}}
     this.props.actions.logInUser({'email': Username, 'password': Password});
 
   }
 
   componentDidMount() {
     console.log("songchen345@gmail.com")
-    // $('input').iCheck({
-    //   checkboxClass: 'icheckbox_square-blue',
-    //   radioClass: 'iradio_square-blue',
-    //   increaseArea: '20%' // optional
-    // });
   }
 
   handleChange(name, e) {
@@ -105,11 +98,6 @@ class LoginForm extends React.Component {
               <NHSHeader />
 
       <form action="javascript:void(0)" noValidate onSubmit={this.handleLogin} className={formOptions.className}>
-        
-
-        
-
-
         <div className={usernameOptions.containerClassName}>
 
           <input
@@ -164,7 +152,6 @@ LoginForm.propTypes = {
   text: PropTypes.object,
   onSubmit: PropTypes.func.isRequired
 };
-
 
 LoginForm.defaultProps = {
   username: {},
