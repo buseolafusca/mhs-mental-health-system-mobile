@@ -18,7 +18,6 @@ class ProfilePage extends React.Component {
                 postcode: '',
                 telephone: '',
                 service: null,
-                postcode: ''
             },
             submitted: false
         };
@@ -40,8 +39,7 @@ class ProfilePage extends React.Component {
                     email: response.email,
                     postcode: response.postcode,
                     telephone: 'not provided',
-                    service: response.service_id,
-                    postcode: response.postcode
+                    service: response.service_id
                 }
                   this.setState({ user: newUser})
                 }

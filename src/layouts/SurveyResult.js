@@ -13,10 +13,8 @@ import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
 import "icheck/skins/square/blue.css";
-import axios from "axios";
-import { getAnsweredQuestionnaire, getQuestionnaire, getAuthenticationToken, getQuestionnaireWithoutToken, getQuestionnaireWithToken } from "../services/BackendService";
+import { getAnsweredQuestionnaire} from "../services/BackendService";
 
-import { backendUrl, createUserAnswers } from "../variables/URLs";
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
 import "../assets/css/SurveyResult.css";

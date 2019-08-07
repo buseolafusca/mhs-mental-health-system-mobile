@@ -1,13 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import ErrorText from '../components/ErrorText';
-import styles from '../sass/style.scss';
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
-import LandingPage from './LandingPage'
-import { render } from "react-dom";
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { getAuthenticationToken } from '../services/BackendService.js'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as sessionActions from '../actions/SessionActions';

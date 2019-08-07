@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Table from '@trendmicro/react-table';
-import { TablePagination } from '@trendmicro/react-paginations';
 import styles from '@trendmicro/react-table';
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-table/dist/react-table.css';
@@ -37,8 +36,7 @@ class SelectableTable extends Component {
 
     actions = {
         handleClickRow: (record, index, e) => {
-            const checked = record.checked;
-            var selectedId = '';
+
             const data = this.state.selectionData.map(item => {
                 if (record.id === item.id) {
                     this.props.callbackFromParent(item.id);
@@ -53,14 +51,11 @@ class SelectableTable extends Component {
                         checked: false
                     };
                 }
-                return item;
             });
 
             this.setState({ selectionData: data });
             e.stopPropagation();
-            e.preventDefault();
-            // console.log(data);
-            
+            e.preventDefault();            
         },
         handleRowClassName: (record, key) => {
             const checked = record.checked;
@@ -79,7 +74,6 @@ class SelectableTable extends Component {
                 };
             });
             this.setState({ selectionData: data });
-
             e.stopPropagation();
         },
         renderHeaderCheckbox: () => {

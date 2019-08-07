@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewSurvey should render correctly in "debug" mode 1`] = `
+<div
+  id="page-container"
+>
+  <NHSHeader />
+  <div
+    className="SurveyResult"
+  >
+    <div
+      className="surveyjs"
+    >
+      <Survey
+        model={
+          Object {
+            "showProgressBar": "",
+          }
+        }
+        onComplete={[Function]}
+        onValueChanged={[Function]}
+      />
+      <center>
+        <table
+          border="1"
+          width="180"
+        >
+          <tbody
+            id="tbody1"
+          />
+        </table>
+      </center>
+    </div>
+  </div>
+  <NHSFooter />
+</div>
+`;

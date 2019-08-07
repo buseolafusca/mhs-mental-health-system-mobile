@@ -16,6 +16,5 @@ describe('Login page', () => {
     expect(component).toMatchSnapshot()
 
   })
-
 })
 

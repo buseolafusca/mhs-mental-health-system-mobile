@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from 'react-dom'
 import './assets/css/index.css'
 import SurveyResult from './layouts/SurveyResult'
@@ -11,7 +11,6 @@ import LoginForm from './layouts/LoginPage'
 import {ProfilePage} from './layouts/ProfilePage'
 import {RegisterPage} from './layouts/RegisterPage'
 import * as serviceWorker from './serviceWorker'
-import { render } from "react-dom";
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
@@ -26,7 +25,6 @@ import {
 
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-// const history = createBrowserHistory();
 
 ReactDOM.render(
   <Provider store={store}>
@@ -71,33 +69,3 @@ function isLoggedOut () {
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister()
 
-
-
-            // <Route path="/landingpage" render={() => (isLoggedIn() ? ( <LandingPage /> ) : ( <Redirect to="/"/> )) } />
-                        // <Route path="/landingpage" component={ LandingPage } />
-
-            // <Route
-            //   exact
-            //   path='/'
-            //   render={props => (
-
-            //     <LoginForm
-            //       {...props}
-            //       childProps={childProps}
-            //     />
-            //   )}
-            // />
-
-            
-            
-            // <Route
-            //   exact
-            //   path="/landingpage"
-            //   render={props => (
-
-            //     <LandingPage
-            //       {...props}
-            //       childProps={childProps}
-            //     />
-            //   )}
-            // />
