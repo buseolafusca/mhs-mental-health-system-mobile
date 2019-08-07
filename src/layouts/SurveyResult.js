@@ -16,7 +16,7 @@ import "icheck/skins/square/blue.css";
 import axios from "axios";
 import { getAnsweredQuestionnaire, getQuestionnaire, getAuthenticationToken, getQuestionnaireWithoutToken, getQuestionnaireWithToken } from "../services/BackendService";
 
-import { backendUrl, createUserAnswers } from "../variables/general";
+import { backendUrl, createUserAnswers } from "../variables/URLs";
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
 import "../assets/css/SurveyResult.css";

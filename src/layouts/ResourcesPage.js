@@ -13,7 +13,7 @@ import 'here-js-api/scripts/mapsjs-ui'
 import 'here-js-api/scripts/mapsjs-mapevents'
 import 'here-js-api/scripts/mapsjs-clustering'
 import 'here-js-api/scripts/mapsjs-places'
-import { appId as apI, appCode as apC } from '../variables/general'
+import { appId as apI, appCode as apC } from '../variables/URLs'
 
 class ResourcesPage extends React.Component {
   constructor (props) {

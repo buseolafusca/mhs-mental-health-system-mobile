@@ -5,8 +5,6 @@ import { userActions } from '../actions/userActions';
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
 import { getPatientProfile } from '../services/BackendService.js'
-import SelectableTable from '../components/CheckedTable/CheckedTable.js'
-import history from '../history'
 
 class ProfilePage extends React.Component {
     constructor(props) {
@@ -52,7 +50,6 @@ class ProfilePage extends React.Component {
     }
 
     render() {
-        const { registering  } = this.props;
         const { user, submitted } = this.state;
         return (
           <div className='landing-page-container'>
@@ -113,10 +110,6 @@ class ProfilePage extends React.Component {
     }
 }
 
-function mapState(state) {
-    const { registering } = state.registration;
-    return { registering };
-}
 
 const actionCreators = {
     register: userActions.register

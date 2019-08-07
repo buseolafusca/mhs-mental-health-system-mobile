@@ -6,7 +6,6 @@ import NHSFooter from '../components/NHSFooter.js'
 import { fetchPublishedQuestionnaires } from '../services/BackendService.js'
 // import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import '../assets/css/firebaseui-styling.global.css'
-import {isLoggedIn } from './LoginPage'
 
 class Square extends React.Component {
   render () {

@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { nhsUrl, baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
-  getPlacesByCategoryLocationUrl, registerUrl, serviceUrl, patientUrl } from '../variables/URLs'
-import { appId, appCode, patientanswersUrl, authenticationUrl, questionnaireWithoutToken, backendUrl } from '../variables/general'
+  getPlacesByCategoryLocationUrl, registerUrl, serviceUrl, patientUrl,appId, appCode, patientanswersUrl,
+  authenticationUrl, questionnaireWithoutToken, backendUrl
+} from '../variables/URLs'
 
 const getQuestionnaire = async (id) => {
   var url = baseUrl + fetchQuestionnaireUrl + id
