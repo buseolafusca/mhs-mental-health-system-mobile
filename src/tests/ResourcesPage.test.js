@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 import { ResourcesPage, SinglePlacePage, PlacesPage } from '../layouts/ResourcesPage'
 import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import ReactDOM from 'react-dom'
 
 // describe('<ResourcesPage />', () => {
 //   it('renders three <Foo /> components', () => {
@@ -33,6 +34,14 @@ import Adapter from 'enzyme-adapter-react-16'
 //   //   expect(onButtonClick).to.have.property('callCount', 1);
 //   // });
 // });
+
+it('renders without crashing', () => {
+  const div = document.createElement('div')
+  const match = { params: { id: 'aaa' } }
+  ReactDOM.render(<ResourcesPage match={match} />, div)
+  ReactDOM.unmountComponentAtNode(div)
+  
+})
 
 
 describe('ResourcesPage', () => {
