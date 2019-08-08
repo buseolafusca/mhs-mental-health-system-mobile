@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<div
+  id="page-container"
+>
+  <NHSHeader />
+  <div
+    className="SurveyResult"
+  >
+    <div
+      className="surveyjs"
+    >
+      <Survey
+        model={
+          Object {
+            "mode": "display",
+            "showProgressBar": "",
+          }
+        }
+      />
+      <div>
+         
+        <Square
+          title="Referrals"
+          url="/referrals"
+        />
+         
+      </div>
+    </div>
+  </div>
+  <NHSFooter />
+</div>
+`;

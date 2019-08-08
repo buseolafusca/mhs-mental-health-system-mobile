@@ -49,6 +49,7 @@ class NewSurvey extends Component {
         pages: [],
         showProgressBar: ""
       },
+      rules: [],
       score:0
     };
   }
@@ -66,7 +67,6 @@ class NewSurvey extends Component {
     console.log("sendResultOnPageNext");
   }
 
-
   goNextPageAutomatic() {
     console.log("goNextPageAutomatic");
   }
@@ -83,7 +83,8 @@ class NewSurvey extends Component {
 
     getQuestionnaire(url)
       .then(fetchedData => {
-        this.setState({ json: fetchedData.body });
+        console.log(fetchedData)
+        this.setState({ json: fetchedData.body, rules: fetchedData.rules });
       })
       .catch(error => {
         console.error(error);

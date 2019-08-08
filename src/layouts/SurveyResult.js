@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import * as Survey from "survey-react";
+
+//import css style
 import "survey-react/survey.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "jquery-ui/themes/base/all.css";
@@ -7,17 +9,18 @@ import "nouislider/distribute/nouislider.css";
 import "select2/dist/css/select2.css";
 import "bootstrap-slider/dist/css/bootstrap-slider.css";
 import "jquery-bar-rating/dist/themes/css-stars.css";
+import "icheck/skins/square/blue.css";
+import "../assets/css/SurveyResult.css";
+
 import $ from "jquery";
 import "jquery-ui/ui/widgets/datepicker.js";
 import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
-import "icheck/skins/square/blue.css";
 import { getAnsweredQuestionnaire} from "../services/BackendService";
 
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
-import "../assets/css/SurveyResult.css";
 
 window["$"] = window["jQuery"] = $;
 require("icheck");
@@ -44,7 +47,6 @@ class Square extends React.Component {
     )
   }
 }
-
 class SurveyResult extends Component {
 
   constructor(props) {
@@ -64,27 +66,27 @@ class SurveyResult extends Component {
   componentWillMount() {
     const { id } = this.props.match.params;
     const answerId = id;
+ 
     getAnsweredQuestionnaire(answerId)
         .then(fetched_answers => {
-          console.log("fetched_answers");
-          console.log(fetched_answers);
-          this.setState( {answers: JSON.parse(fetched_answers["body"]) } );
-          var jsonData = fetched_answers["questionnaireBody"];
-          var jsonFormatData = JSON.parse(jsonData);
-          for (var i=1; i<jsonFormatData.pages.length; i++){
-            if (jsonFormatData.pages[i].elements){
-                jsonFormatData.pages[0].elements = jsonFormatData.pages[0].elements.concat(jsonFormatData.pages[i].elements)
+
+          this.setState( {answers: fetched_answers.body } );
+          var jsonData = fetched_answers.questionnaireBody;
+     
+          for (var i=1; i<jsonData.pages.length; i++){
+            if (jsonData.pages[i].elements){
+              jsonData.pages[0].elements = jsonData.pages[0].elements.concat(jsonData.pages[i].elements)
             }
           }
-          jsonFormatData.pages = [jsonFormatData.pages[0]]
-          jsonFormatData.pages[0].title = ""
-          jsonData = JSON.stringify(jsonFormatData);
+          jsonData.pages = [jsonData.pages[0]]
+          jsonData.pages[0].title = ""
           this.setState( {json: jsonData} );   
         })
         .catch(error => {
           console.error(error);
         });
   }
+
 
   render() {
     Survey.Survey.cssType = "bootstrap";
@@ -101,7 +103,7 @@ class SurveyResult extends Component {
             <Survey.Survey
               model={this.model}
             />
-            <div> <Square url='/referrals' title='Referrals' /> </div>
+            <div> <Square url='/landingpage' title='Back' /> </div>
           </div>
         </div>
         <NHSFooter/>

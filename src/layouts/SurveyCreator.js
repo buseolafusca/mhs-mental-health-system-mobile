@@ -1,23 +1,21 @@
 import React, { Component } from "react";
 import * as SurveyJSCreator from "survey-creator";
 import * as SurveyKo from "survey-knockout";
-import "survey-creator/survey-creator.css";
 
+//import css style
+import "survey-creator/survey-creator.css";
 import "jquery-ui/themes/base/all.css";
 import "nouislider/distribute/nouislider.css";
 import "select2/dist/css/select2.css";
 import "bootstrap-slider/dist/css/bootstrap-slider.css";
-
 import "jquery-bar-rating/dist/themes/css-stars.css";
 import "jquery-bar-rating/dist/themes/fontawesome-stars.css";
+import "icheck/skins/square/blue.css";
 
 import $ from "jquery";
 import "jquery-ui/ui/widgets/datepicker.js";
 import "select2/dist/js/select2.js";
 import "jquery-bar-rating";
-
-import "icheck/skins/square/blue.css";
-
 import * as widgets from "surveyjs-widgets";
 
 SurveyJSCreator.StylesManager.applyTheme("default");
@@ -48,7 +46,7 @@ class SurveyCreator extends Component {
     return <div id="surveyCreatorContainer" />;
   }
   saveMySurvey = () => {
-    console.log(JSON.stringify(this.surveyCreator.text));
+   
   };
 }
 
