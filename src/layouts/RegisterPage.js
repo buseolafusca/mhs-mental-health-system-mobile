@@ -21,8 +21,7 @@ class RegisterPage extends React.Component {
                 telephone: '',
                 password: '',
                 repeatedPassword: '',
-                service: null,
-                postcode: ''
+                service: null
             },
             submitted: false
         };
@@ -172,10 +171,6 @@ class RegisterPage extends React.Component {
     }
 }
 
-function mapState(state) {
-    const { registering } = state.registration;
-    return { registering };
-}
 
 const actionCreators = {
     register: userActions.register
@@ -183,7 +178,3 @@ const actionCreators = {
 
 const connectedRegisterPage = connect(null, actionCreators)(RegisterPage);
 export { connectedRegisterPage as RegisterPage };
-
-
-// song@gmail.com
-// 1234

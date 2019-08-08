@@ -18,7 +18,6 @@ class ProfilePage extends React.Component {
                 postcode: '',
                 telephone: '',
                 service: null,
-                postcode: ''
             },
             submitted: false
         };
@@ -40,8 +39,7 @@ class ProfilePage extends React.Component {
                     email: response.email,
                     postcode: response.postcode,
                     telephone: 'not provided',
-                    service: response.service_id,
-                    postcode: response.postcode
+                    service: response.service_id
                 }
                   this.setState({ user: newUser})
                 }
@@ -96,7 +94,6 @@ class ProfilePage extends React.Component {
                         <input type="text" className="form-control" name="service" value={user.service} />
                     </div>
                         
-                 
                     <div className="form-group">
                         <Link to="/landingpage" className="btn btn-link">Back</Link>
                         
@@ -110,14 +107,9 @@ class ProfilePage extends React.Component {
     }
 }
 
-
 const actionCreators = {
     register: userActions.register
 }
 
 const connectedProfilePage = connect(null, actionCreators)(ProfilePage);
 export { connectedProfilePage as ProfilePage };
-
-
-// song@gmail.com
-// 1234

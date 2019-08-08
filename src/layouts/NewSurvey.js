@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import * as Survey from "survey-react";
 import "survey-react/survey.css";
-import logo from "../assets/images/logo.svg";
 import "icheck/skins/square/blue.css";
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import "jquery-ui/themes/base/all.css";
 import "nouislider/distribute/nouislider.css";
@@ -17,8 +15,7 @@ import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
-import { getQuestionnaire, postAnswers, sendResults } from '../services/BackendService';
-import SurveyCreator from "./SurveyCreator";
+import { getQuestionnaire, postAnswers} from '../services/BackendService';
 import "../assets/css/NewSurvey.css";
 
 window["$"] = window["jQuery"] = $;
@@ -52,6 +49,7 @@ class NewSurvey extends Component {
         pages: [],
         showProgressBar: ""
       },
+      rules: [],
       score:0
     };
   }
@@ -69,7 +67,6 @@ class NewSurvey extends Component {
     console.log("sendResultOnPageNext");
   }
 
-
   goNextPageAutomatic() {
     console.log("goNextPageAutomatic");
   }
@@ -86,7 +83,8 @@ class NewSurvey extends Component {
 
     getQuestionnaire(url)
       .then(fetchedData => {
-        this.setState({ json: fetchedData.body });
+        console.log(fetchedData)
+        this.setState({ json: fetchedData.body, rules: fetchedData.rules });
       })
       .catch(error => {
         console.error(error);

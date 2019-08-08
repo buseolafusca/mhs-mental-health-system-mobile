@@ -1,13 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import ErrorText from '../components/ErrorText';
-import styles from '../sass/style.scss';
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
-import LandingPage from './LandingPage'
-import { render } from "react-dom";
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { getAuthenticationToken } from '../services/BackendService.js'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as sessionActions from '../actions/SessionActions';
@@ -22,7 +17,6 @@ class LoginForm extends React.Component {
       Password: '',
       remember: false,
       error: {}
-
     };
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -38,18 +32,12 @@ class LoginForm extends React.Component {
 
     const { Username, Password, remember } = this.state;
     console.log({'email': Username, 'password': Password})
-// {credentials: {email: "ss", password: "aaa"}}
     this.props.actions.logInUser({'email': Username, 'password': Password});
 
   }
 
   componentDidMount() {
     console.log("songchen345@gmail.com")
-    // $('input').iCheck({
-    //   checkboxClass: 'icheckbox_square-blue',
-    //   radioClass: 'iradio_square-blue',
-    //   increaseArea: '20%' // optional
-    // });
   }
 
   handleChange(name, e) {
@@ -110,11 +98,6 @@ class LoginForm extends React.Component {
               <NHSHeader />
 
       <form action="javascript:void(0)" noValidate onSubmit={this.handleLogin} className={formOptions.className}>
-        
-
-        
-
-
         <div className={usernameOptions.containerClassName}>
 
           <input
@@ -170,7 +153,6 @@ LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired
 };
 
-
 LoginForm.defaultProps = {
   username: {},
   password: {}
@@ -183,3 +165,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(null, mapDispatchToProps)(LoginForm);
+

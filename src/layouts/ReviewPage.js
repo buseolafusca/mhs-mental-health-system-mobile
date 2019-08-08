@@ -43,9 +43,7 @@ class ReviewPage extends Component {
           var currentRow = table.rows[i];
           var createClickHandler = function(row) {
             return function() {
-              // window.location.href='result/' + '5d41792a031abb2303f8add7';//row.getAttribute('data-id');
               window.location.href='result/' + row.getAttribute('data-id');
-
             };
           };
           currentRow.onclick = createClickHandler(currentRow);

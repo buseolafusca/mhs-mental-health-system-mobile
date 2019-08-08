@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 import { ResourcesPage, SinglePlacePage, PlacesPage } from '../layouts/ResourcesPage'
 import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import ReactDOM from 'react-dom'
 
 // describe('<ResourcesPage />', () => {
 //   it('renders three <Foo /> components', () => {
@@ -34,6 +35,14 @@ import Adapter from 'enzyme-adapter-react-16'
 //   // });
 // });
 
+it('renders without crashing', () => {
+  const div = document.createElement('div')
+  const match = { params: { id: 'aaa' } }
+  ReactDOM.render(<ResourcesPage match={match} />, div)
+  ReactDOM.unmountComponentAtNode(div)
+  
+})
+
 
 describe('ResourcesPage', () => {
   it('should render correctly in "debug" mode', async () => {
@@ -48,17 +57,3 @@ describe('ResourcesPage', () => {
     // expect(component.contains(<div className='nhsuk-expander-group' />)).to.equal(true);
   })
 })
-// describe('SinglePlacePage', () => {
-//   it('should render correctly in "debug" mode', () => {
-//     const component = shallow(<SinglePlacePage  />)
-
-//     expect(component).toMatchSnapshot()
-//   })
-// })
-// describe('PlacesPage', () => {
-//   it('should render correctly in "debug" mode', () => {
-//     const component = shallow(<PlacesPage  />)
-
-//     expect(component).toMatchSnapshot()
-//   })
-// })

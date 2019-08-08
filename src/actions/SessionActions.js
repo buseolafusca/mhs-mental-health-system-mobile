@@ -1,7 +1,5 @@
 import * as types from './ActionTypes';
 import { getAuthenticationToken } from '../services/BackendService';
- import { push } from 'react-router-redux'
-
 import history from '../history'
 
 export function loginSuccess() {

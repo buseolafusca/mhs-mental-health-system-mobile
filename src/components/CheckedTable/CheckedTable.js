@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Table from '@trendmicro/react-table';
-import { TablePagination } from '@trendmicro/react-paginations';
 import styles from '@trendmicro/react-table';
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-table/dist/react-table.css';
@@ -14,16 +13,6 @@ class SelectableTable extends Component {
 
       this.state = {
           selectionData: [
-            // { id: 1, checked: true, serviceName: '200000000000000000000200000000000000000000ss'},
-            // { id: 2, checked: false, serviceName: 20},
-            // { id: 3, checked: false, serviceName: 15},
-            // {
-            //     id: 4,
-            //     checked: false,
-            //     serviceName: 15
-            // },
-            // { id: 5, checked: false, serviceName: 15},
-            // { id: 6, checked: false, serviceName: 0}
         ]
       };
     }
@@ -47,8 +36,7 @@ class SelectableTable extends Component {
 
     actions = {
         handleClickRow: (record, index, e) => {
-            const checked = record.checked;
-            var selectedId = '';
+
             const data = this.state.selectionData.map(item => {
                 if (record.id === item.id) {
                     this.props.callbackFromParent(item.id);
@@ -63,14 +51,11 @@ class SelectableTable extends Component {
                         checked: false
                     };
                 }
-                return item;
             });
 
             this.setState({ selectionData: data });
             e.stopPropagation();
-            e.preventDefault();
-            // console.log(data);
-            
+            e.preventDefault();            
         },
         handleRowClassName: (record, key) => {
             const checked = record.checked;
@@ -89,13 +74,10 @@ class SelectableTable extends Component {
                 };
             });
             this.setState({ selectionData: data });
-
-
             e.stopPropagation();
         },
         renderHeaderCheckbox: () => {
             let className = 'input-checkbox';
-            // const selectedItems = _.filter(this.state.selectionData, { 'checked': true });
             const dataLength = this.state.selectionData.length;
             const selectedLength = this.state.selectionData.length;
             const isSelectedAll = selectedLength > 0 && selectedLength === dataLength;
