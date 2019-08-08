@@ -84,7 +84,7 @@ class NewSurvey extends Component {
     getQuestionnaire(url)
       .then(fetchedData => {
         console.log(fetchedData)
-        this.setState({ json: JSON.parse(fetchedData.body), rules: fetchedData.rules });
+        this.setState({ json: fetchedData.body, rules: fetchedData.rules });
       })
       .catch(error => {
         console.error(error);
