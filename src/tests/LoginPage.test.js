@@ -22,6 +22,8 @@ describe('Login page', () => {
                 </Provider>)
 
     expect(component).toMatchSnapshot()
+    expect(component.find('Connect(NHSHeader)')).toHaveLength(0);
+
   })
 
 
