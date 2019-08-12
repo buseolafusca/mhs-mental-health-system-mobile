@@ -7,7 +7,7 @@ import LandingPage from './layouts/LandingPage'
 import ReviewPage from './layouts/ReviewPage'
 import { ResourcesPage, PlacesPage, SinglePlacePage } from './layouts/ResourcesPage'
 import LocationPage from './layouts/LocationPage'
-import LoginForm from './layouts/LoginPage'
+import {ConnectedLoginForm} from './layouts/LoginPage'
 import {ProfilePage} from './layouts/ProfilePage'
 import {RegisterPage} from './layouts/RegisterPage'
 import * as serviceWorker from './serviceWorker'
@@ -30,7 +30,7 @@ ReactDOM.render(
   <Provider store={store}>
   <Router history={history}>
     <Switch>
-      <Route exact path="/login" component={ LoginForm } />
+      <Route exact path="/login" component={ ConnectedLoginForm } />
       <Route exact path="/register" component={ RegisterPage } />
       <Route path="/landingpage" render={(params) => (isLoggedIn() ? ( <LandingPage {...params}/> ) : ( <Redirect to="/login"/> )) } />
       <Route path="/locationpage" render={(params) => (isLoggedIn() ? ( <LocationPage {...params}/> ) : ( <Redirect to="/login"/> )) } />

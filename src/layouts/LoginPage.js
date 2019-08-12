@@ -12,7 +12,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as sessionActions from '../actions/SessionActions';
 import { Link } from 'react-router-dom';
-import '../assets/css/LandingPage.css'
+
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -109,9 +109,12 @@ class LoginForm extends React.Component {
       <div className='landing-page-container'>
               <NHSHeader />
 
-       <div className='wrapper-container1'>
       <form action="javascript:void(0)" noValidate onSubmit={this.handleLogin} className={formOptions.className}>
         
+
+        
+
+
         <div className={usernameOptions.containerClassName}>
           <div class="row">
             <div class="block">
@@ -165,7 +168,6 @@ class LoginForm extends React.Component {
 
         </div>
       </form>
-      </div>
         <NHSFooter />
 
       </div>
@@ -192,4 +194,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+const ConnectedLoginForm = connect(null, mapDispatchToProps)(LoginForm);
+
+export { ConnectedLoginForm, LoginForm };
+
