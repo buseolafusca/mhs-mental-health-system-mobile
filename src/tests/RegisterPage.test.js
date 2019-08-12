@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { Provider } from "react-redux"
 import configureMockStore from "redux-mock-store"
-import RegisterPage from '../layouts/RegisterPage'
+import {RegisterPage, InnerRegisterPage} from '../layouts/RegisterPage'
 import SelectableTable from '../components/CheckedTable/CheckedTable.js'
 
 const mockStore = configureMockStore();
@@ -18,6 +18,11 @@ describe('Register page', () => {
 
   it('should render correctly in mode', () => {
     const component = shallow(<SelectableTable/>)
+    expect(component).toMatchSnapshot()
+  })
+
+  it('should render correctly in mode', () => {
+    const component = shallow(<InnerRegisterPage/>)
     expect(component).toMatchSnapshot()
   })
 

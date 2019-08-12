@@ -177,4 +177,4 @@ const actionCreators = {
 }
 
 const connectedRegisterPage = connect(null, actionCreators)(RegisterPage);
-export { connectedRegisterPage as RegisterPage };
+export { connectedRegisterPage as RegisterPage, RegisterPage as InnerRegisterPage };

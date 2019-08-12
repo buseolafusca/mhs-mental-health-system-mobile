@@ -30,7 +30,6 @@ it('should render correctly in mode', () => {
   })
 
 
-
   const scope = nock(baseUrl + authenticationUrl)
     .post('5d2f3dfd820884002fbabb41')
     .reply(200,

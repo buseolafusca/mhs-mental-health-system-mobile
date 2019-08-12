@@ -112,4 +112,4 @@ const actionCreators = {
 }
 
 const connectedProfilePage = connect(null, actionCreators)(ProfilePage);
-export { connectedProfilePage as ProfilePage };
+export { connectedProfilePage as ProfilePage, ProfilePage as InnerProfilePage };
