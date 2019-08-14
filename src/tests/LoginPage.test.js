@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { Provider } from "react-redux"
 import configureMockStore from "redux-mock-store"
-import LoginForm from '../layouts/LoginPage'
+import {ConnectedLoginForm, LoginForm} from '../layouts/LoginPage'
 import ReactDOM from 'react-dom'
 import { baseUrl, authenticationUrl} from '../variables/URLs'
 
@@ -11,17 +11,22 @@ const store = mockStore({});
 const nock = require('nock')
 
 describe('Login page', () => {
-
   it('should render correctly in mode', () => {
-
-    // const component = shallow(<SurveyCreator match={{ params: { id: '5d2f3dfd820884002fbabb40' }, isExact: true, path: '', url: '' }} />)
-
-
     const component = shallow(<Provider store={store}>
-                    <LoginForm />
+                    <ConnectedLoginForm />
                 </Provider>)
 
     expect(component).toMatchSnapshot()
+    expect(component.find('Connect(NHSHeader)')).toHaveLength(0);
+
+  })
+
+it('should render correctly in mode', () => {
+    const component = shallow(
+                    <LoginForm />)
+
+    expect(component).toMatchSnapshot()
+
   })
 
 

@@ -101,5 +101,19 @@ span.input-icon {
   }
 }
 
+.row {
+  width: 100%;
+  margin: 0 auto;
+  
+}
+.block {
+  width: 85%;
+  float: left;
+}
+
+.block2 {
+  width: 15%;
+  float: right;
+}
 :local(.className) { background: red; }
 :global(.xyz)  { background: green; }
