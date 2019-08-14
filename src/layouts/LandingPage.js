@@ -50,6 +50,7 @@ class LandingPage extends React.Component {
             <Square url='/appointments' title='Appointments' />
             <Square url='/locationpage' title='Resources' />
             <Square url='/profile' title='Profile' />
+            <Square url='/logout' title='Log Out' />
             <Square url='/review' title='Previous Contact' />
           </div>
         </div>
