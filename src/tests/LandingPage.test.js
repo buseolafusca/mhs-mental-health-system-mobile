@@ -10,7 +10,7 @@ describe('Landing page', () => {
     const component = shallow(<LandingPage/>)
 
     expect(component).toMatchSnapshot()
-    expect(component.find("Square")).toHaveLength(5);
+    expect(component.find("Square")).toHaveLength(6);
   })
 
 
