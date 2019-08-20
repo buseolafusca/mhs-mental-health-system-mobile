@@ -22,8 +22,8 @@ exports[`renders without crashing 1`] = `
       <div>
          
         <Square
-          title="Referrals"
-          url="/referrals"
+          title="Back"
+          url="/landingpage"
         />
          
       </div>

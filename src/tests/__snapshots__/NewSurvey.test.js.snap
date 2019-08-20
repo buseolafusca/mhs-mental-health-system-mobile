@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewSurvey should render correctly in "debug" mode 1`] = `
+<div
+  id="page-container"
+>
+  <NHSHeader />
+  <div
+    class="modal fade"
+    id="questionDescriptionPopup"
+    role="dialog"
+  >
+    <div
+      class="modal-dialog"
+    >
+      <div
+        class="modal-content"
+      >
+        <div
+          class="modal-header"
+        >
+          <button
+            class="close"
+            data-dismiss="modal"
+            type="button"
+          >
+            ×
+          </button>
+          <h4
+            class="modal-title"
+          >
+            Information
+          </h4>
+        </div>
+        <div
+          class="modal-body"
+        >
+          <p>
+            <div
+              id="questionDescriptionText"
+            />
+          </p>
+        </div>
+        <div
+          class="modal-footer"
+        >
+          <button
+            class="btn btn-default"
+            data-dismiss="modal"
+            type="button"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="SurveyResult"
+  >
+    <div
+      className="surveyjs"
+    >
+      <Survey
+        model={
+          Object {
+            "showProgressBar": "",
+          }
+        }
+        onComplete={[Function]}
+        onValueChanged={[Function]}
+      />
+      <center>
+        <table
+          border="1"
+          width="180"
+        >
+          <tbody
+            id="tbody1"
+          />
+        </table>
+      </center>
+    </div>
+  </div>
+  <NHSFooter />
+</div>
+`;
