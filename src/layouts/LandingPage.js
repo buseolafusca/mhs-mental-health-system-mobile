@@ -6,7 +6,6 @@ import NHSFooter from '../components/NHSFooter.js'
 import { fetchPublishedQuestionnaires } from '../services/BackendService.js'
 // import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import '../assets/css/firebaseui-styling.global.css'
-
 class Square extends React.Component {
   render () {
     return (
@@ -14,7 +13,6 @@ class Square extends React.Component {
     )
   }
 }
-
 
 class LandingPage extends React.Component {
   constructor (props) {
@@ -28,10 +26,10 @@ class LandingPage extends React.Component {
   componentWillMount () {
     fetchPublishedQuestionnaires().then(
       response => {
-        console.log("response.questionnaireList")
+        console.log('response.questionnaireList')
         console.log(response)
-        if (response){
-          this.setState({ questionnaireList: response})
+        if (response) {
+          this.setState({ questionnaireList: response })
         }
       }
     )

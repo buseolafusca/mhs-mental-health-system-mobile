@@ -1,0 +1,212 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Register page should render correctly in mode 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "clear": [Function],
+          "get": [Function],
+          "notify": [Function],
+          "subscribe": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": [Function],
+      },
+    }
+  }
+>
+  <Connect(RegisterPage) />
+</ContextProvider>
+`;
+
+exports[`Register page should render correctly in mode 2`] = `
+<Table
+  bordered={true}
+  columns={
+    Array [
+      Object {
+        "dataIndex": "checked",
+        "render": [Function],
+        "title": "Select service",
+        "width": 80,
+      },
+      Object {
+        "dataIndex": "serviceName",
+        "title": "Service Name",
+      },
+    ]
+  }
+  data={Array []}
+  hoverable={true}
+  justified={true}
+  loading={false}
+  maxHeight={0}
+  onRowClick={[Function]}
+  rowClassName={[Function]}
+  rowKey="id"
+  useFixedHeader={false}
+/>
+`;
+
+exports[`Register page should render correctly in mode 3`] = `
+<div
+  className="landing-page-container"
+>
+  <NHSHeader />
+  <div
+    className="col-md-6 col-md-offset-3"
+  >
+    <form
+      name="form"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="firstName"
+        />
+        <input
+          className="form-control"
+          name="firstName"
+          onChange={[Function]}
+          placeholder="First Name"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="lastName"
+        />
+        <input
+          className="form-control"
+          name="lastName"
+          onChange={[Function]}
+          placeholder="Last Name"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="email"
+        />
+        <input
+          className="form-control"
+          name="email"
+          onChange={[Function]}
+          placeholder="Email"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="postcode"
+        />
+        <input
+          className="form-control"
+          name="postcode"
+          onChange={[Function]}
+          placeholder="Postcode"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="telephone"
+        />
+        <input
+          className="form-control"
+          name="telephone"
+          onChange={[Function]}
+          placeholder="Telephone"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="password"
+        />
+        <input
+          className="form-control"
+          name="password"
+          onChange={[Function]}
+          placeholder="Password"
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="password"
+        />
+        <input
+          className="form-control"
+          name="repeatedPassword"
+          onChange={[Function]}
+          placeholder="Repeat your password"
+          type="password"
+          value=""
+        />
+      </div>
+      <div>
+        <SelectableTable
+          callbackFromParent={[Function]}
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <button
+          className="btn btn-primary"
+        >
+          Register
+        </button>
+        <Link
+          className="btn btn-link"
+          to="/login"
+        >
+          Cancel
+        </Link>
+      </div>
+    </form>
+  </div>
+  <NHSFooter />
+</div>
+`;
