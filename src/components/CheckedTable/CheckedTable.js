@@ -18,7 +18,6 @@ class SelectableTable extends Component {
     }
 
     componentWillMount() {
-        console.log("dadada");
         getServices().then(data => {
           console.log(data)
 
