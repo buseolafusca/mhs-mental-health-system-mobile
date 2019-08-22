@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { nhsUrl, baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
+import { baseUrl, fetchQuestionnaireUrl, answersUrl, getLocationByPostCodeUrl, getCategoriesByLocationUrl,
   getPlacesByCategoryLocationUrl, registerUrl, serviceUrl, patientUrl,appId, appCode, patientanswersUrl,
   authenticationUrl, questionnaireWithoutToken
 } from '../variables/URLs'
@@ -281,8 +281,8 @@ const getAuthenticationToken = async (body) => {
 
 const getServices = async () => {
   try {
-    console.log(nhsUrl + serviceUrl)
-    const response = await axios.get(nhsUrl + serviceUrl)
+    console.log(baseUrl + serviceUrl)
+    const response = await axios.get(baseUrl + serviceUrl)
     console.log(response)
     return response.data.data
   } catch (error) {
