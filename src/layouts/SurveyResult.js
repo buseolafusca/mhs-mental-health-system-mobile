@@ -83,7 +83,6 @@ class SurveyResult extends Component {
           this.setState( {json: jsonData} );   
         })
         .catch(error => {
-          console.error(error);
         });
   }
 

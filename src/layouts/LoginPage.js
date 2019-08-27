@@ -43,14 +43,9 @@ class LoginForm extends React.Component {
 
   }
 
-  componentDidMount() {
-    console.log("songchen345@gmail.com")
-    // $('input').iCheck({
-    //   checkboxClass: 'icheckbox_square-blue',
-    //   radioClass: 'iradio_square-blue',
-    //   increaseArea: '20%' // optional
-    // });
-  }
+  // componentDidMount() {
+  //   console.log("songchen345@gmail.com")
+  // }
 
   handleChange(name, e) {
     this.setState({

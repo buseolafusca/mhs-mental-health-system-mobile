@@ -35,7 +35,6 @@ class LocationPage extends React.Component {
         var id = this.state.latitude + ',' + this.state.longitude
         this.props.history.push('/resources/' + id)
       } catch (error) {
-        console.log('No results Found for that postcode') // TODO PUT ON A PAGE
       }
     })
 

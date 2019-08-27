@@ -71,15 +71,12 @@ class RegisterPage extends React.Component {
                     history.push('/login');
                   })
                   .catch(error => {
-                    console.error(error);
                   });
             }
         }
     }
 
     myCallback = (dataFromChild) => {
-        console.log("selected service id");
-        console.log(dataFromChild);
         const { user } = this.state;
         this.setState({
             user: {
