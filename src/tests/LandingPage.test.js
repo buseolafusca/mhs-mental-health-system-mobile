@@ -17,13 +17,13 @@ describe('Test LandingPage willMount', () => {
       });
   });
 
-  it('Component fetching LandingPage from API', async (done) => {
-      const root = shallow(<LandingPage/>);
-      await waitUntil(() => root.state('questionnaireList') !== null);
+  // it('Component fetching LandingPage from API', async (done) => {
+  //     const root = shallow(<LandingPage/>);
+  //     await waitUntil(() => root.state('questionnaireList') !== null);
 
-      expect(root.state('questionnaireList').length).toEqual(1);
-      done();
-  });
+  //     expect(root.state('questionnaireList').length).toEqual(1);
+  //     done();
+  // });
 });
 
 describe('LandingPage', () => {
