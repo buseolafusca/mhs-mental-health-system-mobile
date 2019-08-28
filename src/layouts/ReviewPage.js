@@ -18,6 +18,7 @@ class ReviewPage extends Component {
         .then(response => {
           var rows = []
           var tableData;
+          this.setState({ userAnswers: response})
           for (var i = 0; i < response.length; i++) {
             var row = [response[i].title, 'PENDING']
             rows.push(row)
