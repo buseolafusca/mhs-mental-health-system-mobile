@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Landing page should render correctly in mode 1`] = `
+<div
+  className="landing-page-container"
+>
+  <NHSHeader />
+  <div
+    className="wrapper-container"
+  >
+    <div
+      className="wrapper"
+    >
+      <Square
+        title="Referrals"
+        url="/referrals"
+      />
+      <Square
+        title="Appointments"
+        url="/appointments"
+      />
+      <Square
+        title="Resources"
+        url="/locationpage"
+      />
+      <Square
+        title="Profile"
+        url="/profile"
+      />
+      <Square
+        title="Log Out"
+        url="/logout"
+      />
+      <Square
+        title="Previous Contact"
+        url="/review"
+      />
+    </div>
+  </div>
+  <NHSFooter />
+</div>
+`;

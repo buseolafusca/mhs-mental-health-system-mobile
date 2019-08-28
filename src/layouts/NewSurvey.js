@@ -15,14 +15,14 @@ import "jquery-bar-rating";
 import * as widgets from "surveyjs-widgets";
 import NHSHeader from '../components/NHSHeader.js'
 import NHSFooter from '../components/NHSFooter.js'
-import { getQuestionnaire, postAnswers} from '../services/BackendService';
+import { getQuestionnaire, postAnswers } from '../services/BackendService';
 import "../assets/css/NewSurvey.css";
-
+import 'bootstrap'
 window["$"] = window["jQuery"] = $;
 require("icheck");
 
 Survey.StylesManager.applyTheme("darkblue");
-
+Survey.Serializer.addProperty("question", "hint:text");
 widgets.icheck(Survey, $);
 widgets.select2(Survey, $);
 widgets.inputmask(Survey);
@@ -36,9 +36,11 @@ widgets.ckeditor(Survey);
 widgets.autocomplete(Survey, $);
 widgets.bootstrapslider(Survey);
 
+
 class NewSurvey extends Component {
 
   constructor(props) {
+    
     super(props);
     this.state = {
       json:
@@ -50,34 +52,94 @@ class NewSurvey extends Component {
         showProgressBar: ""
       },
       rules: [],
-      score:0
+      score: 0,
+      hints:{}
     };
+    this.showDescription=this.showDescription.bind(this)
   }
 
   onComplete = (result) => {
-    postAnswers(this.model,this.state);
+    postAnswers(this.model, this.state);
   };
 
   componentWillMount() {
-    
+
     const { id } = this.props.match.params;
 
     const url = id;
 
     getQuestionnaire(url)
       .then(fetchedData => {
-        this.setState({ json: fetchedData.body, rules: fetchedData.rules });
+        var hint={}
+        fetchedData.body.pages.forEach(element => {
+          element.elements.forEach(question=>{
+            hint[question.name]=question.hint
+          })
+        });
+        this.setState({ json: fetchedData.body, rules: fetchedData.rules, hints:hint});
+        
       })
       .catch(error => {
       });
   }
 
+  showDescription(element) {
+      document.getElementById("questionDescriptionText").innerHTML = this.state.hints.element.name;
+      $("#questionDescriptionPopup").modal();
+  }
+
+  onAfterRenderQuestion(survey, options) {
+    if(!options.question.hint) return;
+    var btn = document.createElement("div");
+    btn.type = "button";
+    btn.className = "btn btn-info btn-xs";
+    btn.innerHTML = "?";
+    var question = options.question;
+    console.log(survey)
+    btn.onclick = () =>{
+      console.log(options.question)
+      document.getElementById("questionDescriptionText").innerHTML = options.question.hint
+      $("#questionDescriptionPopup").modal();
+
+    }
+
+    var header = options.htmlElement.querySelector("h5");
+    var span = document.createElement("span");
+    span.innerHTML = "  ";
+    header.appendChild(span);
+    header.appendChild(btn);
+  }
+
+
+
   render() {
     Survey.Survey.cssType = "bootstrap";
     this.model = new Survey.Model(this.state.json);
+    console.log(this.state.json)
+    this.model.onAfterRenderQuestion.add(this.onAfterRenderQuestion)
+
     return (
-      <div id = "page-container">
-        <NHSHeader/>
+
+      <div id="page-container">
+        <NHSHeader />
+        <div id="questionDescriptionPopup" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Information</h4>
+              </div>
+              <div class="modal-body">
+                <p><div id="questionDescriptionText"></div></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
         <div className="SurveyResult">
           <div className="surveyjs" >
             <Survey.Survey
@@ -90,13 +152,13 @@ class NewSurvey extends Component {
                 </tbody>
               </table>
             </center>
- 
+
           </div>
         </div>
-        <NHSFooter/>
+        <NHSFooter />
       </div>
     );
-    
+
   }
 }
 
