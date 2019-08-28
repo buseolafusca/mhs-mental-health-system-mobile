@@ -54,10 +54,8 @@ class SurveyResult extends Component {
     this.state = { json: 
       {
         "title": "",
-        "description": "",
-        "completedHtml": "",
         "pages": [],
-        "showProgressBar": ""
+        "description": ""
       },
       answers : {}
     };
@@ -72,18 +70,15 @@ class SurveyResult extends Component {
 
           this.setState( {answers: fetched_answers.body } );
           var jsonData = fetched_answers.questionnaireBody;
-     
           for (var i=1; i<jsonData.pages.length; i++){
             if (jsonData.pages[i].elements){
               jsonData.pages[0].elements = jsonData.pages[0].elements.concat(jsonData.pages[i].elements)
             }
           }
-          jsonData.pages = [jsonData.pages[0]]
-          jsonData.pages[0].title = ""
-          this.setState( {json: jsonData} );   
+          jsonData.description = ''
+          this.setState( {json: jsonData} );
         })
         .catch(error => {
-          console.error(error);
         });
   }
 

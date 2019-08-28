@@ -58,23 +58,6 @@ class NewSurvey extends Component {
     this.showDescription=this.showDescription.bind(this)
   }
 
-  /* The following 4 methods are needed by SurveyJS */
-  sendResult() {
-    console.log("value changed!");
-  }
-
-  onValueChanged = (result) => {
-    console.log("value changed!");
-  }
-
-  sendResultOnPageNext() {
-    console.log("sendResultOnPageNext");
-  }
-
-  goNextPageAutomatic() {
-    console.log("goNextPageAutomatic");
-  }
-
   onComplete = (result) => {
     postAnswers(this.model, this.state);
   };
@@ -97,7 +80,6 @@ class NewSurvey extends Component {
         
       })
       .catch(error => {
-        console.error(error);
       });
   }
 
@@ -163,7 +145,6 @@ class NewSurvey extends Component {
             <Survey.Survey
               model={this.model}
               onComplete={this.onComplete}
-              onValueChanged={this.onValueChanged}
             />
             <center>
               <table border="1" width="180" >

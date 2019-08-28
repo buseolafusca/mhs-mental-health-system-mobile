@@ -55,7 +55,6 @@ class RegisterPage extends React.Component {
                 alert("Passwords don't match");
             }
             else{
-                console.log(this.state.user);
                 registerUser({"email":user.email, 
                     "password": user.password,
                     "first_name": user.firstName,
@@ -65,25 +64,19 @@ class RegisterPage extends React.Component {
                 })
 
                   .then(fetchedData => {
-                    console.log("fetchedData")
-                    console.log(fetchedData)
                     alert("Registered successfully");
                     history.push('/login');
                   })
                   .catch(error => {
-                    console.error(error);
                   });
             }
         }
     }
 
     myCallback = (dataFromChild) => {
-        console.log("selected service id");
-        console.log(dataFromChild);
-        const { user } = this.state;
         this.setState({
             user: {
-                ...user,
+                ...this.state.user,
                 service: dataFromChild
             }
         });

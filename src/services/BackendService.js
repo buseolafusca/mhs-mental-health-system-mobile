@@ -22,8 +22,7 @@ const getQuestionnaire = async (id) => {
 
 const getPatientProfile = async () => {
   var url = baseUrl + patientUrl + sessionStorage.jwt
-  console.log("getPatientProfile")
-  console.log(url)
+
   try {
     var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
     const response = await axios({
@@ -41,8 +40,7 @@ const getPatientProfile = async () => {
 const postAnswers = async (ans, state) => {
   const backendURL = baseUrl + answersUrl
   var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
-  console.log(ans);
-  console.log(state);
+ 
   axios({
     method: 'post',
     url: backendURL,
@@ -127,7 +125,6 @@ const getCategoriesBasedOnLocation = async (loc) => {
 const fetchPublishedQuestionnaires = async () => {
   try {
     var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
-
     const response = await axios({
       method: 'get',
       url: baseUrl + fetchQuestionnaireUrl,
@@ -184,7 +181,6 @@ const getPlaceDetails = async (url) => {
 
 const fetchUserAnswers = async () => {
   var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
-  console.log('fetchUserAnswers')
   var userAnswerUrl = baseUrl + answersUrl
   try {
     const response = await axios({
@@ -192,7 +188,6 @@ const fetchUserAnswers = async () => {
       url: userAnswerUrl,
       headers: headers // check later
     })
-    console.log(response)
     return response.data.data
   } catch (error) {
     console.log('GET server error: ', error)
@@ -203,7 +198,6 @@ const getAnsweredQuestionnaire = async (theId) => {
 
   try {
     var headers = { 'Authorization': 'Bearer ' + sessionStorage.jwt }
-
     const response = await axios({
       method: 'get',
       url: baseUrl + patientanswersUrl + '/' + theId,
@@ -217,11 +211,8 @@ const getAnsweredQuestionnaire = async (theId) => {
 
 const getAuthenticationToken = async (body) => {
   var headers = { 'Content-Type': 'application/json' }
-  // var baseUrl = 'http://178.128.34.125/';
-  // http://178.128.34.125/api/v1/patients/authenticate
-  // console.log(baseUrl + '/' + authenticationUrl)
+
   var url = baseUrl + authenticationUrl
-  console.log(url)
   try {
     const response = await axios({
       method: 'post',
@@ -229,61 +220,16 @@ const getAuthenticationToken = async (body) => {
       headers: headers,
       data: body
     })
-    console.log('getAuthenticationToken')
-    console.log(response)
-    console.log(response.data.token)
+
     return response
   } catch (error) {
     console.log('POST server error: ', error)
   }
 }
 
-// const getQuestionnaireWithoutToken = async () => {
-//   try {
-//     console.log(baseUrl + questionnaireWithoutToken)
-//     const response = await axios.get(baseUrl + questionnaireWithoutToken)
-//     console.log('getQuestionnaireWithoutToken')
-//     console.log(response)
-//     return response
-//   } catch (error) {
-//     console.log('GET server error: ', error)
-//   }
-// }
-
-// const getQuestionnaireWithToken = async (body) => {
-//   var headers = { 'Content-Type': 'application/json' }
-//   try {
-//     const response = await axios({
-//       method: 'post',
-//       url: baseUrl + fetchQuestionnaireUrl,
-//       headers: headers,
-//       data: body
-//     })
-//     console.log('getAuthenticationToken')
-//     console.log(response.data.data)
-//     var token = response.data.data
-//     try {
-//       const res = await axios.get(baseUrl + questionnaireWithoutToken, {
-//         headers: { 'Authorization': 'Bearer ' + token }
-//       })
-
-//       console.log('res.data.data')
-//       console.log(res.data.data)
-//       return res.data.data
-//     } catch (error) {
-//       console.log('GET server error: ', error)
-//     }
-//     return response.data.data
-//   } catch (error) {
-//     console.log('POST server error: ', error)
-//   }
-// }
-
 const getServices = async () => {
   try {
-    console.log(baseUrl + serviceUrl)
     const response = await axios.get(baseUrl + serviceUrl)
-    console.log(response)
     return response.data.data
   } catch (error) {
     console.log('GET server error: ', error)

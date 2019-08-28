@@ -13,6 +13,17 @@ it('renders without crashing', () => {
   
 })
 
+// TODO
+// it('submit works', () => {
+//     let complete = jest.fn();
+//     const match = { params: { id: '5d1b655ad01e83503e3a6e55' } }
+//     const wrapper = shallow(<NewSurvey match={match} onComplete={complete} />)    
+//     console.log("wwww")
+//     console.log(wrapper.find("Survey.Survey"))   
+//     wrapper.find("Survey.Survey").simulate("onComplete");
+//     expect(complete).toBeCalled()
+// })
+
 
 describe('NewSurvey', () => {
   it('should render correctly in "debug" mode', () => {

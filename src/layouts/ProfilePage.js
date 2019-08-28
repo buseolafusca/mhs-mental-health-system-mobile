@@ -28,10 +28,6 @@ class ProfilePage extends React.Component {
     componentWillMount () {
         getPatientProfile().then(
             response => {
-                // console.log("getPatientProfile")
-                console.log(response)
-                
-
                 if (response){
                     var newUser = {
                     firstName: response.first_name,

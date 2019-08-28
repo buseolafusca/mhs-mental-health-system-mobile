@@ -28,6 +28,7 @@ class ResourcesPage extends React.Component {
   }
 
   componentWillMount () {
+    console.log("ResourcesPage")
     const { id } = this.props.match.params
 
     this.setState({ coordinates: id })
@@ -96,6 +97,9 @@ class ResourcesPage extends React.Component {
 
 class PlacesPage extends React.Component {
   constructor (props) {
+    // console.log("props")
+    // console.log(props)
+    // console.log(JSON.stringify(props))
     super(props)
     this.state = {
       placesList: [],
@@ -107,6 +111,7 @@ class PlacesPage extends React.Component {
   }
 
   componentWillMount () {
+    console.log("PlacesPage")
     const { id } = this.props.match.params
     const { cat } = this.props.match.params
     this.setState({ coordinates: id })
@@ -183,7 +188,11 @@ class PlacesPage extends React.Component {
 
 class SinglePlacePage extends React.Component {
   constructor (props) {
+    console.log("33333")
+    // console.log(JSON.stringify(props))
     super(props)
+    console.log(props)
+    console.log(props.location)
     this.state = {
       coordinates: [],
       category: '',
@@ -203,6 +212,7 @@ class SinglePlacePage extends React.Component {
   }
 
   componentWillMount () {
+    console.log("SinglePlacePage")
     const { id } = this.props.match.params
     const { cat } = this.props.match.params
     // const { place } = this.props.match.params

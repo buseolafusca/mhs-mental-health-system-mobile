@@ -9,6 +9,7 @@ export function loginSuccess() {
 export function logInUser(body) {
   return function(dispatch) {
     console.log("DDD")
+    console.log(body)
     return getAuthenticationToken(body).then(response => {
       try {
         sessionStorage.setItem('jwt', response.data.token);

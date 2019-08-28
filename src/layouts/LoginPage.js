@@ -20,13 +20,10 @@ class LoginForm extends React.Component {
     this.state = {
       Username: '',
       Password: '',
-      remember: false,
       error: {}
-
     };
 
     this.handleLogin = this.handleLogin.bind(this);
-    this.handleCheck = this.handleCheck.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -36,31 +33,13 @@ class LoginForm extends React.Component {
       error: {}
     });
 
-    const { Username, Password, remember } = this.state;
-    console.log({'email': Username, 'password': Password})
-// {credentials: {email: "ss", password: "aaa"}}
-    this.props.actions.logInUser({'email': Username, 'password': Password});
+    this.props.actions.logInUser({'email': this.state.Username, 'password': this.state.Password});
 
-  }
-
-  componentDidMount() {
-    console.log("songchen345@gmail.com")
-    // $('input').iCheck({
-    //   checkboxClass: 'icheckbox_square-blue',
-    //   radioClass: 'iradio_square-blue',
-    //   increaseArea: '20%' // optional
-    // });
   }
 
   handleChange(name, e) {
     this.setState({
       [name]: e.target.value
-    });
-  }
-
-  handleCheck() {
-    this.setState({
-      remember: !this.state.remember
     });
   }
 
@@ -84,7 +63,6 @@ class LoginForm extends React.Component {
     };
 
     let i18n = {
-      rememberMe: 'Remember Me',
       submitLabel: 'Sign In'
     };
 
@@ -110,10 +88,6 @@ class LoginForm extends React.Component {
               <NHSHeader />
 
       <form action="javascript:void(0)" noValidate onSubmit={this.handleLogin} className={formOptions.className}>
-        
-
-        
-
 
         <div className={usernameOptions.containerClassName}>
           <div class="row">
@@ -161,7 +135,6 @@ class LoginForm extends React.Component {
         >
           
           <Link to="/register" className="btn btn-link">Register</Link>
-
           <div className="button-container">
             <button type="submit" className="btnSubmit">{i18n.submitLabel}</button>
           </div>
