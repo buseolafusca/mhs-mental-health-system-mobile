@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import LandingPage from '../layouts/LandingPage'
-import * as Survey from "survey-react";
 import { shallow, mount } from 'enzyme'
 import { baseUrl, fetchQuestionnaireUrl } from '../variables/URLs'
 import waitUntil from 'async-wait-until';
@@ -11,7 +10,6 @@ const nock = require('nock')
 
 describe('Test LandingPage willMount', () => {
   beforeAll(() => {
-    
     nock(baseUrl)
       .get(fetchQuestionnaireUrl)
       .reply(200, {
@@ -23,12 +21,6 @@ describe('Test LandingPage willMount', () => {
       const root = shallow(<LandingPage/>);
       await waitUntil(() => root.state('questionnaireList') !== null);
 
-      
-      // console.log("tttt")
-      // console.log(root.state)
-
-      // console.log(root.state())
-      // expect(root.state('questionnaireList')).toEqual([]);
       expect(root.state('questionnaireList').length).toEqual(1);
       done();
   });
@@ -39,18 +31,11 @@ describe('LandingPage', () => {
     const component = shallow(<LandingPage/>)
 
     expect(component).toMatchSnapshot()
-    expect(component.find("Square")).toHaveLength(6);
+    expect(component.find("Square")).toHaveLength(4);
     
   })
-  
-  // it('should render correctly in mode', () => {
-  //   const wrapper = shallow(<LandingPage />);
-  //   expect(wrapper.state().questionnaireList).toEqual(10);
-
-  // })
 
 })
-
 
 it('renders without crashing', () => {
   const div = document.createElement('div')
@@ -78,36 +63,3 @@ test('calls `componentWillMount` before rendering', () => {
 //             }
 //         }
 //     )
-
-
-
-// describe('<Weather />', () => {
-//   beforeAll(() => {
-//     // Prepare nock to respond to a request
-//     // to the weather API.
-//     // In this case our test will always think that london
-//     // is sunny.
-//     nock('https://weather.example.com/api')
-//       .get('/weather?q=london')
-//       .reply(200, {
-//            summary: 'sunny',
-//       });
-//   });
-//   it('Component fetching weather from API', async (done) => {
-//       const root = shallow(<Weather location="london" />);
-//       let componentsWeather = {};
-//       // We wait until the state has a weather summary, but we
-//       // don't care yet about the content.
-//       await waitUntil(() => root.state('weather').summary !== null);
-//       // It is better to have the expectation here and not inside
-//       // the waitUntil condition.
-//      expect(root.state('weather').summary).toEqual('sunny');
-
-//      // expect(componentsWeather.summary).toEqual('sunny');
-//      done();
-//   });
-// });
-
- // LandingPage.js   |       50 |        0 |    66.67 |       50 |    31,32,33,34,47 |
-
-

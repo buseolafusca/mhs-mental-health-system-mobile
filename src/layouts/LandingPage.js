@@ -29,9 +29,6 @@ class LandingPage extends React.Component {
     fetchPublishedQuestionnaires().then(
       response => {
         if (response){
-          console.log('response')
-          console.log(response)
-          console.log(JSON.stringify(response));
           this.setState({ questionnaireList: response})
         }
       }
@@ -47,12 +44,11 @@ class LandingPage extends React.Component {
             {this.state.questionnaireList.map((item, key) =>
               <Square url={'/questionnaire/' + item._id} title={item.title} key={key} />
             )}
-            <Square url='/referrals' title='Referrals' />
-            <Square url='/appointments' title='Appointments' />
             <Square url='/locationpage' title='Resources' />
             <Square url='/profile' title='Profile' />
-            <Square url='/logout' title='Log Out' />
             <Square url='/review' title='Previous Contact' />
+            <Square url='/logout' title='Log Out' />
+            
           </div>
         </div>
         <NHSFooter />
