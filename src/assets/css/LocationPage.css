@@ -1,5 +1,10 @@
-.SurveyResult1{
-    padding-bottom: 0.5rem;  
-    min-height: calc(100vh - 200px);
-    position: relative;
-  }
+.SurveyResult1 {
+  padding-bottom: 0.5rem;
+  min-height: calc(100vh - 200px);
+  position: relative;
+}
+
+.submit {
+  left: 25%;
+  position: absolute;
+}

@@ -2,7 +2,7 @@
 var appId = 'nuT8ftiOYvrfFNaFEUyV'
 var appCode = 'yNZIQaMP6fRuY1D8DKsuxw'
 
-var baseUrl = "http://178.128.34.125/api/v1";
+var baseUrl = "https://mhsbackend.azurewebsites.net/api/v1";
 
 var fetchQuestionnaireUrl = '/questionnaire_sJS/'
 var answersUrl = '/patientanswers/'
