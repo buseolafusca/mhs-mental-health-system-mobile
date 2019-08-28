@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Location page should render correctly in mode 1`] = `
-<div
-  id="surveyCreatorContainer"
-/>
-`;
