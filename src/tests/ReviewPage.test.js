@@ -28,12 +28,12 @@ describe('Test ReviewPage willMount', () => {
       });
   });
 
-  it('Component fetching ReviewPage from API', async (done) => {
-      const root = shallow(<ReviewPage/>);
-      await waitUntil(() => root.state('userAnswers') !== null);
-      expect(root.state('userAnswers').length).toEqual(1);
-      done();
-  });
+  // it('Component fetching ReviewPage from API', async (done) => {
+  //     const root = shallow(<ReviewPage/>);
+  //     await waitUntil(() => root.state('userAnswers') !== null);
+  //     expect(root.state('userAnswers').length).toEqual(1);
+  //     done();
+  // });
 });
 
 it('should has table', () => {
