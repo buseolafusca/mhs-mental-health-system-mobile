@@ -57,7 +57,7 @@ class LocationPage extends React.Component {
                   <br /><span>
                     <input type='text' class='postcode' value={this.state.value} onChange={this.handleChange} />
                     <br />
-                    <input class='nhsuk-search__submit' type='submit' value='Submit' />
+                    <input class='nhsuk-search__submit submit' type='submit' value='Submit' />
                   </span>
                 </form>
                 <NHSFooter />
