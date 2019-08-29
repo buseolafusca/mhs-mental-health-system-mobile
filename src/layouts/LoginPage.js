@@ -85,7 +85,8 @@ class LoginForm extends React.Component {
     return (
 
       <div className='landing-page-container'>
-              <NHSHeader />
+      <NHSHeader />
+      <div className='wrapper-container1'>
 
       <form action="javascript:void(0)" noValidate onSubmit={this.handleLogin} className={formOptions.className}>
 
@@ -141,7 +142,8 @@ class LoginForm extends React.Component {
 
         </div>
       </form>
-        <NHSFooter />
+      </div>
+      <NHSFooter />
 
       </div>
     );
